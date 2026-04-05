@@ -571,7 +571,7 @@ function initCheckout() {
         `_Thank you for choosing Adox Foods!_ 🧡`
       );
 
-    // Save order to backend first
+     // Save order to backend first
 const orderRes = await fetch('/api/create-order', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
@@ -705,4 +705,4 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.cat-tab').forEach(tab => {
     tab.addEventListener('click', () => setTimeout(initTilt, 400));
   });
-});
+  });
