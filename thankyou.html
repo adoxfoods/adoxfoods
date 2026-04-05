@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Confirmed! — Adox Foods</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍛</text></svg>" />
+    <style>
+        .thankyou-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--secondary) 0%, #1a2a3a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        /* background grid */
+        
+        .thankyou-page::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 107, 53, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 107, 53, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+        /* floating orbs */
+        
+        .ty-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.12;
+            animation: floatOrb 8s ease-in-out infinite;
+        }
+        
+        .ty-orb:nth-child(1) {
+            width: 350px;
+            height: 350px;
+            background: var(--primary);
+            top: -80px;
+            right: -80px;
+        }
+        
+        .ty-orb:nth-child(2) {
+            width: 250px;
+            height: 250px;
+            background: #ff9f43;
+            bottom: -60px;
+            left: -60px;
+            animation-delay: -4s;
+        }
+        
+        .ty-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 3rem 2.5rem;
+            max-width: 560px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+            animation: cardPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+        }
+        
+        @keyframes cardPop {
+            from {
+                opacity: 0;
+                transform: scale(0.7) translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        /* confetti burst ring */
+        
+        .success-ring {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+        }
+        
+        .success-ring::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 107, 53, 0.3);
+            animation: ringPulse 2s ease infinite;
+        }
+        
+        .success-ring::after {
+            content: '';
+            position: absolute;
+            inset: -16px;
+            border-radius: 50%;
+            border: 2px dashed rgba(255, 107, 53, 0.15);
+            animation: ringPulse 2s ease 0.5s infinite;
+        }
+        
+        @keyframes ringPulse {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.08);
+                opacity: 0.5;
+            }
+        }
+        
+        .success-icon-wrap {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.4);
+            animation: iconBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s both;
+        }
+        
+        @keyframes iconBounce {
+            from {
+                transform: scale(0) rotate(-180deg);
+            }
+            to {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+        /* floating emojis */
+        
+        .float-emojis {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            border-radius: 28px;
+        }
+        
+        .fe {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: floatUp linear infinite;
+            opacity: 0;
+        }
+        
+        .fe:nth-child(1) {
+            left: 10%;
+            animation-duration: 4s;
+            animation-delay: 0.5s;
+        }
+        
+        .fe:nth-child(2) {
+            left: 25%;
+            animation-duration: 5s;
+            animation-delay: 1.2s;
+        }
+        
+        .fe:nth-child(3) {
+            left: 45%;
+            animation-duration: 3.5s;
+            animation-delay: 0.2s;
+        }
+        
+        .fe:nth-child(4) {
+            left: 65%;
+            animation-duration: 4.5s;
+            animation-delay: 1.8s;
+        }
+        
+        .fe:nth-child(5) {
+            left: 82%;
+            animation-duration: 4s;
+            animation-delay: 0.8s;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                bottom: -10%;
+                opacity: 0;
+                transform: rotate(0deg);
+            }
+            20% {
+                opacity: 0.6;
+            }
+            80% {
+                opacity: 0.4;
+            }
+            100% {
+                bottom: 110%;
+                opacity: 0;
+                transform: rotate(360deg) translateX(20px);
+            }
+        }
+        
+        .ty-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+            animation: fadeInUp 0.6s ease 0.4s both;
+        }
+        
+        .ty-title span {
+            color: var(--primary);
+        }
+        
+        .ty-sub {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease 0.5s both;
+        }
+        /* info pills */
+        
+        .ty-pills {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease 0.6s both;
+        }
+        
+        .ty-pill {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .ty-pill .pill-icon {
+            font-size: 1.1rem;
+        }
+        /* order summary box */
+        
+        .ty-summary {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            text-align: left;
+            animation: fadeInUp 0.6s ease 0.7s both;
+        }
+        
+        .ty-summary-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .ty-order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.85rem;
+        }
+        
+        .ty-order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .ty-item-name {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .ty-item-price {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .ty-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.75rem;
+            margin-top: 0.5rem;
+            border-top: 2px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .ty-total-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .ty-total-amt {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        /* buttons */
+        
+        .ty-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            animation: fadeInUp 0.6s ease 0.8s both;
+        }
+        
+        .ty-wa-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            padding: 15px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+        }
+        
+        .ty-wa-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(37, 211, 102, 0.4);
+        }
+        
+        .ty-wa-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+            flex-shrink: 0;
+        }
+        
+        .ty-home-btn {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 15px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+        }
+        
+        .ty-home-btn:hover {
+            background: rgba(255, 255, 255, 0.16);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        /* delivery timer */
+        
+        .delivery-timer {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 107, 53, 0.05));
+            border: 1px solid rgba(255, 107, 53, 0.25);
+            border-radius: 14px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: fadeInUp 0.6s ease 0.65s both;
+        }
+        
+        .timer-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .timer-text {
+            text-align: left;
+        }
+        
+        .timer-label {
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .timer-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        
+        .timer-sub {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        @media (max-width: 480px) {
+            .ty-card {
+                padding: 2rem 1.5rem;
+            }
+            .ty-title {
+                font-size: 1.6rem;
+            }
+            .ty-pills {
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">Adox<span>Foods</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="cart-btn">
+      🛒 Cart
+      <span class="cart-count hidden">0</span>
+    </button>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== CART SIDEBAR ===== -->
+    <div class="cart-overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>🛒 Your Cart</h3>
+            <button class="cart-close">✕</button>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-min-bar-wrap">
+                <div class="cart-min-label">
+                    <span>Minimum Order</span>
+                    <span id="cart-min-text">₦0 / ₦500</span>
+                </div>
+                <div class="cart-min-bar">
+                    <div class="cart-min-fill" id="cart-min-fill"></div>
+                </div>
+                <div class="cart-min-notice not-reached" id="cart-min-notice">
+                    ⚠️ Add ₦500 more to checkout
+                </div>
+            </div>
+            <button class="checkout-btn">Go to Checkout</button>
+        </div>
+    </div>
+
+    <!-- ===== THANK YOU PAGE ===== -->
+    <div class="thankyou-page">
+        <div class="ty-orb"></div>
+        <div class="ty-orb"></div>
+
+        <div class="ty-card">
+
+            <!-- floating emojis background -->
+            <div class="float-emojis">
+                <span class="fe">🎉</span>
+                <span class="fe">🧡</span>
+                <span class="fe">⭐</span>
+                <span class="fe">🎊</span>
+                <span class="fe">✨</span>
+            </div>
+
+            <!-- success icon -->
+            <div class="success-ring">
+                <div class="success-icon-wrap">✅</div>
+            </div>
+
+            <div style="background:rgba(255,107,53,0.15);border:1px solid rgba(255,107,53,0.3);border-radius:12px;padding:10px 16px;margin-bottom:1.5rem;font-size:.82rem;color:rgba(255,255,255,0.8);font-weight:600;display:flex;justify-content:space-between;align-items:center"><span>🔢 Your Order ID</span><span style="color:var(--primary);font-weight:800;letter-spacing:1px" id="display-order-id">Loading...</span></div>
+            <h1 class="ty-title">Order <span>Confirmed!</span> 🎉</h1>
+            <p class="ty-sub">
+                Your order has been received! We're preparing your foodstuff right now. Hang tight — it's on its way to your hostel! 🚀
+            </p>
+
+            <!-- delivery timer -->
+            <div class="delivery-timer">
+                <div class="timer-icon">⏱️</div>
+                <div class="timer-text">
+                    <div class="timer-label">Estimated Delivery</div>
+                    <div class="timer-value">15 – 20 mins</div>
+                    <div class="timer-sub">We'll notify you via WhatsApp</div>
+                </div>
+            </div>
+
+            <!-- info pills -->
+            <div class="ty-pills">
+                <div class="ty-pill"><span class="pill-icon">📍</span> Hostel Delivery</div>
+                <div class="ty-pill"><span class="pill-icon">💳</span> Payment Received</div>
+                <div class="ty-pill"><span class="pill-icon">🔥</span> Being Prepared</div>
+            </div>
+
+            <!-- order summary -->
+            <div class="ty-summary" id="ty-summary">
+                <div class="ty-summary-title">📋 Your Order</div>
+                <div id="ty-items">
+                    <!-- filled by JS -->
+                </div>
+                <div class="ty-total-row">
+                    <span class="ty-total-label">Total Paid</span>
+                    <span class="ty-total-amt" id="ty-total">₦0</span>
+                </div>
+            </div>
+
+            <!-- buttons -->
+            <div class="ty-btns">
+                <a href="https://wa.me/2348012345678" target="_blank" class="ty-wa-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg> Follow Up on WhatsApp
+                </a>
+                <a href="index.html" class="ty-home-btn"> Back to Home</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Launch confetti!
+        launchConfetti();
+
+        // Show Order ID
+        const lastOrderId = localStorage.getItem('adoxLastOrderId') || 'N/A';
+        const orderIdEl = document.getElementById('display-order-id');
+        if (orderIdEl) orderIdEl.textContent = lastOrderId;
+
+        // Show last order summary
+        const lastOrder = JSON.parse(localStorage.getItem('adoxLastOrder') || '[]');
+        const lastTotal = localStorage.getItem('adoxLastTotal') || '0';
+        const itemsEl = document.getElementById('ty-items');
+        const totalEl = document.getElementById('ty-total');
+
+        if (lastOrder.length > 0) {
+            itemsEl.innerHTML = lastOrder.map(item => `
+      <div class="ty-order-item">
+        <span class="ty-item-name">${item.emoji} ${item.name} × ${item.qty}</span>
+        <span class="ty-item-price">₦${(item.price * item.qty).toLocaleString()}</span>
+      </div>
+    `).join('');
+            totalEl.textContent = '₦' + parseInt(lastTotal).toLocaleString();
+        } else {
+            document.getElementById('ty-summary').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop — Adox Foods</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>" />
+</head>
+
+<body>
+    <div class="status-banner" id="statusBanner"></div>
+    <nav class="navbar">
+        <a href="index.html" class="logo">Adox<span>Foods</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html" class="active">Shop</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="refund.html">Refund Policy</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="cart-btn">🛒 Cart<span class="cart-count hidden">0</span></button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <div class="cart-overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>🛒 Your Cart</h3><button class="cart-close">✕</button></div>
+        <div class="cart-items">
+            <div class="cart-empty">
+                <div class="empty-icon">🛒</div>
+                <p>Your cart is empty.<br>Add some foodstuff!</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-min-bar-wrap">
+                <div class="cart-min-label">
+                    <span>Minimum Order</span>
+                    <span id="cart-min-text">₦0 / ₦500</span>
+                </div>
+                <div class="cart-min-bar">
+                    <div class="cart-min-fill" id="cart-min-fill"></div>
+                </div>
+                <div class="cart-min-notice not-reached" id="cart-min-notice">
+                    ⚠️ Add ₦500 more to checkout
+                </div>
+            </div>
+            <button class="checkout-btn">Go to Checkout</button>
+        </div>
+    </div>
+
+    <div class="menu-hero">
+        <h1>Our <span>Shop</span> 🛒</h1>
+        <p>Fresh, quality foodstuff — delivered to your hostel!</p>
+    </div>
+
+    <div style="background:white;padding:1rem 2rem;border-bottom:1px solid #f0f0f0;position:sticky;top:106px;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,0.06)">
+        <div style="max-width:1300px;margin:0 auto;position:relative">
+
+            <!-- Filter trigger button -->
+            <button id="filterToggle" onclick="toggleFilterDropdown()" style="display:flex;align-items:center;gap:8px;padding:10px 20px;background:var(--secondary);color:white;border:none;border-radius:10px;font-family:'Poppins',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .3s ease">
+      <span>🔽 Filter by Category</span>
+      <span id="activeCatLabel" style="background:var(--primary);padding:2px 10px;border-radius:50px;font-size:.75rem">All Items</span>
+    </button>
+
+            <!-- Dropdown -->
+            <div id="filterDropdown" style="display:none;position:absolute;top:110%;left:0;background:white;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,0.15);padding:0.75rem;z-index:200;min-width:220px;border:1px solid #f0f0f0;animation:slideDown 0.2s ease">
+                <button class="cat-tab active" data-cat="all" onclick="selectCategory(this,'All Items')">🛒 All Items</button>
+                <button class="cat-tab" data-cat="grains" onclick="selectCategory(this,'Grains')">🌾 Grains</button>
+                <button class="cat-tab" data-cat="pasta" onclick="selectCategory(this,'Pasta & Semo')">🍝 Pasta & Semo</button>
+                <button class="cat-tab" data-cat="oils" onclick="selectCategory(this,'Oils')">🫙 Oils</button>
+                <button class="cat-tab" data-cat="tomato" onclick="selectCategory(this,'Tomato Paste')">🍅 Tomato Paste</button>
+                <button class="cat-tab" data-cat="seasonings" onclick="selectCategory(this,'Seasonings')">🧂 Seasonings</button>
+                <button class="cat-tab" data-cat="spices" onclick="selectCategory(this,'Spices')">🌶️ Spices</button>
+                <button class="cat-tab" data-cat="offers" onclick="selectCategory(this,'Special Offers')">🌶️ Special Offers</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div style="max-width:1300px;margin:0 auto;padding:2.5rem 2rem">
+        <div class="menu-grid"></div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,var(--primary),#e85a26);padding:4rem 2rem;text-align:center">
+        <div style="max-width:600px;margin:0 auto">
+            <div style="font-size:3rem;margin-bottom:1rem">🛒</div>
+            <h2 style="color:white;font-size:1.8rem;font-weight:800;margin-bottom:0.75rem">Ready to Order?</h2>
+            <p style="color:rgba(255,255,255,0.85);margin-bottom:2rem;line-height:1.8">Add your favourite foodstuff to cart and we'll deliver straight to your hostel!</p>
+            <button onclick="openCart()" style="background:white;color:var(--primary);padding:14px 36px;border-radius:50px;font-weight:800;font-size:1rem;border:none;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.2);transition:all .3s ease;font-family:'Poppins',sans-serif"
+                onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">🛒 View Cart & Checkout</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">Adox<span>Foods</span></div>
+        <p class="footer-text">Stocking student life, one delivery at a time 📦</p>
+        <p style="color:rgba(255,255,255,0.4);font-size:.82rem;margin-bottom:0.5rem">📍 FUTA, Akure, Ondo State</p>
+        <p style="color:rgba(255,255,255,0.4);font-size:.82rem;margin-bottom:1.5rem">📞 +234 801 234 5678</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="refund.html">Refund Policy</a>
+        </div>
+        <div class="social-links">
+            <a href="https://x.com/adoxfoods" target="_blank" class="social-btn"><svg viewbox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://tiktok.com/@adoxfoods" target="_blank" class="social-btn"><svg viewbox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.19 8.19 0 004.79 1.54V6.78a4.85 4.85 0 01-1.02-.09z"/></svg></a>
+            <a href="https://wa.me/2348012345678" target="_blank" class="social-btn"><svg viewbox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        </div>
+        <div class="footer-copy">© 2026 Adox Foods. All rights reserved.</div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
