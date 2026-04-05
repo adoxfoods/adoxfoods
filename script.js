@@ -537,7 +537,7 @@ function initCheckout() {
 
   const waBtn = document.querySelector('.whatsapp-btn');
   if (waBtn) {
-    waBtn.addEventListener('click', () => {
+      waBtn.addEventListener('click', async () => {
       if (!validateForm()) return;
       if (cart.length === 0) { showToast('🛒 Your cart is empty!'); return; }
 
@@ -571,10 +571,35 @@ function initCheckout() {
         `_Thank you for choosing Adox Foods!_ 🧡`
       );
 
-      // Save order with ID
-      localStorage.setItem('adoxLastOrder', JSON.stringify(cart));
-      localStorage.setItem('adoxLastTotal', getCartTotal());
-      localStorage.setItem('adoxLastOrderId', orderId);
+    // Save order to backend first
+const orderRes = await fetch('/api/create-order', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    name,
+    phone,
+    email,
+    delivery: currentLocation === 'campus' 
+      ? document.getElementById('hostel').value
+      : `${document.getElementById('gate').options[document.getElementById('gate').selectedIndex].text} - ${document.getElementById('pickup').value}`,
+    items: cart,
+    total: getCartTotal()
+  })
+});
+
+const orderData = await orderRes.json();
+
+if (!orderData.success) {
+  showToast('❌ Error saving order. Please try again!');
+  return;
+}
+
+const orderId = orderData.orderId;
+
+// Save to localStorage
+localStorage.setItem('adoxLastOrder', JSON.stringify(cart));
+localStorage.setItem('adoxLastTotal', getCartTotal());
+localStorage.setItem('adoxLastOrderId', orderId);
 
       window.open(`https://wa.me/2348012345678?text=${message}`, '_blank');
       setTimeout(() => showConfirmModal(), 800);
