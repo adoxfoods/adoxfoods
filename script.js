@@ -574,21 +574,7 @@ if (waBtn) {
       })
     });
     // Send order details to Formspree
-fetch('https://formspree.io/f/xvzvdlyk', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    email: email,
-    name: name,
-    phone: phone,
-    order_id: orderId,
-    delivery: currentLocation === 'campus'
-      ? document.getElementById('hostel').value
-      : document.getElementById('pickup').value,
-    items: cart.map(i => `${i.name} x${i.qty} = ₦${(i.price * i.qty).toLocaleString()}`).join(', '),
-    total: '₦' + getCartTotal().toLocaleString()
-  })
-});
+
 
     const orderData = await orderRes.json();
 
@@ -622,6 +608,23 @@ fetch('https://formspree.io/f/xvzvdlyk', {
     localStorage.setItem('adoxLastTotal', getCartTotal());
     localStorage.setItem('adoxLastOrderId', orderId);
 
+    // Send to Formspree (don't await — let it run in background)
+fetch('https://formspree.io/f/xvzvdlyk', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    email: email,
+    name: name,
+    phone: phone,
+    order_id: orderId,
+    delivery: currentLocation === 'campus'
+      ? document.getElementById('hostel').value
+      : document.getElementById('pickup').value,
+    items: cart.map(i => i.name + ' x' + i.qty + ' = ₦' + (i.price * i.qty).toLocaleString()).join(', '),
+    total: '₦' + getCartTotal().toLocaleString()
+  })
+});
+    
     // STEP 4 — Open WhatsApp
     window.open(`https://wa.me/2348012345678?text=${message}`, '_blank');
     setTimeout(() => showConfirmModal(), 800);
