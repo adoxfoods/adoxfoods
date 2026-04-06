@@ -23,7 +23,7 @@ const FOOD_DATA = [
     { id: 33, name: "Half A Bottle Of Vegetable Oil", category: "oils", emoji: "🫙", image: "halfvoil.jpeg", price: 1100, desc: "Half a bottle of vegetable oil", badge: null },
     { id: 14, name: "Power Oil (1 Roll, 8 Pieces)", category: "oils", emoji: "🛢️", image: "poweroil.png", price: 1900, desc: "Power Oil — 1 roll", badge: "⭐ Best" },
     { id: 30, name: "Power Oil (1/2 Roll, 4 Pieces)", category: "oils", emoji: "🛢️", image: "halfpoil.jpeg", price: 980, desc: "Power Oil — 1/2 roll", badge: null },
-    { id: 31, name: "A Sachet Of Power Oil", category: "oils", emoji: "🛢️", image: "sachetoil.jpeg", price: 250, desc: "A Sachet Of Power Oil", badge: null },
+    { id: 31, name: "A Sachet Of Power Oil", category: "oils", emoji: "🛢️", image: "sachetoil.jfif", price: 250, desc: "A Sachet Of Power Oil", badge: null },
     // TOMATO PASTE
     { id: 15, name: "Party Jollof Tomato Paste", category: "tomato", emoji: "🍅", image: "partyjollof.png", price: 240, desc: "Party Jollof tomato paste — per tin", badge: null },
     { id: 16, name: "Pepper & Onions Tomato Paste", category: "tomato", emoji: "🍅", image: "potomat.png", price: 200, desc: "Pepper and onions tomato paste — per tin", badge: null },
