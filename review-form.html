@@ -1,269 +1,344 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Leave a Review — Adox Foods</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .review-page {
-      min-height: 100vh;
-      background: linear-gradient(135deg, var(--secondary), #1a2a3a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 100px 2rem 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .review-page::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,107,53,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,107,53,0.04) 1px, transparent 1px);
-      background-size: 50px 50px;
-    }
-
-    .review-card {
-      background: white;
-      border-radius: 24px;
-      padding: 3rem 2.5rem;
-      max-width: 520px;
-      width: 100%;
-      position: relative;
-      z-index: 2;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.3);
-      animation: cardPop 0.5s cubic-bezier(0.68,-0.55,0.265,1.55) both;
-    }
-    @keyframes cardPop {
-      from { opacity: 0; transform: scale(0.8) translateY(30px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    .review-icon { font-size: 3rem; text-align: center; margin-bottom: 1rem; }
-    .review-title { font-size: 1.5rem; font-weight: 800; color: var(--secondary); text-align: center; margin-bottom: 0.5rem; }
-    .review-sub { font-size: 0.88rem; color: var(--gray-600); text-align: center; margin-bottom: 2rem; line-height: 1.7; }
-
-    /* Star rating picker */
-    .star-picker { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
-    .star-pick {
-      font-size: 2.5rem;
-      cursor: pointer;
-      color: var(--gray-200);
-      transition: all 0.2s ease;
-      line-height: 1;
-    }
-    .star-pick:hover, .star-pick.selected { color: #f59e0b; transform: scale(1.2); }
-
-    .rating-label {
-      text-align: center;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 1.5rem;
-      min-height: 20px;
-    }
-
-    .submit-btn {
-      width: 100%;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-      padding: 15px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-      transition: var(--transition);
-      font-family: 'Poppins', sans-serif;
-      margin-top: 0.5rem;
-    }
-    .submit-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-orange); }
-    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-    /* States */
-    .state-loading, .state-error, .state-success, .state-expired {
-      text-align: center;
-      padding: 3rem 2rem;
-    }
-    .state-icon { font-size: 3.5rem; margin-bottom: 1rem; }
-    .state-title { font-size: 1.3rem; font-weight: 700; color: var(--secondary); margin-bottom: 0.75rem; }
-    .state-text { font-size: 0.9rem; color: var(--gray-600); line-height: 1.7; }
-
-    @media (max-width: 480px) {
-      .review-card { padding: 2rem 1.5rem; }
-      .star-pick { font-size: 2rem; }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leave a Review — Adox Foods</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .review-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--secondary), #1a2a3a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .review-page::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 107, 53, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 107, 53, 0.04) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .review-card {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            max-width: 520px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+            animation: cardPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+        }
+        
+        @keyframes cardPop {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        .review-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .review-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .review-sub {
+            font-size: 0.88rem;
+            color: var(--gray-600);
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        
+        .star-picker {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .star-pick {
+            font-size: 2.5rem;
+            cursor: pointer;
+            color: var(--gray-200);
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+        
+        .star-pick:hover,
+        .star-pick.selected {
+            color: #f59e0b;
+            transform: scale(1.2);
+        }
+        
+        .rating-label {
+            text-align: center;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            min-height: 20px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            margin-top: 0.5rem;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-orange);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .state-loading,
+        .state-error,
+        .state-success,
+        .state-expired {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        
+        .state-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .state-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .state-text {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .review-card {
+                padding: 2rem 1.5rem;
+            }
+            .star-pick {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<nav class="navbar">
-  <a href="index.html" class="logo">Adox<span>Foods</span></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="shop.html">Shop</a></li>
-    <li><a href="reviews.html">Reviews</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="hamburger"><span></span><span></span><span></span></div>
-  </div>
-</nav>
+    <nav class="navbar">
+        <a href="index.html" class="logo">Adox<span>Foods</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
 
-<div class="review-page">
-  <div class="review-card" id="review-card">
-    <!-- Loading state -->
-    <div class="state-loading">
-      <div style="width:40px;height:40px;border:3px solid #f0f0f0;border-top-color:var(--primary);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1rem"></div>
-      <p style="color:var(--gray-400)">Verifying your link...</p>
+    <div class="review-page">
+        <div class="review-card" id="review-card">
+            <div class="state-loading">
+                <div style="width:40px;height:40px;border:3px solid #f0f0f0;border-top-color:var(--primary);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1rem"></div>
+                <p style="color:var(--gray-400)">Verifying your link...</p>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-<script src="script.js"></script>
-<script>
-  const ratingLabels = ['', 'Poor 😞', 'Fair 😐', 'Good 😊', 'Great 😄', 'Excellent! 🔥'];
-  let selectedRating = 0;
-  let customerName = '';
-  let token = '';
+    <script src="script.js"></script>
+    <script>
+        var ratingLabels = ['', 'Poor', 'Fair', 'Good', 'Great', 'Excellent!'];
+        var selectedRating = 0;
+        var customerName = '';
+        var token = '';
 
-  // Get token from URL
-  const params = new URLSearchParams(window.location.search);
-  token = params.get('token');
+        var params = new URLSearchParams(window.location.search);
+        token = params.get('token');
 
-  async function verifyToken() {
-    const card = document.getElementById('review-card');
+        function verifyToken() {
+            var card = document.getElementById('review-card');
 
-    if (!token) {
-      card.innerHTML = `
-        <div class="state-error">
-          <div class="state-icon">❌</div>
-          <div class="state-title">Invalid Link</div>
-          <p class="state-text">This review link is invalid. Please contact us on WhatsApp if you think this is a mistake.</p>
-        </div>`;
-      return;
-    }
+            if (!token) {
+                card.innerHTML = '<div class="state-error"><div class="state-icon">❌</div><div class="state-title">Invalid Link</div><p class="state-text">This review link is invalid. Please contact us on WhatsApp.</p></div>';
+                return;
+            }
 
-    try {
-      const res = await fetch(`/api/verify-token?token=${token}`);
-      const data = await res.json();
+            fetch('/api/verify-token?token=' + token)
+                .then(function(res) {
+                    return res.json();
+                })
+                .then(function(data) {
+                    if (!data.success) {
+                        card.innerHTML = '<div class="state-expired"><div class="state-icon">⏰</div><div class="state-title">Link Expired</div><p class="state-text">This review link has already been used or has expired.</p></div>';
+                        return;
+                    }
+                    customerName = data.customer_name;
+                    renderForm(card, data.customer_name, data.order_id);
+                })
+                .catch(function() {
+                    card.innerHTML = '<div class="state-error"><div class="state-icon">⚠️</div><div class="state-title">Something went wrong</div><p class="state-text">Could not verify your link. Please try again.</p></div>';
+                });
+        }
 
-      if (!data.success) {
-        card.innerHTML = `
-          <div class="state-expired">
-            <div class="state-icon">⏰</div>
-            <div class="state-title">Link Expired</div>
-            <p class="state-text">${data.error || 'This review link has already been used or has expired.'}</p>
-          </div>`;
-        return;
-      }
+        function renderForm(card, name, orderId) {
+            card.innerHTML =
+                '<div class="review-icon">⭐</div>' +
+                '<div class="review-title">How was your order?</div>' +
+                '<p class="review-sub">Hi <strong>' + name + '</strong>! Tell us about your experience with order <strong>' + orderId + '</strong>.</p>' +
+                '<div class="star-picker" id="star-picker">' +
+                '<span class="star-pick" data-rating="1">★</span>' +
+                '<span class="star-pick" data-rating="2">★</span>' +
+                '<span class="star-pick" data-rating="3">★</span>' +
+                '<span class="star-pick" data-rating="4">★</span>' +
+                '<span class="star-pick" data-rating="5">★</span>' +
+                '</div>' +
+                '<div class="rating-label" id="rating-label">Tap a star to rate</div>' +
+                '<div class="form-group">' +
+                '<label class="form-label">Your Review <span>*</span></label>' +
+                '<textarea id="review-text" class="form-input" rows="4" placeholder="Tell us about your experience!" style="resize:vertical;min-height:120px"></textarea>' +
+                '<div class="form-error" id="text-error">Please write a review</div>' +
+                '</div>' +
+                '<button class="submit-btn" id="submit-btn" onclick="submitReview()">⭐ Submit Review</button>';
 
-      customerName = data.customer_name;
-      renderForm(card, customerName, data.order_id);
+            var stars = document.querySelectorAll('.star-pick');
 
-    } catch (err) {
-      card.innerHTML = `
-        <div class="state-error">
-          <div class="state-icon">⚠️</div>
-          <div class="state-title">Something went wrong</div>
-          <p class="state-text">Could not verify your link. Please try again or contact us on WhatsApp.</p>
-        </div>`;
-    }
-  }
+            for (var i = 0; i < stars.length; i++) {
+                (function(star, index) {
+                    star.addEventListener('click', function() {
+                        selectedRating = index + 1;
+                        for (var j = 0; j < stars.length; j++) {
+                            if (j < selectedRating) {
+                                stars[j].classList.add('selected');
+                                stars[j].style.color = '#f59e0b';
+                            } else {
+                                stars[j].classList.remove('selected');
+                                stars[j].style.color = '';
+                            }
+                        }
+                        document.getElementById('rating-label').textContent = ratingLabels[selectedRating];
+                    });
 
-  function renderForm(card, name, orderId) {
-    card.innerHTML = `
-      <div class="review-icon">⭐</div>
-      <div class="review-title">How was your order?</div>
-      <p class="review-sub">Hi <strong>${name}</strong>! We'd love to hear about your experience with order <strong>${orderId}</strong>.</p>
+                    star.addEventListener('mouseover', function() {
+                        for (var j = 0; j < stars.length; j++) {
+                            stars[j].style.color = j <= index ? '#f59e0b' : '';
+                        }
+                    });
 
-      <div class="star-picker" id="star-picker">
-        <span class="star-pick" data-rating="1">★</span>
-        <span class="star-pick" data-rating="2">★</span>
-        <span class="star-pick" data-rating="3">★</span>
-        <span class="star-pick" data-rating="4">★</span>
-        <span class="star-pick" data-rating="5">★</span>
-      </div>
-      <div class="rating-label" id="rating-label">Tap a star to rate</div>
+                    star.addEventListener('mouseout', function() {
+                        for (var j = 0; j < stars.length; j++) {
+                            stars[j].style.color = j < selectedRating ? '#f59e0b' : '';
+                        }
+                    });
+                })(stars[i], i);
+            }
+        }
 
-      <div class="form-group">
-        <label class="form-label" for="review-text">Your Review <span>*</span></label>
-        <textarea id="review-text" class="form-input" rows="4" placeholder="Tell us about your experience — quality, delivery speed, anything!" style="resize:vertical;min-height:120px"></textarea>
-        <div class="form-error" id="text-error">Please write a review</div>
-      </div>
+        function submitReview() {
+            var reviewTextEl = document.getElementById('review-text');
+            var reviewText = reviewTextEl ? reviewTextEl.value.trim() : '';
+            var btn = document.getElementById('submit-btn');
+            var textError = document.getElementById('text-error');
 
-      <button class="submit-btn" id="submit-btn" onclick="submitReview()">
-        ⭐ Submit Review
-      </button>
-    `;
+            if (!selectedRating) {
+                alert('Please select a star rating!');
+                return;
+            }
 
-    // Star interaction
-    const stars = document.querySelectorAll('.star-pick');
-    stars.forEach(star => {
-      star.addEventListener('click', () => {
-        selectedRating = parseInt(star.dataset.rating);
-        stars.forEach((s, i) => s.classList.toggle('selected', i < selectedRating));
-        document.getElementById('rating-label').textContent = ratingLabels[selectedRating];
-      });
-      star.addEventListener('mouseover', () => {
-        const r = parseInt(star.dataset.rating);
-        stars.forEach((s, i) => s.style.color = i < r ? '#f59e0b' : '';
-        );
-      });
-      star.addEventListener('mouseout', () => {
-        stars.forEach((s, i) => s.style.color = i < selectedRating ? '#f59e0b' : '');
-      });
-    });
-  }
+            if (!reviewText || reviewText.length < 10) {
+                textError.classList.add('show');
+                textError.textContent = 'Please write at least 10 characters';
+                return;
+            }
 
-  async function submitReview() {
-    const reviewText = document.getElementById('review-text')?.value.trim();
-    const btn = document.getElementById('submit-btn');
-    const textError = document.getElementById('text-error');
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
 
-    if (!selectedRating) { showToast('⭐ Please select a star rating!'); return; }
-    if (!reviewText || reviewText.length < 10) {
-      textError.classList.add('show');
-      textError.textContent = 'Please write at least 10 characters';
-      return;
-    }
+            fetch('/api/submit-review', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        token: token,
+                        rating: selectedRating,
+                        review_text: reviewText
+                    })
+                })
+                .then(function(res) {
+                    return res.json();
+                })
+                .then(function(data) {
+                    if (data.success) {
+                        document.getElementById('review-card').innerHTML =
+                            '<div class="state-success">' +
+                            '<div class="state-icon">🎉</div>' +
+                            '<div class="state-title">Thank You, ' + customerName + '!</div>' +
+                            '<p class="state-text">Your review has been submitted! It will appear after approval. Thank you! 🧡</p>' +
+                            '<a href="shop.html" style="display:inline-block;margin-top:1.5rem;background:var(--primary);color:white;padding:12px 28px;border-radius:50px;font-weight:700;font-size:.9rem;text-decoration:none">🛒 Shop Again</a>' +
+                            '</div>';
+                    } else {
+                        btn.disabled = false;
+                        btn.textContent = '⭐ Submit Review';
+                        alert(data.error || 'Something went wrong');
+                    }
+                })
+                .catch(function() {
+                    btn.disabled = false;
+                    btn.textContent = '⭐ Submit Review';
+                    alert('Network error. Please try again.');
+                });
+        }
 
-    btn.disabled = true;
-    btn.textContent = 'Submitting...';
-
-    try {
-      const res = await fetch('/api/submit-review', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, rating: selectedRating, review_text: reviewText })
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        document.getElementById('review-card').innerHTML = `
-          <div class="state-success">
-            <div class="state-icon">🎉</div>
-            <div class="state-title">Thank You, ${customerName}!</div>
-            <p class="state-text">Your review has been submitted successfully! It will appear on our reviews page after approval. We really appreciate your feedback! 🧡</p>
-            <a href="shop.html" style="display:inline-block;margin-top:1.5rem;background:var(--primary);color:white;padding:12px 28px;border-radius:50px;font-weight:700;font-size:.9rem;text-decoration:none">🛒 Shop Again</a>
-          </div>`;
-      } else {
-        btn.disabled = false;
-        btn.textContent = '⭐ Submit Review';
-        showToast('❌ ' + (data.error || 'Something went wrong'));
-      }
-
-    } catch (err) {
-      btn.disabled = false;
-      btn.textContent = '⭐ Submit Review';
-      showToast('❌ Network error. Please try again.');
-    }
-  }
-
-  verifyToken();
-</script>
+        verifyToken();
+    </script>
 </body>
+
 </html>
