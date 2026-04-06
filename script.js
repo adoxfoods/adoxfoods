@@ -4,10 +4,10 @@
 // ===== FOOD DATA =====
 const FOOD_DATA = [
     // GRAINS
-    { id: 1, name: "A Congo Of Rice", category: "grains", emoji: "🌾", price: 2300, desc: "Fresh, quality rice measured by the congo", badge: "🔥 Popular" },
-    { id: 2, name: "A Congo Of White Beans", category: "grains", emoji: "🫘", price: 2100, desc: "Fresh white beans, perfect for any meal", badge: null },
-    { id: 3, name: "A Congo Of Oloyin Beans", category: "grains", emoji: "🫘", price: 2800, desc: "Premium Oloyin honey beans", badge: null },
-    { id: 4, name: "A Congo Of Garri", category: "grains", emoji: "🥣", price: 600, desc: "Fresh garri, measured by the congo", badge: "⭐ Best" },
+    { id: 1, name: "A Congo Of Rice", category: "grains", emoji: "🌾", image: "rice.png", price: 2300, desc: "Fresh, quality rice measured by the congo", badge: "🔥 Popular" },
+    { id: 2, name: "A Congo Of White Beans", category: "grains", emoji: "🫘", image: "whitebeans.png", price: 2100, desc: "Fresh white beans, perfect for any meal", badge: null },
+    { id: 3, name: "A Congo Of Oloyin Beans", category: "grains", emoji: "🫘", image: "oloyin.png", price: 2800, desc: "Premium Oloyin honey beans", badge: null },
+    { id: 4, name: "A Congo Of Garri", category: "grains", emoji: "🥣", image: "gari.png", price: 600, desc: "Fresh garri, measured by the congo", badge: "⭐ Best" },
     { id: 5, name: "Kivo Garri", category: "grains", emoji: "🥣", price: 380, image: "images/garri.png", desc: "Packaged Kivo garri — student favourite", badge: null },
     // PASTA & SEMOVITA
     { id: 6, name: "Golden Penny Spag", category: "pasta", emoji: "🍝", price: 1100, desc: "Golden Penny spaghetti — full pack", badge: "🔥 Popular" },
@@ -381,9 +381,10 @@ function foodCardHTML(food, showQty = true) {
     return `
     <div class="food-card reveal">
       <div class="food-img-wrap">
-  ${food.image
-  ? `<img src="${food.image}" alt="${food.name}" style="width:100%;height:100%;object-fit:cover;object-position:center;position:absolute;top:0;left:0;" />`
+  ${food.image 
+  ? `<img src="images/${food.image}" alt="${food.name}" />`
   : `<div class="food-emoji">${food.emoji}</div>`
+}
 }
         ${food.badge ? `<div class="food-badge">${food.badge}</div>` : ''}
       </div>
