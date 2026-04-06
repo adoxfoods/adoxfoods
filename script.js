@@ -8,41 +8,40 @@ const FOOD_DATA = [
     { id: 2, name: "A Congo Of White Beans", category: "grains", emoji: "🫘", image: "whitebeans.png", price: 2100, desc: "Fresh white beans, perfect for any meal", badge: null },
     { id: 3, name: "A Congo Of Oloyin Beans", category: "grains", emoji: "🫘", image: "oloyin.png", price: 2800, desc: "Premium Oloyin honey beans", badge: null },
     { id: 4, name: "A Congo Of Garri", category: "grains", emoji: "🥣", image: "gari.png", price: 600, desc: "Fresh garri, measured by the congo", badge: "⭐ Best" },
-    { id: 5, name: "Kivo Garri", category: "grains", emoji: "🥣", price: 380, image: "images/garri.png", desc: "Packaged Kivo garri — student favourite", badge: null },
+    // { id: 5, name: "Kivo Garri", category: "grains", emoji: "🥣", price: 380, image: "images/garri.png", desc: "Packaged Kivo garri — student favourite", badge: null },
     // PASTA & SEMOVITA
-    { id: 6, name: "Golden Penny Spag", category: "pasta", emoji: "🍝", price: 1100, desc: "Golden Penny spaghetti — full pack", badge: "🔥 Popular" },
-    { id: 7, name: "Mama's Pride Spag", category: "pasta", emoji: "🍝", price: 950, desc: "Mama's Pride spaghetti — budget friendly", badge: null },
-    { id: 8, name: "Auntie B Spag", category: "pasta", emoji: "🍝", price: 950, desc: "Auntie B spaghetti — great quality", badge: null },
-    { id: 9, name: "Crown Spag", category: "pasta", emoji: "🍝", price: 1050, desc: "Crown spaghetti — premium quality", badge: null },
-    { id: 10, name: "Semo 1kg", category: "pasta", emoji: "🫙", price: 1800, desc: "Semovita 1kg pack — full size", badge: null },
-    { id: 11, name: "Semo 500g", category: "pasta", emoji: "🫙", price: 950, desc: "Semovita 500g pack — student size", badge: null },
+    { id: 6, name: "Golden Penny Spag", category: "pasta", emoji: "🍝", image: "GoldenPennySpag.png", price: 1100, desc: "Golden Penny spaghetti — full pack", badge: "🔥 Popular" },
+    { id: 7, name: "Mama's Pride Spag", category: "pasta", emoji: "🍝", image: "mamaspag.png", price: 950, desc: "Mama's Pride spaghetti — budget friendly", badge: null },
+    { id: 8, name: "Auntie B Spag", category: "pasta", emoji: "🍝", image: "AuntieB spag.png", price: 950, desc: "Auntie B spaghetti — great quality", badge: null },
+    { id: 9, name: "Crown Spag", category: "pasta", emoji: "🍝", image: "CrownSpag.png", price: 1050, desc: "Crown spaghetti — premium quality", badge: null },
+    { id: 10, name: "Semo 1kg", category: "pasta", emoji: "🫙", image: "1kkgsemo.png", price: 1800, desc: "Semovita 1kg pack — full size", badge: null },
+    { id: 11, name: "Semo 500g", category: "pasta", emoji: "🫙", image: "500gsemo.jpeg", price: 950, desc: "Semovita 500g pack — student size", badge: null },
     // OILS
-    { id: 12, name: "A Bottle Of Palm Oil", category: "oils", emoji: "🫙", price: 1480, desc: "Full bottle of fresh palm oil)", badge: null },
-    { id: 32, name: "Half A Bottle Of Palm Oil", category: "oils", emoji: "🫙", price: 750, desc: "Half a bottle of fresh palm oil", badge: null },
-    { id: 13, name: "A Bottle Of Vegetable Oil", category: "oils", emoji: "🫙", price: 0, desc: "Full bottle of vegetable oil — ask for price", badge: null },
-    { id: 33, name: "Half A Bottle Of Vegetable Oil", category: "oils", emoji: "🫙", price: 0, desc: "Half a bottle of vegetable oil — ask for price", badge: null },
-    { id: 14, name: "Power Oil (1 Roll, 8 Pieces)", category: "oils", emoji: "🛢️", price: 1900, desc: "Power Oil — 1 roll", badge: "⭐ Best" },
-    { id: 30, name: "Power Oil (1/2 Roll, 4 Pieces)", category: "oils", emoji: "🛢️", price: 980, desc: "Power Oil — 1/2 roll", badge: null },
-    { id: 31, name: "A Sachet Of Power Oil", category: "oils", emoji: "🛢️", price: 250, desc: "A Sachet Of Power Oil", badge: null },
+    { id: 12, name: "A Bottle Of Palm Oil", category: "oils", emoji: "🫙", image: "p.oil.png", price: 1480, desc: "Full bottle of fresh palm oil)", badge: null },
+    { id: 32, name: "Half A Bottle Of Palm Oil", category: "oils", emoji: "🫙", image: "halfoil.png", price: 750, desc: "Half a bottle of fresh palm oil", badge: null },
+    { id: 13, name: "A Bottle Of Vegetable Oil", category: "oils", emoji: "🫙", image: "voil.png", price: 2100, desc: "Full bottle of vegetable oil", badge: null },
+    { id: 33, name: "Half A Bottle Of Vegetable Oil", category: "oils", emoji: "🫙", image: "halfvoil.jpeg", price: 1100, desc: "Half a bottle of vegetable oil", badge: null },
+    { id: 14, name: "Power Oil (1 Roll, 8 Pieces)", category: "oils", emoji: "🛢️", image: "poweroil.png", price: 1900, desc: "Power Oil — 1 roll", badge: "⭐ Best" },
+    { id: 30, name: "Power Oil (1/2 Roll, 4 Pieces)", category: "oils", emoji: "🛢️", image: "halfpoil.jpeg", price: 980, desc: "Power Oil — 1/2 roll", badge: null },
+    { id: 31, name: "A Sachet Of Power Oil", category: "oils", emoji: "🛢️", image: "sachetoil.jpeg", price: 250, desc: "A Sachet Of Power Oil", badge: null },
     // TOMATO PASTE
-    { id: 15, name: "Party Jollof Tomato Paste", category: "tomato", emoji: "🍅", price: 240, desc: "Party Jollof tomato paste — per tin", badge: null },
-    { id: 16, name: "Pepper & Onions Tomato Paste", category: "tomato", emoji: "🍅", price: 200, desc: "Pepper and onions tomato paste — per tin", badge: null },
-    { id: 17, name: "Tomato Paste Mix (Normal)", category: "tomato", emoji: "🍅", price: 190, desc: "Regular tomato paste mix — per tin", badge: null },
+    { id: 15, name: "Party Jollof Tomato Paste", category: "tomato", emoji: "🍅", image: "partyjollof.png", price: 240, desc: "Party Jollof tomato paste — per tin", badge: null },
+    { id: 16, name: "Pepper & Onions Tomato Paste", category: "tomato", emoji: "🍅", image: "potomat.png", price: 200, desc: "Pepper and onions tomato paste — per tin", badge: null },
+    { id: 17, name: "Tomato Paste Mix (Normal)", category: "tomato", emoji: "🍅", image: "tomatpaste.png", price: 190, desc: "Regular tomato paste mix — per tin", badge: null },
     // SEASONINGS
-    { id: 18, name: "Knorr Seasoning Cube (50 Cubes)", category: "seasonings", emoji: "🧊", price: 650, desc: "Knorr seasoning cubes — pack of 50", badge: "🔥 Popular" },
-    { id: 19, name: "Chicken Flavor Cube (20 Cubes)", category: "seasonings", emoji: "🧊", price: 400, desc: "Chicken flavor seasoning — pack of 20", badge: null },
-    { id: 20, name: "Salt", category: "seasonings", emoji: "🧂", price: 190, desc: "Table salt — standard pack", badge: null },
-    { id: 23, name: "Jollof Spicity", category: "seasonings", emoji: "🌶️", price: 150, desc: "Jollof spice mix — perfect blend", badge: null },
-    { id: 29, name: "Hot Pepper", category: "seasonings", emoji: "🌶️", price: 100, desc: "Ground hot pepper — per pack", badge: null },
+    { id: 18, name: "Knorr Seasoning Cube (50 Cubes)", category: "seasonings", emoji: "🧊", image: "knorr.png", price: 650, desc: "Knorr seasoning cubes — pack of 50", badge: "🔥 Popular" },
+    { id: 19, name: "Chicken Flavor Cube (20 Cubes)", category: "seasonings", emoji: "🧊", image: "c.flvormag.jpg", price: 400, desc: "Chicken flavor seasoning — pack of 20", badge: null },
+    //{ id: 20, name: "Salt", category: "seasonings", emoji: "🧂", price: 190, image: "poweroil.png", desc: "Table salt — standard pack", badge: null },
+    { id: 23, name: "Jollof Spicity", category: "seasonings", emoji: "🌶️", image: "jollofspicity.jpeg", price: 150, desc: "Jollof spice mix — perfect blend", badge: null },
+    { id: 29, name: "Hot Pepper", category: "seasonings", emoji: "🌶️", image: "hotpeper.png", price: 100, desc: "Ground hot pepper — per pack", badge: null },
     // SPICES
-    { id: 21, name: "Thyme", category: "spices", emoji: "🌿", price: 100, desc: "Dried thyme — per pack", badge: null },
-    { id: 22, name: "Curry", category: "spices", emoji: "🌿", price: 100, desc: "Curry powder — per pack", badge: null },
-    { id: 24, name: "Lasor Beef Spice", category: "spices", emoji: "🌶️", price: 180, desc: "Lasor beef spice blend", badge: null },
-    { id: 25, name: "Lasor Fish Spice", category: "spices", emoji: "🌶️", price: 180, desc: "Lasor fish spice blend", badge: null },
-    { id: 26, name: "Lasor Chicken Spice", category: "spices", emoji: "🌶️", price: 140, desc: "Lasor chicken spice blend", badge: null },
-    { id: 27, name: "Lasor Fried Rice Spice", category: "spices", emoji: "🌶️", price: 140, desc: "Lasor fried rice spice mix", badge: null },
-    { id: 28, name: "Ginger, Garlic & Onion Mix", category: "spices", emoji: "🧄", price: 140, desc: "Mixed ginger, garlic and onion powder", badge: "⭐ Best" },
-    { id: 29, name: "Hot Pepper", category: "spices", emoji: "🌶️", price: 100, desc: "Ground hot pepper — per pack", badge: null },
+    { id: 21, name: "Thyme", category: "spices", emoji: "🌿", price: 100, image: "thyme.jpg", desc: "Dried thyme — per pack", badge: null },
+    { id: 22, name: "Curry", category: "spices", emoji: "🌿", price: 100, image: "curry.jpeg", desc: "Curry powder — per pack", badge: null },
+    // { id: 24, name: "Lasor Beef Spice", category: "spices", emoji: "🌶️", price: 180, desc: "Lasor beef spice blend", badge: null },
+    // { id: 25, name: "Lasor Fish Spice", category: "spices", emoji: "🌶️", price: 180, desc: "Lasor fish spice blend", badge: null },
+    //{ id: 26, name: "Lasor Chicken Spice", category: "spices", emoji: "🌶️", price: 140, desc: "Lasor chicken spice blend", badge: null },
+    //{ id: 27, name: "Lasor Fried Rice Spice", category: "spices", emoji: "🌶️", price: 140, desc: "Lasor fried rice spice mix", badge: null },
+    // { id: 28, name: "Ginger, Garlic & Onion Mix", category: "spices", emoji: "🧄", price: 140, desc: "Mixed ginger, garlic and onion powder", badge: "⭐ Best" },
     //SPECIAL OFFERS
 
 ];
@@ -444,8 +443,8 @@ function initShop() {
 
 // ===== PICKUP POINTS =====
 const GATE_PICKUPS = {
-  north: ['Junction A - North Gate', 'Junction B - North Gate', 'North Gate Bus Stop', 'North Market Square'],
-  south: ['Junction A - South Gate', 'Junction B - South Gate', 'South Gate Bus Stop', 'South Shopping Complex'],
+  north: ['Front Of North Gate', ' Junction  - North Gate', 'North Gate Bus Stop', 'North Market Square'],
+  south: ['Front Of South Gate', 'RCF Junction', 'Peace Avenue Junction', 'Apatapiti Junction', 'Stateline Junction'],
   west:  ['Junction A - West Gate', 'Junction B - West Gate', 'West Gate Bus Stop', 'West End Junction'],
 };
 
@@ -574,6 +573,22 @@ if (waBtn) {
         total: getCartTotal()
       })
     });
+    // Send order details to Formspree
+fetch('https://formspree.io/f/xvzvdlyk', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    email: email,
+    name: name,
+    phone: phone,
+    order_id: orderId,
+    delivery: currentLocation === 'campus'
+      ? document.getElementById('hostel').value
+      : document.getElementById('pickup').value,
+    items: cart.map(i => `${i.name} x${i.qty} = ₦${(i.price * i.qty).toLocaleString()}`).join(', '),
+    total: '₦' + getCartTotal().toLocaleString()
+  })
+});
 
     const orderData = await orderRes.json();
 
