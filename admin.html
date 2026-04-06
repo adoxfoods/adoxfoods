@@ -601,7 +601,14 @@
                 <td>${o.phone}</td>
                 <td style="max-width:150px;font-size:.78rem">${o.delivery}</td>
                 <td><strong>₦${o.total?.toLocaleString()}</strong></td>
-                <td><span class="badge badge-${o.status}">${o.status}</span></td>
+                <td>
+  <select onchange="updateOrderStatus('${o.id}', this.value)" style="padding:4px 8px;border-radius:6px;border:1px solid #e0e0e0;font-family:'Poppins',sans-serif;font-size:.75rem;cursor:pointer;color:var(--secondary)">
+    <option value="pending" ${o.status === 'pending' ? 'selected' : ''}>⏳ Pending</option>
+    <option value="confirmed" ${o.status === 'confirmed' ? 'selected' : ''}>✅ Confirmed</option>
+    <option value="delivered" ${o.status === 'delivered' ? 'selected' : ''}>📦 Delivered</option>
+    <option value="cancelled" ${o.status === 'cancelled' ? 'selected' : ''}>❌ Cancelled</option>
+  </select>
+</td>
                 <td style="font-size:.75rem">${new Date(o.created_at).toLocaleDateString('en-NG')}</td>
               </tr>
             `).join('')}
@@ -612,6 +619,23 @@
       container.innerHTML = '<div class="table-loading">Error loading orders</div>';
     }
   }
+  async function updateOrderStatus(id, status) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/orders?id=eq.${id}`, {
+    method: 'PATCH',
+    headers: {
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify({ status: status })
+  });
+  if (res.ok) {
+    showToast('✅ Order status updated!');
+  } else {
+    alert('Error updating status');
+  }
+}
 
   async function loadReviews() {
     const container = document.getElementById('reviews-table');
