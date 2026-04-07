@@ -221,7 +221,7 @@ function initStatusBanner() {
 
     if (isOpen) {
         banner.className = 'status-banner open';
-        banner.innerHTML = '🟢 We\'re Open! Orders are being accepted right now 🎉';
+        banner.innerHTML = '🟢 We\'re Open! Orders are being accepted right now';
     } else {
         banner.className = 'status-banner closed';
         banner.innerHTML = '🔴 We\'re currently closed. Check our hours below for when we reopen!';
