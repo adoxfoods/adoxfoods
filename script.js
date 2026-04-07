@@ -95,7 +95,7 @@ function refreshCheckoutSummary() {
             </div>
             <div class="oi-price">₦${(item.price * item.qty).toLocaleString()}</div>
         </div>
-    `).join(''); - v
+    `).join('');
     const totalEl = document.querySelector('.order-total-price');
     if (totalEl) totalEl.textContent = '₦' + getCartTotal().toLocaleString();
 }
@@ -384,7 +384,7 @@ function foodCardHTML(food, showQty = true) {
   ? `<img src="images/${food.image}" alt="${food.name}" />`
   : `<div class="food-emoji">${food.emoji}</div>`
 }
-}
+
         ${food.badge ? `<div class="food-badge">${food.badge}</div>` : ''}
       </div>
       <div class="food-body">
@@ -561,7 +561,7 @@ if (waBtn) {
     waBtn.textContent = '⏳ Processing...';
     waBtn.disabled = true;
 
-    const orderRes = fetch('/api/create-order', {
+const orderRes = await fetch('/api/create-order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
