@@ -2004,6 +2004,9 @@ footer {
     .logo {
         font-size: 1rem;
     }
+    .hero {
+        padding: 80px 15px;
+    }
     .hero-stats {
         flex-wrap: wrap;
         gap: 1rem;
@@ -2049,10 +2052,6 @@ footer {
 
 .hero {
     padding-top: 140px;
-}
-
-.hero {
-    padding-top: 130px;
 }
 
 .menu-hero {
