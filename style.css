@@ -1995,14 +1995,25 @@ footer {
 
 @media (max-width: 480px) {
     .navbar {
-        padding: 0 1rem;
+        padding: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5px;
     }
     .logo {
-        font-size: 1.3rem;
+        font-size: 1rem;
     }
     .hero-stats {
         flex-wrap: wrap;
         gap: 1rem;
+    }
+    .cart-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    .menu-icon {
+        font-size: 1.2rem;
     }
 }
 
