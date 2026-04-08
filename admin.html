@@ -185,7 +185,7 @@
             font-weight: 500;
             margin-top: 4px;
         }
-        /* Section */
+        /* Sections */
         
         .admin-section {
             display: none;
@@ -194,7 +194,7 @@
         .admin-section.active {
             display: block;
         }
-        /* Review link generator */
+        /* Review link */
         
         .link-gen-card {
             background: white;
@@ -352,6 +352,110 @@
             margin-right: 4px;
         }
         
+        .action-btn.approve {
+            background: rgba(34, 197, 94, 0.1);
+            color: #16a34a;
+        }
+        
+        .action-btn.approve:hover {
+            background: #16a34a;
+            color: white;
+        }
+        
+        .action-btn.delete {
+            background: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+        }
+        
+        .action-btn.delete:hover {
+            background: #dc2626;
+            color: white;
+        }
+        /* Screenshot button */
+        
+        .action-btn.screenshot {
+            background: rgba(59, 130, 246, 0.1);
+            color: #2563eb;
+        }
+        
+        .action-btn.screenshot:hover {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .no-screenshot {
+            font-size: 0.72rem;
+            color: var(--gray-400);
+            font-style: italic;
+        }
+        /* Screenshot lightbox */
+        
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .lightbox-overlay.show {
+            display: flex;
+        }
+        
+        .lightbox-inner {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+        
+        .lightbox-inner img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: block;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -16px;
+            right: -16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .lightbox-label {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            margin-top: 0.75rem;
+        }
+        /* Stars */
+        
+        .stars-sm {
+            color: #f59e0b;
+            font-size: 0.85rem;
+        }
+        
+        .table-loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--gray-400);
+        }
+        
         @media (max-width: 768px) {
             .admin-body {
                 padding: 1rem;
@@ -373,7 +477,7 @@
                 overflow-x: auto;
             }
             .admin-table {
-                min-width: 600px;
+                min-width: 700px;
             }
             .admin-table th,
             .admin-table td {
@@ -403,59 +507,19 @@
                 font-size: 1.5rem;
             }
         }
-        
-        .action-btn.approve {
-            background: rgba(34, 197, 94, 0.1);
-            color: #16a34a;
-        }
-        
-        .action-btn.approve:hover {
-            background: #16a34a;
-            color: white;
-        }
-        
-        .action-btn.delete {
-            background: rgba(239, 68, 68, 0.1);
-            color: #dc2626;
-        }
-        
-        .action-btn.delete:hover {
-            background: #dc2626;
-            color: white;
-        }
-        /* Stars small */
-        
-        .stars-sm {
-            color: #f59e0b;
-            font-size: 0.85rem;
-        }
-        /* Loading */
-        
-        .table-loading {
-            text-align: center;
-            padding: 3rem;
-            color: var(--gray-400);
-        }
-        
-        @media (max-width: 768px) {
-            .admin-body {
-                padding: 1rem;
-            }
-            .link-gen-row {
-                flex-direction: column;
-            }
-            .admin-table {
-                font-size: 0.78rem;
-            }
-            .admin-table th,
-            .admin-table td {
-                padding: 0.75rem 0.5rem;
-            }
-        }
     </style>
 </head>
 
 <body>
+
+    <!-- SCREENSHOT LIGHTBOX -->
+    <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox(event)">
+        <div class="lightbox-inner">
+            <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+            <img id="lightboxImg" alt="Payment Screenshot" />
+            <div class="lightbox-label" id="lightboxLabel"></div>
+        </div>
+    </div>
 
     <!-- LOGIN SCREEN -->
     <div class="login-screen" id="loginScreen">
@@ -517,8 +581,6 @@
 
             <!-- REVIEWS SECTION -->
             <div class="admin-section" id="section-reviews">
-
-                <!-- Generate review link -->
                 <div class="link-gen-card">
                     <h3>🔗 Generate Review Link</h3>
                     <div class="link-gen-row">
@@ -531,7 +593,6 @@
                         <button class="copy-btn" onclick="copyLink()">📋 Copy Link</button>
                     </div>
                 </div>
-
                 <div class="admin-table-wrap">
                     <div id="reviews-table" class="table-loading">Loading reviews...</div>
                 </div>
@@ -545,9 +606,7 @@
         const SUPABASE_URL = 'https://iebgvxdkhxabvpmprhfi.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImllYmd2eGRraHhhYnZwbXByaGZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5NzA1NjAsImV4cCI6MjA5MDU0NjU2MH0.UwxSil8P2YpZMlqAhXEacRiQMT5ueC-e856nNgjagIU';
 
-        // Enter key on password
-        const pwdInput = document.getElementById('adminPassword');
-        if (pwdInput) pwdInput.addEventListener('keydown', e => {
+        document.getElementById('adminPassword').addEventListener('keydown', e => {
             if (e.key === 'Enter') handleLogin();
         });
 
@@ -557,7 +616,6 @@
                 alert('Please enter password');
                 return;
             }
-
             try {
                 const res = await fetch('/api/delete-review', {
                     method: 'DELETE',
@@ -569,22 +627,15 @@
                         admin_password: pwd
                     })
                 });
-                console.log('Status:', res.status);
-                const data = await res.json();
-                console.log('Data:', data);
-
                 if (res.status === 401) {
                     alert('❌ Wrong password!');
                     return;
                 }
-
                 adminPassword = pwd;
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('adminLayout').classList.add('visible');
                 loadAll();
-
             } catch (err) {
-                console.log('Error:', err);
                 alert('Error: ' + err.message);
             }
         }
@@ -602,7 +653,6 @@
             document.getElementById(`section-${tab}`).classList.add('active');
         }
 
-        // Supabase fetch helper
         async function sbFetch(table, query = '') {
             const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}${query}`, {
                 headers: {
@@ -633,181 +683,177 @@
                 }
 
                 container.innerHTML = `
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>Order ID</th>
-              <th>Customer</th>
-              <th>Phone</th>
-              <th>Delivery</th>
-              <th>Total</th>
-              <th>Status</th>
-              <th>Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${orders.map(o => `
-              <tr>
-                <td><strong style="color:var(--primary)">${o.order_id}</strong></td>
-                <td>${o.name}</td>
-                <td>${o.phone}</td>
-                <td style="max-width:150px;font-size:.78rem">${o.delivery}</td>
-                <td><strong>₦${o.total?.toLocaleString()}</strong></td>
-                <td>
-  <select onchange="updateOrderStatus('${o.id}', this.value)" style="padding:4px 8px;border-radius:6px;border:1px solid #e0e0e0;font-family:'Poppins',sans-serif;font-size:.75rem;cursor:pointer;color:var(--secondary)">
-    <option value="pending" ${o.status === 'pending' ? 'selected' : ''}>⏳ Pending</option>
-    <option value="confirmed" ${o.status === 'confirmed' ? 'selected' : ''}>✅ Confirmed</option>
-    <option value="delivered" ${o.status === 'delivered' ? 'selected' : ''}>📦 Delivered</option>
-    <option value="cancelled" ${o.status === 'cancelled' ? 'selected' : ''}>❌ Cancelled</option>
-  </select>
-</td>
-<td style="font-size:.75rem">${new Date(o.created_at).toLocaleDateString('en-NG')}</td>
-<td><button class="action-btn delete" onclick="deleteOrder('${o.id}')">🗑 Delete</button></td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      `;
-    } catch (err) {
-      container.innerHTML = '<div class="table-loading">Error loading orders</div>';
-    }
-  }
-  async function deleteOrder(id) {
-  if (!confirm('Are you sure you want to delete this order?')) return;
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/orders?id=eq.${id}`, {
-    method: 'DELETE',
-    headers: {
-      'apikey': SUPABASE_ANON_KEY,
-      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-      'Content-Type': 'application/json'
-    }
-  });
-  if (res.ok) {
-    alert('🗑 Order deleted!');
-    loadOrders();
-  } else {
-    alert('Error deleting order');
-  }
-}
-  async function updateOrderStatus(id, status) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/orders?id=eq.${id}`, {
-    method: 'PATCH',
-    headers: {
-      'apikey': SUPABASE_ANON_KEY,
-      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-      'Content-Type': 'application/json',
-      'Prefer': 'return=minimal'
-    },
-    body: JSON.stringify({ status: status })
-  });
-  if (res.ok) {
-    showToast('✅ Order status updated!');
-  } else {
-    alert('Error updating status');
-  }
-}
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Phone</th>
+                                <th>Delivery</th>
+                                <th>Total</th>
+                                <th>Screenshot</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${orders.map(o => `
+                                <tr>
+                                    <td><strong style="color:var(--primary)">${o.order_id}</strong></td>
+                                    <td>${o.name}</td>
+                                    <td>${o.phone}</td>
+                                    <td style="max-width:140px;font-size:.78rem">${o.delivery}</td>
+                                    <td><strong>₦${o.total?.toLocaleString()}</strong></td>
+                                    <td>
+                                        ${o.screenshot_url
+                                            ? `<button class="action-btn screenshot" onclick="viewScreenshot('${o.screenshot_url}', '${o.order_id}')">🖼 View</button>`
+                                            : `<span class="no-screenshot">No screenshot</span>`
+                                        }
+                                    </td>
+                                    <td>
+                                        <select onchange="updateOrderStatus('${o.id}', this.value)"
+                                            style="padding:4px 8px;border-radius:6px;border:1px solid #e0e0e0;font-family:'Poppins',sans-serif;font-size:.75rem;cursor:pointer;color:var(--secondary)">
+                                            <option value="pending"   ${o.status === 'pending'   ? 'selected' : ''}>⏳ Pending</option>
+                                            <option value="confirmed" ${o.status === 'confirmed' ? 'selected' : ''}>✅ Confirmed</option>
+                                            <option value="delivered" ${o.status === 'delivered' ? 'selected' : ''}>📦 Delivered</option>
+                                            <option value="cancelled" ${o.status === 'cancelled' ? 'selected' : ''}>❌ Cancelled</option>
+                                        </select>
+                                    </td>
+                                    <td style="font-size:.75rem">${new Date(o.created_at).toLocaleDateString('en-NG')}</td>
+                                    <td><button class="action-btn delete" onclick="deleteOrder('${o.id}')">🗑 Delete</button></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } catch (err) {
+                container.innerHTML = '<div class="table-loading">Error loading orders</div>';
+            }
+        }
 
-  async function loadReviews() {
-    const container = document.getElementById('reviews-table');
-    try {
-      const reviews = await sbFetch('reviews', '?order=created_at.desc');
-      document.getElementById('stat-reviews').textContent = reviews.length;
-      document.getElementById('stat-pending').textContent = reviews.filter(r => !r.is_approved && r.token_used).length;
+        // ---- Screenshot lightbox ----
+        function viewScreenshot(url, orderId) {
+            document.getElementById('lightboxImg').src = url;
+            document.getElementById('lightboxLabel').textContent = `Payment proof for order ${orderId}`;
+            document.getElementById('lightboxOverlay').classList.add('show');
+        }
 
-      if (reviews.length === 0) {
-        container.innerHTML = '<div class="table-loading">No reviews yet</div>';
-        return;
-      }
+        function closeLightbox(e) {
+            // Close if clicking the overlay background (not the image itself)
+            if (!e || e.target === document.getElementById('lightboxOverlay') || e.currentTarget.classList.contains('lightbox-close')) {
+                document.getElementById('lightboxOverlay').classList.remove('show');
+                document.getElementById('lightboxImg').src = '';
+            }
+        }
 
-      container.innerHTML = `
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>Customer</th>
-              <th>Order ID</th>
-              <th>Rating</th>
-              <th>Review</th>
-              <th>Status</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${reviews.map(r => `
-              <tr id="review-row-${r.id}">
-                <td><strong>${r.customer_name || '—'}</strong></td>
-                <td style="color:var(--primary);font-size:.8rem">${r.order_id}</td>
-                <td class="stars-sm">${r.rating ? '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating) : '—'}</td>
-                <td style="max-width:200px;font-size:.8rem">${r.review_text || '<em style="color:var(--gray-400)">Not submitted yet</em>'}</td>
-                <td><span class="badge ${r.is_approved ? 'badge-approved' : 'badge-unapproved'}">${r.is_approved ? 'Approved' : r.token_used ? 'Pending' : 'Not submitted'}</span></td>
-                <td style="font-size:.75rem">${new Date(r.created_at).toLocaleDateString('en-NG')}</td>
-                <td>
-                  ${r.token_used && !r.is_approved ? `<button class="action-btn approve" onclick="approveReview('${r.id}')">✅ Approve</button>` : ''}
-                  ${r.review_text ? `<button class="action-btn delete" onclick="deleteReview('${r.id}')">🗑 Delete</button>` : ''}
-                </td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      `;
-    } catch (err) {
-      container.innerHTML = '<div class="table-loading">Error loading reviews</div>';
-    }
-  }
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeLightbox({ target: document.getElementById('lightboxOverlay') });
+        });
 
-  async function approveReview(id) {
-    try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/reviews?id=eq.${id}`, {
-        method: 'PATCH',
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ is_approved: true })
-      });
-      if (res.ok) { alert('✅ Review approved!'); loadReviews(); }
-      else alert('Error approving review');
-    } catch (err) { alert('Error: ' + err.message); }
-  }
+        async function deleteOrder(id) {
+            if (!confirm('Are you sure you want to delete this order?')) return;
+            const res = await fetch(`${SUPABASE_URL}/rest/v1/orders?id=eq.${id}`, {
+                method: 'DELETE',
+                headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json' }
+            });
+            if (res.ok) { alert('🗑 Order deleted!'); loadOrders(); }
+            else alert('Error deleting order');
+        }
 
-  async function deleteReview(id) {
-    if (!confirm('Are you sure you want to delete this review?')) return;
-    try {
-      const res = await fetch('/api/delete-review', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, admin_password: adminPassword })
-      });
-      const data = await res.json();
-      if (data.success) { alert('🗑 Review deleted!'); loadReviews(); }
-      else alert('Error: ' + data.error);
-    } catch (err) { alert('Error: ' + err.message); }
-  }
+        async function updateOrderStatus(id, status) {
+            const res = await fetch(`${SUPABASE_URL}/rest/v1/orders?id=eq.${id}`, {
+                method: 'PATCH',
+                headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+                body: JSON.stringify({ status })
+            });
+            if (res.ok) showToast('✅ Order status updated!');
+            else alert('Error updating status');
+        }
 
-  async function generateLink() {
-    const orderId = document.getElementById('linkOrderId').value.trim();
-    if (!orderId) { alert('Please enter an Order ID'); return; }
-    try {
-      const res = await fetch('/api/generate-review-link', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ order_id: orderId })
-      });
-      const data = await res.json();
-      if (data.success) {
-        document.getElementById('linkText').textContent = data.link;
-        document.getElementById('generatedLink').classList.add('show');
-      } else { alert('Error: ' + data.error); }
-    } catch (err) { alert('Error: ' + err.message); }
-  }
+        async function loadReviews() {
+            const container = document.getElementById('reviews-table');
+            try {
+                const reviews = await sbFetch('reviews', '?order=created_at.desc');
+                document.getElementById('stat-reviews').textContent = reviews.length;
+                document.getElementById('stat-pending').textContent = reviews.filter(r => !r.is_approved && r.token_used).length;
 
-  function copyLink() {
-    const link = document.getElementById('linkText').textContent;
-    navigator.clipboard.writeText(link);
-    alert('✅ Link copied to clipboard!');
-  }
+                if (reviews.length === 0) { container.innerHTML = '<div class="table-loading">No reviews yet</div>'; return; }
+
+                container.innerHTML = `
+                    <table class="admin-table">
+                        <thead>
+                            <tr><th>Customer</th><th>Order ID</th><th>Rating</th><th>Review</th><th>Status</th><th>Date</th><th>Actions</th></tr>
+                        </thead>
+                        <tbody>
+                            ${reviews.map(r => `
+                                <tr id="review-row-${r.id}">
+                                    <td><strong>${r.customer_name || '—'}</strong></td>
+                                    <td style="color:var(--primary);font-size:.8rem">${r.order_id}</td>
+                                    <td class="stars-sm">${r.rating ? '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating) : '—'}</td>
+                                    <td style="max-width:200px;font-size:.8rem">${r.review_text || '<em style="color:var(--gray-400)">Not submitted yet</em>'}</td>
+                                    <td><span class="badge ${r.is_approved ? 'badge-approved' : 'badge-unapproved'}">${r.is_approved ? 'Approved' : r.token_used ? 'Pending' : 'Not submitted'}</span></td>
+                                    <td style="font-size:.75rem">${new Date(r.created_at).toLocaleDateString('en-NG')}</td>
+                                    <td>
+                                        ${r.token_used && !r.is_approved ? `<button class="action-btn approve" onclick="approveReview('${r.id}')">✅ Approve</button>` : ''}
+                                        ${r.review_text ? `<button class="action-btn delete" onclick="deleteReview('${r.id}')">🗑 Delete</button>` : ''}
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } catch (err) { container.innerHTML = '<div class="table-loading">Error loading reviews</div>'; }
+        }
+
+        async function approveReview(id) {
+            try {
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/reviews?id=eq.${id}`, {
+                    method: 'PATCH',
+                    headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ is_approved: true })
+                });
+                if (res.ok) { alert('✅ Review approved!'); loadReviews(); }
+                else alert('Error approving review');
+            } catch (err) { alert('Error: ' + err.message); }
+        }
+
+        async function deleteReview(id) {
+            if (!confirm('Are you sure you want to delete this review?')) return;
+            try {
+                const res = await fetch('/api/delete-review', {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id, admin_password: adminPassword })
+                });
+                const data = await res.json();
+                if (data.success) { alert('🗑 Review deleted!'); loadReviews(); }
+                else alert('Error: ' + data.error);
+            } catch (err) { alert('Error: ' + err.message); }
+        }
+
+        async function generateLink() {
+            const orderId = document.getElementById('linkOrderId').value.trim();
+            if (!orderId) { alert('Please enter an Order ID'); return; }
+            try {
+                const res = await fetch('/api/generate-review-link', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ order_id: orderId })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('linkText').textContent = data.link;
+                    document.getElementById('generatedLink').classList.add('show');
+                } else alert('Error: ' + data.error);
+            } catch (err) { alert('Error: ' + err.message); }
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(document.getElementById('linkText').textContent);
+            alert('✅ Link copied to clipboard!');
+        }
     </script>
 </body>
 

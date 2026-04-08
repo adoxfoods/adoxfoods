@@ -443,9 +443,9 @@ function initShop() {
 
 // ===== PICKUP POINTS =====
 const GATE_PICKUPS = {
-  north: ['Front Of North Gate', ' Junction  - North Gate', 'North Gate Bus Stop', 'North Market Square'],
-  south: ['Front Of South Gate', 'RCF Junction', 'Peace Avenue Junction', 'Apatapiti Junction', 'Stateline Junction'],
-  west:  ['Junction A - West Gate', 'Junction B - West Gate', 'West Gate Bus Stop', 'West End Junction'],
+  north: ['North Gate Junction', ' Junction  - North Gate', 'North Gate Bus Stop', 'North Market Square'],
+  south: ['South Gate Junction', 'RCF Junction', 'Peace Avenue Junction', 'Apatapiti Junction', 'Stateline Junction', 'CAC Chapel Of Praise', 'Deeper Life Church'],
+  west:  ['Westgate Junction', 'Aside Junction', 'CACCF Junction', 'Filaoye Junction', 'Capricorn Junction','Yeolab Junction'],
 };
 
 // ===== CHECKOUT PAGE =====
@@ -598,7 +598,7 @@ const orderRes = await fetch('/api/create-order', {
       `${deliveryInfo}\n\n` +
       `📋 *Order Details:*\n${items}\n\n` +
       `💰 *Total: ₦${total.toLocaleString()}*\n\n` +
-      `✅ Payment made via GTBank.\n` +
+      `✅ Payment made via Palmpay.\n` +
       `📸 Please see attached payment screenshot.\n\n` +
       `_Thank you for choosing Adox Foods!_ 🧡`
     );

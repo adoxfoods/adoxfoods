@@ -21,9 +21,9 @@ module.exports = async function handler(req, res) {
     }
 
     try {
-        const { name, phone, email, delivery, items, total } = req.body;
+        const { name, phone, email, delivery, items, total, screenshot_base64, screenshot_mime } = req.body;
 
-        // Validate
+        // Validate required fields
         if (!name || !phone || !email || !delivery || !items || !total) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
@@ -41,7 +41,37 @@ module.exports = async function handler(req, res) {
             if (!data) isUnique = true;
         }
 
-        // Save to Supabase
+        // Upload screenshot to Supabase Storage (if provided)
+        let screenshot_url = null;
+        if (screenshot_base64 && screenshot_mime) {
+            // Convert base64 to buffer
+            const base64Data = screenshot_base64.replace(/^data:image\/\w+;base64,/, '');
+            const buffer = Buffer.from(base64Data, 'base64');
+
+            // File extension from mime type (e.g. image/jpeg → jpeg)
+            const ext = screenshot_mime.split('/')[1] || 'jpg';
+            const fileName = `${orderId}.${ext}`;
+
+            const { error: uploadError } = await supabase.storage
+                .from('screenshots')
+                .upload(fileName, buffer, {
+                    contentType: screenshot_mime,
+                    upsert: false
+                });
+
+            if (uploadError) {
+                console.error('Screenshot upload error:', uploadError.message);
+                // Don't block the order — just skip the screenshot
+            } else {
+                // Build public URL
+                const { data: urlData } = supabase.storage
+                    .from('screenshots')
+                    .getPublicUrl(fileName);
+                screenshot_url = urlData.publicUrl;
+            }
+        }
+
+        // Save order to Supabase (with screenshot_url if we got one)
         const { error } = await supabase.from('orders').insert({
             order_id: orderId,
             name,
@@ -50,7 +80,8 @@ module.exports = async function handler(req, res) {
             delivery,
             items,
             total,
-            status: 'pending'
+            status: 'pending',
+            screenshot_url
         });
 
         if (error) throw error;
@@ -60,4 +91,4 @@ module.exports = async function handler(req, res) {
     } catch (err) {
         return res.status(500).json({ error: err.message });
     }
-}
+};
