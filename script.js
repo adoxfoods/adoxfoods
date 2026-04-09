@@ -1,4 +1,4 @@
-// @ts-nocheck
+//@ts - nocheck
 // ===== ADOX FOODS - MAIN SCRIPT =====
 
 // ===== FOOD DATA =====
@@ -87,17 +87,21 @@ function refreshCheckoutSummary() {
     if (totalEl) totalEl.textContent = '₦' + getCartTotal().toLocaleString();
 }
 
-function clearCart() { cart = [];
+function clearCart() {
+    cart = [];
     saveCart();
-    updateCartUI(); }
+    updateCartUI();
+}
 
 function updateCartUI() {
     const count = getCartCount();
     document.querySelectorAll('.cart-count').forEach(el => {
         el.textContent = count;
-        if (count === 0) { el.classList.add('hidden'); } else { el.classList.remove('hidden');
+        if (count === 0) { el.classList.add('hidden'); } else {
+            el.classList.remove('hidden');
             el.classList.add('pop');
-            setTimeout(() => el.classList.remove('pop'), 400); }
+            setTimeout(() => el.classList.remove('pop'), 400);
+        }
     });
     const totalEl = document.querySelector('.cart-total-amount');
     if (totalEl) totalEl.textContent = '₦' + getCartTotal().toLocaleString();
@@ -115,13 +119,17 @@ function updateMinBar() {
     fill.style.width = pct + '%';
     if (total >= MIN) {
         fill.classList.add('reached');
-        if (notice) { notice.textContent = '✅ Minimum reached! Ready to checkout';
-            notice.className = 'cart-min-notice reached'; }
+        if (notice) {
+            notice.textContent = '✅ Minimum reached! Ready to checkout';
+            notice.className = 'cart-min-notice reached';
+        }
     } else {
         fill.classList.remove('reached');
         const remaining = MIN - total;
-        if (notice) { notice.textContent = `⚠️ Add ₦${remaining.toLocaleString()} more to checkout`;
-            notice.className = 'cart-min-notice not-reached'; }
+        if (notice) {
+            notice.textContent = `⚠️ Add ₦${remaining.toLocaleString()} more to checkout`;
+            notice.className = 'cart-min-notice not-reached';
+        }
     }
     if (text) text.textContent = `₦${total.toLocaleString()} / ₦${MIN.toLocaleString()}`;
 }
@@ -237,35 +245,45 @@ function launchConfetti() {
         if (alive) { frame = requestAnimationFrame(animate); } else { canvas.remove(); }
     }
     animate();
-    setTimeout(() => { cancelAnimationFrame(frame);
-        canvas.remove(); }, 5000);
+    setTimeout(() => {
+        cancelAnimationFrame(frame);
+        canvas.remove();
+    }, 5000);
 }
 
 // ===== CART SIDEBAR =====
 function openCart() {
-    document.querySelector('.cart-overlay') ? .classList.add('open');
-    document.querySelector('.cart-sidebar') ? .classList.add('open');
+    const _overlay = document.querySelector('.cart-overlay');
+    const _sidebar = document.querySelector('.cart-sidebar');
+    if (_overlay) _overlay.classList.add('open');
+    if (_sidebar) _sidebar.classList.add('open');
     renderCartItems();
     updateCartUI();
 }
 
 function closeCart() {
-    document.querySelector('.cart-overlay') ? .classList.remove('open');
-    document.querySelector('.cart-sidebar') ? .classList.remove('open');
+    const overlay = document.querySelector('.cart-overlay');
+    const sidebar = document.querySelector('.cart-sidebar');
+    if (overlay) overlay.classList.remove('open');
+    if (sidebar) sidebar.classList.remove('open');
 }
 
 // ===== TOAST =====
 function showToast(message) {
     let container = document.querySelector('.toast-container');
-    if (!container) { container = document.createElement('div');
+    if (!container) {
+        container = document.createElement('div');
         container.className = 'toast-container';
-        document.body.appendChild(container); }
+        document.body.appendChild(container);
+    }
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.innerHTML = message;
     container.appendChild(toast);
-    setTimeout(() => { toast.classList.add('leaving');
-        setTimeout(() => toast.remove(), 350); }, 2800);
+    setTimeout(() => {
+        toast.classList.add('leaving');
+        setTimeout(() => toast.remove(), 350);
+    }, 2800);
 }
 
 // ===== NAVBAR =====
@@ -273,12 +291,17 @@ function initNavbar() {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active');
-            navLinks.classList.toggle('mobile-open'); });
-        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hamburger.classList.remove('active');
-            navLinks.classList.remove('mobile-open'); }));
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('mobile-open');
+        });
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('mobile-open');
+        }));
     }
-    window.addEventListener('scroll', () => { document.querySelector('.navbar') ? .classList.toggle('scrolled', window.scrollY > 20); });
+    const nav = document.querySelector('.navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
     const current = location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.nav-links a').forEach(a => { if (a.getAttribute('href') === current) a.classList.add('active'); });
     document.querySelectorAll('.cart-btn').forEach(btn => btn.addEventListener('click', openCart));
@@ -309,9 +332,11 @@ function initHome() {
     if (!featured) return;
     const items = [FOOD_DATA[0], FOOD_DATA[5], FOOD_DATA[17]];
     featured.innerHTML = items.map(f => foodCardHTML(f, false)).join('');
-    featured.querySelectorAll('.food-card').forEach(card => { card.classList.remove('reveal');
+    featured.querySelectorAll('.food-card').forEach(card => {
+        card.classList.remove('reveal');
         card.style.opacity = '1';
-        card.style.transform = 'none'; });
+        card.style.transform = 'none';
+    });
     setTimeout(initTilt, 300);
 }
 
@@ -354,8 +379,10 @@ function handleAddToCart(btn, id) {
     addToCart(id, qty);
     btn.innerHTML = '✅ Added!';
     btn.classList.add('added');
-    setTimeout(() => { btn.innerHTML = '🛒 Add to Cart';
-        btn.classList.remove('added'); }, 500);
+    setTimeout(() => {
+        btn.innerHTML = '🛒 Add to Cart';
+        btn.classList.remove('added');
+    }, 500);
 }
 
 // ===== SHOP PAGE =====
@@ -378,10 +405,12 @@ function initShop() {
             activeCategory = tab.dataset.cat;
             grid.style.opacity = '0';
             grid.style.transform = 'translateY(10px)';
-            setTimeout(() => { render();
+            setTimeout(() => {
+                render();
                 grid.style.transition = 'all 0.3s ease';
                 grid.style.opacity = '1';
-                grid.style.transform = 'translateY(0)'; }, 200);
+                grid.style.transform = 'translateY(0)';
+            }, 200);
         });
     });
 }
@@ -451,12 +480,14 @@ function showConfirmModal() {
 
 function handleModalYes() {
     clearCart();
-    document.getElementById('confirmModal') ? .classList.remove('open');
+    const modal = document.getElementById('confirmModal');
+    if (modal) modal.classList.remove('open');
     window.location.href = 'thankyou.html';
 }
 
 function handleModalNo() {
-    document.getElementById('confirmModal') ? .classList.remove('open');
+    const modal = document.getElementById('confirmModal');
+    if (modal) modal.classList.remove('open');
 }
 
 // ===== 3D TILT =====
@@ -468,8 +499,10 @@ function initTilt() {
             const rotY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 6;
             card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
         });
-        card.addEventListener('mouseleave', () => { card.style.transform = '';
-            card.style.transition = 'all 0.5s ease'; });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+            card.style.transition = 'all 0.5s ease';
+        });
         card.addEventListener('mouseenter', () => { card.style.transition = 'none'; });
     });
 }
