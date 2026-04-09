@@ -23,7 +23,6 @@ module.exports = async function handler(req, res) {
     try {
         const { name, phone, email, delivery, items, total, screenshot_base64, screenshot_mime } = req.body;
 
-        // Validate required fields
         if (!name || !phone || !email || !delivery || !items || !total) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
@@ -41,37 +40,31 @@ module.exports = async function handler(req, res) {
             if (!data) isUnique = true;
         }
 
-        // Upload screenshot to Supabase Storage (if provided)
+        // Upload screenshot to Supabase Storage
         let screenshot_url = null;
         if (screenshot_base64 && screenshot_mime) {
-            // Convert base64 to buffer
-            const base64Data = screenshot_base64.replace(/^data:image\/\w+;base64,/, '');
-            const buffer = Buffer.from(base64Data, 'base64');
+            try {
+                const base64Data = screenshot_base64.replace(/^data:image\/\w+;base64,/, '');
+                const buffer = Buffer.from(base64Data, 'base64');
+                const ext = screenshot_mime.split('/')[1] || 'png';
+                const fileName = `${orderId}.${ext}`;
 
-            // File extension from mime type (e.g. image/jpeg → jpeg)
-            const ext = screenshot_mime.split('/')[1] || 'jpg';
-            const fileName = `${orderId}.${ext}`;
-
-            const { error: uploadError } = await supabase.storage
-                .from('screenshots')
-                .upload(fileName, buffer, {
-                    contentType: screenshot_mime,
-                    upsert: false
-                });
-
-            if (uploadError) {
-                console.error('Screenshot upload error:', uploadError.message);
-                // Don't block the order — just skip the screenshot
-            } else {
-                // Build public URL
-                const { data: urlData } = supabase.storage
+                const { error: uploadError } = await supabase.storage
                     .from('screenshots')
-                    .getPublicUrl(fileName);
-                screenshot_url = urlData.publicUrl;
+                    .upload(fileName, buffer, { contentType: screenshot_mime, upsert: true });
+
+                if (!uploadError) {
+                    const { data: urlData } = supabase.storage
+                        .from('screenshots')
+                        .getPublicUrl(fileName);
+                    screenshot_url = urlData.publicUrl;
+                }
+            } catch (e) {
+                console.log('Screenshot error (non-fatal):', e.message);
             }
         }
 
-        // Save order to Supabase (with screenshot_url if we got one)
+        // Save order
         const { error } = await supabase.from('orders').insert({
             order_id: orderId,
             name,
@@ -86,7 +79,7 @@ module.exports = async function handler(req, res) {
 
         if (error) throw error;
 
-        return res.status(200).json({ success: true, orderId });
+        return res.status(200).json({ success: true, orderId, screenshot_url });
 
     } catch (err) {
         return res.status(500).json({ error: err.message });

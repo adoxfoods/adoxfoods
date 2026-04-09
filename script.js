@@ -8,7 +8,7 @@ const FOOD_DATA = [
     { id: 2, name: "A Congo Of White Beans", category: "grains", emoji: "🫘", image: "whitebeans.png", price: 2100, desc: "Fresh white beans, perfect for any meal", badge: null },
     { id: 3, name: "A Congo Of Oloyin Beans", category: "grains", emoji: "🫘", image: "oloyin.png", price: 2800, desc: "Premium Oloyin honey beans", badge: null },
     { id: 4, name: "A Congo Of Garri", category: "grains", emoji: "🥣", image: "gari.png", price: 600, desc: "Fresh garri, measured by the congo", badge: "⭐ Best" },
-    { id: 5, name: "Kivo Garri", category: "grains", emoji: "🥣", price: 400, image: "garri.png", desc: "Packaged Kivo garri — student favourite", badge: null },
+    { id: 5, name: "Kivo Garri", category: "grains", emoji: "🥣", image: "garri.png", price: 400, desc: "Packaged Kivo garri — student favourite", badge: null },
     // PASTA & SEMOVITA
     { id: 6, name: "Golden Penny Spag", category: "pasta", emoji: "🍝", image: "GoldenPennySpag.png", price: 1100, desc: "Golden Penny spaghetti — full pack", badge: "🔥 Popular" },
     { id: 7, name: "Mama's Pride Spag", category: "pasta", emoji: "🍝", image: "mamaspag.png", price: 950, desc: "Mama's Pride spaghetti — budget friendly", badge: null },
@@ -17,7 +17,7 @@ const FOOD_DATA = [
     { id: 10, name: "Semo 1kg", category: "pasta", emoji: "🫙", image: "1kkgsemo.png", price: 1800, desc: "Semovita 1kg pack — full size", badge: null },
     { id: 11, name: "Semo 500g", category: "pasta", emoji: "🫙", image: "500gsemo.jpeg", price: 950, desc: "Semovita 500g pack — student size", badge: null },
     // OILS
-    { id: 12, name: "A Bottle Of Palm Oil", category: "oils", emoji: "🫙", image: "p.oil.png", price: 1480, desc: "Full bottle of fresh palm oil)", badge: null },
+    { id: 12, name: "A Bottle Of Palm Oil", category: "oils", emoji: "🫙", image: "p.oil.png", price: 1480, desc: "Full bottle of fresh palm oil", badge: null },
     { id: 32, name: "Half A Bottle Of Palm Oil", category: "oils", emoji: "🫙", image: "halfoil.png", price: 750, desc: "Half a bottle of fresh palm oil", badge: null },
     { id: 13, name: "A Bottle Of Vegetable Oil", category: "oils", emoji: "🫙", image: "voil.png", price: 2100, desc: "Full bottle of vegetable oil", badge: null },
     { id: 33, name: "Half A Bottle Of Vegetable Oil", category: "oils", emoji: "🫙", image: "halfvoil.jpeg", price: 1100, desc: "Half a bottle of vegetable oil", badge: null },
@@ -31,19 +31,11 @@ const FOOD_DATA = [
     // SEASONINGS
     { id: 18, name: "Knorr Seasoning Cube (50 Cubes)", category: "seasonings", emoji: "🧊", image: "knorr.png", price: 650, desc: "Knorr seasoning cubes — pack of 50", badge: "🔥 Popular" },
     { id: 19, name: "Chicken Flavor Cube (20 Cubes)", category: "seasonings", emoji: "🧊", image: "c.flvormag.jpg", price: 400, desc: "Chicken flavor seasoning — pack of 20", badge: null },
-    //{ id: 20, name: "Salt", category: "seasonings", emoji: "🧂", price: 190, image: "poweroil.png", desc: "Table salt — standard pack", badge: null },
     { id: 23, name: "Jollof Spicity", category: "seasonings", emoji: "🌶️", image: "jollofspicity.jpeg", price: 150, desc: "Jollof spice mix — perfect blend", badge: null },
     { id: 29, name: "Hot Pepper", category: "seasonings", emoji: "🌶️", image: "hotpeper.png", price: 100, desc: "Ground hot pepper — per pack", badge: null },
     // SPICES
-    { id: 21, name: "Thyme", category: "spices", emoji: "🌿", price: 100, image: "thyme.jpg", desc: "Dried thyme — per pack", badge: null },
-    { id: 22, name: "Curry", category: "spices", emoji: "🌿", price: 100, image: "curry.jpeg", desc: "Curry powder — per pack", badge: null },
-    // { id: 24, name: "Lasor Beef Spice", category: "spices", emoji: "🌶️", price: 180, desc: "Lasor beef spice blend", badge: null },
-    // { id: 25, name: "Lasor Fish Spice", category: "spices", emoji: "🌶️", price: 180, desc: "Lasor fish spice blend", badge: null },
-    //{ id: 26, name: "Lasor Chicken Spice", category: "spices", emoji: "🌶️", price: 140, desc: "Lasor chicken spice blend", badge: null },
-    //{ id: 27, name: "Lasor Fried Rice Spice", category: "spices", emoji: "🌶️", price: 140, desc: "Lasor fried rice spice mix", badge: null },
-    // { id: 28, name: "Ginger, Garlic & Onion Mix", category: "spices", emoji: "🧄", price: 140, desc: "Mixed ginger, garlic and onion powder", badge: "⭐ Best" },
-    //SPECIAL OFFERS
-
+    { id: 21, name: "Thyme", category: "spices", emoji: "🌿", image: "thyme.jpg", price: 100, desc: "Dried thyme — per pack", badge: null },
+    { id: 22, name: "Curry", category: "spices", emoji: "🌿", image: "curry.jpeg", price: 100, desc: "Curry powder — per pack", badge: null },
 ];
 
 // ===== CART SYSTEM =====
@@ -63,7 +55,7 @@ function addToCart(id, qty = 1) {
     saveCart();
     updateCartUI();
     playCartSound();
-    showToast(`🛒 ${food.name} added to cart!`);
+    showToast('🛒 ' + food.name + ' added to cart!');
 }
 
 function removeFromCart(id) {
@@ -71,6 +63,7 @@ function removeFromCart(id) {
     saveCart();
     updateCartUI();
     renderCartItems();
+    refreshCheckoutSummary();
 }
 
 function updateCartQty(id, delta) {
@@ -86,78 +79,52 @@ function updateCartQty(id, delta) {
 
 function refreshCheckoutSummary() {
     const summaryWrap = document.querySelector('.order-summary-items');
-    if (!summaryWrap) return; // not on checkout page, skip
-    summaryWrap.innerHTML = cart.map(item => `
-        <div class="order-item">
-            <div>
-                <div class="oi-name">${item.emoji} ${item.name}</div>
-                <div class="oi-qty">× ${item.qty}</div>
-            </div>
-            <div class="oi-price">₦${(item.price * item.qty).toLocaleString()}</div>
-        </div>
-    `).join('');
+    if (!summaryWrap) return;
+    summaryWrap.innerHTML = cart.map(item =>
+        `<div class="order-item"><div><div class="oi-name">${item.emoji} ${item.name}</div><div class="oi-qty">× ${item.qty}</div></div><div class="oi-price">₦${(item.price * item.qty).toLocaleString()}</div></div>`
+    ).join('');
     const totalEl = document.querySelector('.order-total-price');
     if (totalEl) totalEl.textContent = '₦' + getCartTotal().toLocaleString();
 }
 
-function removeFromCart(id) {
-    cart = cart.filter(i => i.id !== id);
+function clearCart() { cart = [];
     saveCart();
-    updateCartUI();
-    renderCartItems();
-    refreshCheckoutSummary(); // ← add this
-}
-
-function clearCart() {
-    cart = [];
-    saveCart();
-    updateCartUI();
-}
+    updateCartUI(); }
 
 function updateCartUI() {
     const count = getCartCount();
     document.querySelectorAll('.cart-count').forEach(el => {
         el.textContent = count;
-        if (count === 0) { el.classList.add('hidden'); } else {
-            el.classList.remove('hidden');
+        if (count === 0) { el.classList.add('hidden'); } else { el.classList.remove('hidden');
             el.classList.add('pop');
-            setTimeout(() => el.classList.remove('pop'), 400);
-        }
-
+            setTimeout(() => el.classList.remove('pop'), 400); }
     });
     const totalEl = document.querySelector('.cart-total-amount');
     if (totalEl) totalEl.textContent = '₦' + getCartTotal().toLocaleString();
-
-    function updateMinBar() {
-        const MIN = 500;
-        const total = getCartTotal();
-        const pct = Math.min((total / MIN) * 100, 100);
-        const fill = document.getElementById('cart-min-fill');
-        const notice = document.getElementById('cart-min-notice');
-        const text = document.getElementById('cart-min-text');
-        if (!fill) return;
-
-        fill.style.width = pct + '%';
-        if (total >= MIN) {
-            fill.classList.add('reached');
-            if (notice) {
-                notice.textContent = '✅ Minimum reached! Ready to checkout';
-                notice.className = 'cart-min-notice reached';
-            }
-        } else {
-            fill.classList.remove('reached');
-            const remaining = MIN - total;
-            if (notice) {
-                notice.textContent = `⚠️ Add ₦${remaining.toLocaleString()} more to checkout`;
-                notice.className = 'cart-min-notice not-reached';
-            }
-        }
-        if (text) text.textContent = `₦${total.toLocaleString()} / ₦${MIN.toLocaleString()}`;
-    }
     updateMinBar();
 }
 
-
+function updateMinBar() {
+    const MIN = 500;
+    const total = getCartTotal();
+    const pct = Math.min((total / MIN) * 100, 100);
+    const fill = document.getElementById('cart-min-fill');
+    const notice = document.getElementById('cart-min-notice');
+    const text = document.getElementById('cart-min-text');
+    if (!fill) return;
+    fill.style.width = pct + '%';
+    if (total >= MIN) {
+        fill.classList.add('reached');
+        if (notice) { notice.textContent = '✅ Minimum reached! Ready to checkout';
+            notice.className = 'cart-min-notice reached'; }
+    } else {
+        fill.classList.remove('reached');
+        const remaining = MIN - total;
+        if (notice) { notice.textContent = `⚠️ Add ₦${remaining.toLocaleString()} more to checkout`;
+            notice.className = 'cart-min-notice not-reached'; }
+    }
+    if (text) text.textContent = `₦${total.toLocaleString()} / ₦${MIN.toLocaleString()}`;
+}
 
 function renderCartItems() {
     const container = document.querySelector('.cart-items');
@@ -212,13 +179,12 @@ function initStatusBanner() {
     const banner = document.getElementById('statusBanner');
     if (!banner) return;
     const now = new Date();
-    const day = now.getDay(); // 0=Sun, 6=Sat
+    const day = now.getDay();
     const hour = now.getHours();
     let isOpen = false;
-    if (day >= 1 && day <= 5) isOpen = hour >= 8 && hour < 21; // Mon-Fri 8am-9pm
-    else if (day === 6) isOpen = hour >= 9 && hour < 20; // Sat 9am-8pm
-    else if (day === 0) isOpen = hour >= 12 && hour < 19; // Sun 12pm-7pm
-
+    if (day >= 1 && day <= 5) isOpen = hour >= 8 && hour < 21;
+    else if (day === 6) isOpen = hour >= 9 && hour < 20;
+    else if (day === 0) isOpen = hour >= 12 && hour < 19;
     if (isOpen) {
         banner.className = 'status-banner open';
         banner.innerHTML = '🟢 We\'re Open! Orders are being accepted right now';
@@ -236,10 +202,8 @@ function launchConfetti() {
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
     const pieces = [];
     const colors = ['#ff6b35', '#2e4057', '#ff9f43', '#22c55e', '#3b82f6', '#f59e0b'];
-
     for (let i = 0; i < 150; i++) {
         pieces.push({
             x: Math.random() * canvas.width,
@@ -253,7 +217,6 @@ function launchConfetti() {
             drift: Math.random() * 2 - 1,
         });
     }
-
     let frame;
 
     function animate() {
@@ -274,45 +237,35 @@ function launchConfetti() {
         if (alive) { frame = requestAnimationFrame(animate); } else { canvas.remove(); }
     }
     animate();
-    setTimeout(() => {
-        cancelAnimationFrame(frame);
-        canvas.remove();
-    }, 5000);
+    setTimeout(() => { cancelAnimationFrame(frame);
+        canvas.remove(); }, 5000);
 }
 
 // ===== CART SIDEBAR =====
 function openCart() {
-    const overlay = document.querySelector('.cart-overlay');
-    const sidebar = document.querySelector('.cart-sidebar');
-    if (overlay) overlay.classList.add('open');
-    if (sidebar) sidebar.classList.add('open');
+    document.querySelector('.cart-overlay') ? .classList.add('open');
+    document.querySelector('.cart-sidebar') ? .classList.add('open');
     renderCartItems();
     updateCartUI();
 }
 
 function closeCart() {
-    const overlay = document.querySelector('.cart-overlay');
-    const sidebar = document.querySelector('.cart-sidebar');
-    if (overlay) overlay.classList.remove('open');
-    if (sidebar) sidebar.classList.remove('open');
+    document.querySelector('.cart-overlay') ? .classList.remove('open');
+    document.querySelector('.cart-sidebar') ? .classList.remove('open');
 }
 
 // ===== TOAST =====
 function showToast(message) {
     let container = document.querySelector('.toast-container');
-    if (!container) {
-        container = document.createElement('div');
+    if (!container) { container = document.createElement('div');
         container.className = 'toast-container';
-        document.body.appendChild(container);
-    }
+        document.body.appendChild(container); }
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.innerHTML = message;
     container.appendChild(toast);
-    setTimeout(() => {
-        toast.classList.add('leaving');
-        setTimeout(() => toast.remove(), 350);
-    }, 2800);
+    setTimeout(() => { toast.classList.add('leaving');
+        setTimeout(() => toast.remove(), 350); }, 2800);
 }
 
 // ===== NAVBAR =====
@@ -320,19 +273,12 @@ function initNavbar() {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('mobile-open');
-        });
-        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('mobile-open');
-        }));
+        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active');
+            navLinks.classList.toggle('mobile-open'); });
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hamburger.classList.remove('active');
+            navLinks.classList.remove('mobile-open'); }));
     }
-    window.addEventListener('scroll', () => {
-        const nav = document.querySelector('.navbar');
-        if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
-    });
+    window.addEventListener('scroll', () => { document.querySelector('.navbar') ? .classList.toggle('scrolled', window.scrollY > 20); });
     const current = location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.nav-links a').forEach(a => { if (a.getAttribute('href') === current) a.classList.add('active'); });
     document.querySelectorAll('.cart-btn').forEach(btn => btn.addEventListener('click', openCart));
@@ -343,6 +289,7 @@ function initNavbar() {
     const checkoutBtn = document.querySelector('.checkout-btn');
     if (checkoutBtn) checkoutBtn.addEventListener('click', () => {
         if (cart.length === 0) { showToast('🛒 Your cart is empty!'); return; }
+        if (getCartTotal() < 500) { showToast(`⚠️ Minimum order is ₦500. Add ₦${(500 - getCartTotal()).toLocaleString()} more!`); return; }
         if (!window.location.href.includes('checkout.html')) { window.location.href = 'checkout.html'; }
     });
 }
@@ -362,11 +309,9 @@ function initHome() {
     if (!featured) return;
     const items = [FOOD_DATA[0], FOOD_DATA[5], FOOD_DATA[17]];
     featured.innerHTML = items.map(f => foodCardHTML(f, false)).join('');
-    featured.querySelectorAll('.food-card').forEach(card => {
-        card.classList.remove('reveal');
+    featured.querySelectorAll('.food-card').forEach(card => { card.classList.remove('reveal');
         card.style.opacity = '1';
-        card.style.transform = 'none';
-    });
+        card.style.transform = 'none'; });
     setTimeout(initTilt, 300);
 }
 
@@ -376,358 +321,191 @@ function categoryLabel(cat) {
 }
 
 function foodCardHTML(food, showQty = true) {
-    const displayPrice = food.price === 0 ? 'Ask' : `₦${food.price.toLocaleString()}`;
+    const imageHTML = food.image ?
+        `<img src="images/${food.image}" alt="${food.name}" />` :
+        `<div class="food-emoji">${food.emoji}</div>`;
+    const badgeHTML = food.badge ? `<div class="food-badge">${food.badge}</div>` : '';
+    const qtyHTML = showQty ?
+        `<div class="qty-wrap">
+        <button class="qty-btn" onclick="this.nextElementSibling.textContent = Math.max(1, parseInt(this.nextElementSibling.textContent) - 1)">−</button>
+        <span class="qty-num">1</span>
+        <button class="qty-btn" onclick="this.previousElementSibling.textContent = parseInt(this.previousElementSibling.textContent) + 1">+</button>
+       </div>` :
+        '';
+    const priceHTML = food.price === 0 ? '<span>Price on request</span>' : `₦<span>${food.price.toLocaleString()}</span>`;
     return `
     <div class="food-card reveal">
-      <div class="food-img-wrap">
-  ${food.image 
-  ? `<img src="images/${food.image}" alt="${food.name}" />`
-  : `<div class="food-emoji">${food.emoji}</div>`
-}
-
-        ${food.badge ? `<div class="food-badge">${food.badge}</div>` : ''}
-      </div>
+      <div class="food-img-wrap">${imageHTML}${badgeHTML}</div>
       <div class="food-body">
         <div class="food-category">${categoryLabel(food.category)}</div>
         <div class="food-name">${food.name}</div>
         <div class="food-desc">${food.desc}</div>
-        ${showQty ? `
-        <div class="qty-wrap">
-          <button class="qty-btn" onclick="this.nextElementSibling.textContent = Math.max(1, parseInt(this.nextElementSibling.textContent) - 1)">−</button>
-          <span class="qty-num">1</span>
-          <button class="qty-btn" onclick="this.previousElementSibling.textContent = parseInt(this.previousElementSibling.textContent) + 1">+</button>
-        </div>` : ''}
-        <div class="food-footer">
-          <div class="food-price">${food.price === 0 ? '<span>Price on request</span>' : `₦<span>${food.price.toLocaleString()}</span>`}</div>
-        </div>
+        ${qtyHTML}
+        <div class="food-footer"><div class="food-price">${priceHTML}</div></div>
         <button class="add-cart-btn" onclick="handleAddToCart(this, ${food.id})">🛒 Add to Cart</button>
       </div>
-    </div>
-  `;
+    </div>`;
 }
 
 function handleAddToCart(btn, id) {
-  const card = btn.closest('.food-card');
-  const qtyEl = card?.querySelector('.qty-num');
-  const qty = qtyEl ? parseInt(qtyEl.textContent) : 1;
-  addToCart(id, qty);
-  btn.innerHTML = '✅ Added!';
-  btn.classList.add('added');
-  setTimeout(() => { btn.innerHTML = '🛒 Add to Cart'; btn.classList.remove('added'); }, 500);
+    const card = btn.closest('.food-card');
+    const qtyEl = card ? card.querySelector('.qty-num') : null;
+    const qty = qtyEl ? parseInt(qtyEl.textContent) : 1;
+    addToCart(id, qty);
+    btn.innerHTML = '✅ Added!';
+    btn.classList.add('added');
+    setTimeout(() => { btn.innerHTML = '🛒 Add to Cart';
+        btn.classList.remove('added'); }, 500);
 }
 
 // ===== SHOP PAGE =====
 function initShop() {
-  const grid = document.querySelector('.menu-grid');
-  if (!grid) return;
-  let activeCategory = 'all';
+    const grid = document.querySelector('.menu-grid');
+    if (!grid) return;
+    let activeCategory = 'all';
 
-  function render() {
-    const items = activeCategory === 'all' ? FOOD_DATA : FOOD_DATA.filter(f => f.category === activeCategory);
-    grid.innerHTML = items.map(f => foodCardHTML(f, true)).join('');
-    initReveal();
-    setTimeout(initTilt, 300);
-  }
-  render();
-
-  document.querySelectorAll('.cat-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      activeCategory = tab.dataset.cat;
-      grid.style.opacity = '0'; grid.style.transform = 'translateY(10px)';
-      setTimeout(() => { render(); grid.style.transition = 'all 0.3s ease'; grid.style.opacity = '1'; grid.style.transform = 'translateY(0)'; }, 200);
+    function render() {
+        const items = activeCategory === 'all' ? FOOD_DATA : FOOD_DATA.filter(f => f.category === activeCategory);
+        grid.innerHTML = items.map(f => foodCardHTML(f, true)).join('');
+        initReveal();
+        setTimeout(initTilt, 300);
+    }
+    render();
+    document.querySelectorAll('.cat-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            activeCategory = tab.dataset.cat;
+            grid.style.opacity = '0';
+            grid.style.transform = 'translateY(10px)';
+            setTimeout(() => { render();
+                grid.style.transition = 'all 0.3s ease';
+                grid.style.opacity = '1';
+                grid.style.transform = 'translateY(0)'; }, 200);
+        });
     });
-  });
 }
 
 // ===== PICKUP POINTS =====
 const GATE_PICKUPS = {
-  north: ['North Gate Junction', ' Junction  - North Gate', 'North Gate Bus Stop', 'North Market Square'],
-  south: ['South Gate Junction', 'RCF Junction', 'Peace Avenue Junction', 'Apatapiti Junction', 'Stateline Junction', 'CAC Chapel Of Praise', 'Deeper Life Church'],
-  west:  ['Westgate Junction', 'Aside Junction', 'CACCF Junction', 'Filaoye Junction', 'Capricorn Junction','Yeolab Junction'],
+    north: ['North Gate Junction', 'Junction - North Gate', 'North Gate Bus Stop', 'North Market Square'],
+    south: ['South Gate Junction', 'RCF Junction', 'Peace Avenue Junction', 'Apatapiti Junction', 'Stateline Junction', 'CAC Chapel Of Praise', 'Deeper Life Church'],
+    west: ['Westgate Junction', 'Aside Junction', 'CACCF Junction', 'Filaoye Junction', 'Capricorn Junction', 'Yeolab Junction'],
 };
 
 // ===== CHECKOUT PAGE =====
 function initCheckout() {
-  const summaryWrap = document.querySelector('.order-summary-items');
-  if (!summaryWrap) return;
+    const summaryWrap = document.querySelector('.order-summary-items');
+    if (!summaryWrap) return;
 
-  // Generate Order ID
-  const orderId = generateOrderId();
-  const orderIdWrap = document.querySelector('.order-id-badge');
-  if (orderIdWrap) orderIdWrap.querySelector('span').textContent = orderId;
-
-  if (cart.length === 0) {
-    summaryWrap.innerHTML = `<p style="color:var(--gray-400);font-size:.9rem;text-align:center;padding:1rem 0">No items in cart. <a href="shop.html" style="color:var(--primary)">Browse shop</a></p>`;
-  } else {
-    summaryWrap.innerHTML = cart.map(item => `
+    if (cart.length === 0) {
+        summaryWrap.innerHTML = `<p style="color:var(--gray-400);font-size:.9rem;text-align:center;padding:1rem 0">No items in cart. <a href="shop.html" style="color:var(--primary)">Browse shop</a></p>`;
+    } else {
+        summaryWrap.innerHTML = cart.map(item => `
       <div class="order-item">
         <div><div class="oi-name">${item.emoji} ${item.name}</div><div class="oi-qty">× ${item.qty}</div></div>
         <div class="oi-price">₦${(item.price * item.qty).toLocaleString()}</div>
-      </div>
-    `).join('');
-  }
-  if (getCartTotal() < 500) { 
-    showToast(`⚠️ Minimum order is ₦500. Add ₦${(500 - getCartTotal()).toLocaleString()} more!`); 
-    return; 
+      </div>`).join('');
+    }
+
+    const totalEl = document.querySelector('.order-total-price');
+    if (totalEl) totalEl.textContent = '₦' + getCartTotal().toLocaleString();
+
+    // Location toggle
+    document.querySelectorAll('.loc-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.loc-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const loc = btn.dataset.loc;
+            if (loc === 'campus') {
+                document.getElementById('campus-fields').style.display = 'block';
+                document.getElementById('offcampus-fields').style.display = 'none';
+            } else {
+                document.getElementById('campus-fields').style.display = 'none';
+                document.getElementById('offcampus-fields').style.display = 'block';
+            }
+        });
+    });
+
+    // Gate cascade
+    const gateSelect = document.getElementById('gate');
+    const pickupSelect = document.getElementById('pickup');
+    const pickupGroup = document.getElementById('pickup-group');
+    if (gateSelect) {
+        gateSelect.addEventListener('change', () => {
+            const gate = gateSelect.value;
+            if (gate && GATE_PICKUPS[gate]) {
+                pickupSelect.innerHTML = `<option value="">-- Choose pickup point --</option>` +
+                    GATE_PICKUPS[gate].map(p => `<option>${p}</option>`).join('');
+                pickupGroup.style.display = 'block';
+            } else { pickupGroup.style.display = 'none'; }
+        });
+    }
 }
 
-  const totalEl = document.querySelector('.order-total-price');
-  if (totalEl) totalEl.textContent = '₦' + getCartTotal().toLocaleString();
-
-  const nameInput = document.getElementById('fullName');
-  const phoneInput = document.getElementById('phone');
-  const emailInput = document.getElementById('email');
-  const screenshotInput = document.getElementById('screenshot');
-  const fileWrap = document.querySelector('.file-upload-wrap');
-  const filePreview = document.querySelector('.file-preview');
-  let screenshotUploaded = false;
-  let currentLocation = 'campus';
-
-  // Location toggle
-  document.querySelectorAll('.loc-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.loc-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentLocation = btn.dataset.loc;
-      if (currentLocation === 'campus') {
-        document.getElementById('campus-fields').style.display = 'block';
-        document.getElementById('offcampus-fields').style.display = 'none';
-      } else {
-        document.getElementById('campus-fields').style.display = 'none';
-        document.getElementById('offcampus-fields').style.display = 'block';
-      }
-    });
-  });
-
-  // Gate cascade
-  const gateSelect = document.getElementById('gate');
-  const pickupSelect = document.getElementById('pickup');
-  const pickupGroup = document.getElementById('pickup-group');
-  if (gateSelect) {
-    gateSelect.addEventListener('change', () => {
-      const gate = gateSelect.value;
-      if (gate && GATE_PICKUPS[gate]) {
-        pickupSelect.innerHTML = `<option value="">-- Choose pickup point --</option>` + GATE_PICKUPS[gate].map(p => `<option>${p}</option>`).join('');
-        pickupGroup.style.display = 'block';
-      } else { pickupGroup.style.display = 'none'; }
-    });
-  }
-
-  if (nameInput) nameInput.addEventListener('input', () => { nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, ''); clearError(nameInput); });
-  if (phoneInput) phoneInput.addEventListener('input', () => { phoneInput.value = phoneInput.value.replace(/[^0-9]/g, ''); clearError(phoneInput); });
-  if (emailInput) emailInput.addEventListener('input', () => clearError(emailInput));
-
-  if (fileWrap && screenshotInput) {
-    fileWrap.addEventListener('click', () => screenshotInput.click());
-    fileWrap.addEventListener('dragover', e => { e.preventDefault(); fileWrap.classList.add('dragover'); });
-    fileWrap.addEventListener('dragleave', () => fileWrap.classList.remove('dragover'));
-    fileWrap.addEventListener('drop', e => { e.preventDefault(); fileWrap.classList.remove('dragover'); screenshotInput.files = e.dataTransfer.files; handleFileUpload(screenshotInput); });
-    screenshotInput.addEventListener('change', () => handleFileUpload(screenshotInput));
-  }
-
-  function handleFileUpload(input) {
-    if (input.files && input.files[0]) {
-      screenshotUploaded = true;
-      if (filePreview) { filePreview.innerHTML = `✅ ${input.files[0].name}`; filePreview.classList.add('show'); }
-      if (fileWrap) fileWrap.style.borderColor = 'var(--success)';
-    }
-  }
-
- const waBtn = document.querySelector('.whatsapp-btn');
-if (waBtn) {
-  waBtn.addEventListener('click', async () => {
-    if (!validateForm()) return;
-    if (cart.length === 0) { showToast('🛒 Your cart is empty!'); return; }
-
-    const name = nameInput.value.trim();
-    const phone = phoneInput.value.trim();
-    const email = emailInput.value.trim();
-    const total = getCartTotal();
-    const items = cart.map(i => `• ${i.emoji} ${i.name} x${i.qty} = ₦${(i.price * i.qty).toLocaleString()}`).join('\n');
-
-    let deliveryInfo = '';
-    if (currentLocation === 'campus') {
-      deliveryInfo = `🏫 *Hostel:* ${document.getElementById('hostel').value}`;
-    } else {
-      const gateEl = document.getElementById('gate');
-      const gate = gateEl.options[gateEl.selectedIndex].text;
-      const pickup = document.getElementById('pickup').value;
-      deliveryInfo = `🚪 *Gate:* ${gate}\n📍 *Pickup Point:* ${pickup}`;
-    }
-
-    // STEP 1 — Save order to backend FIRST to get Order ID
-    waBtn.textContent = '⏳ Processing...';
-    waBtn.disabled = true;
-
-const orderRes = await fetch('/api/create-order', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name, phone, email,
-        delivery: currentLocation === 'campus'
-          ? document.getElementById('hostel').value
-          : `${document.getElementById('gate').options[document.getElementById('gate').selectedIndex].text} - ${document.getElementById('pickup').value}`,
-        items: cart,
-        total: getCartTotal()
-      })
-    });
-    // Send order details to Formspree
-
-
-    const orderData = await orderRes.json();
-
-    waBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:20px;height:20px;fill:white;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> I've Made Payment — Send via WhatsApp`;
-    waBtn.disabled = false;
-
-    if (!orderData.success) {
-      showToast('❌ Error saving order. Please try again!');
-      return;
-    }
-
-    const orderId = orderData.orderId;
-
-    // STEP 2 — Now build WhatsApp message with real Order ID
-    const message = encodeURIComponent(
-      `📦 *NEW ORDER - ADOX FOODS* 📦\n\n` +
-      `🔢 *Order ID:* ${orderId}\n\n` +
-      `👤 *Customer:* ${name}\n` +
-      `📞 *Phone:* ${phone}\n` +
-      `📧 *Email:* ${email}\n` +
-      `${deliveryInfo}\n\n` +
-      `📋 *Order Details:*\n${items}\n\n` +
-      `💰 *Total: ₦${total.toLocaleString()}*\n\n` +
-      `✅ Payment made via Palmpay.\n` +
-      `📸 Please see attached payment screenshot.\n\n` +
-      `_Thank you for choosing Adox Foods!_ 🧡`
-    );
-
-    // STEP 3 — Save to localStorage
-    localStorage.setItem('adoxLastOrder', JSON.stringify(cart));
-    localStorage.setItem('adoxLastTotal', getCartTotal());
-    localStorage.setItem('adoxLastOrderId', orderId);
-
-    // Send to Formspree (don't await — let it run in background)
-fetch('https://formspree.io/f/xvzvdlyk', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    email: email,
-    name: name,
-    phone: phone,
-    order_id: orderId,
-    delivery: currentLocation === 'campus'
-      ? document.getElementById('hostel').value
-      : document.getElementById('pickup').value,
-    items: cart.map(i => i.name + ' x' + i.qty + ' = ₦' + (i.price * i.qty).toLocaleString()).join(', '),
-    total: '₦' + getCartTotal().toLocaleString()
-  })
-});
-    
-    // STEP 4 — Open WhatsApp
-    window.open(`https://wa.me/2348012345678?text=${message}`, '_blank');
-    setTimeout(() => showConfirmModal(), 800);
-  });
-}
-
-  function validateForm() {
-    let valid = true;
-    const name = nameInput?.value.trim();
-    const phone = phoneInput?.value.trim();
-    const email = emailInput?.value.trim();
-    if (!name || name.length < 2) { showError(nameInput, 'Please enter your full name'); valid = false; }
-    if (!phone || phone.length < 10 || phone.length > 14) { showError(phoneInput, 'Enter a valid phone number (10-14 digits)'); valid = false; }
-    if (!email || !email.includes('@')) { showError(emailInput, 'Please enter a valid email address'); valid = false; }
-    if (currentLocation === 'campus') {
-      const hostel = document.getElementById('hostel').value;
-      if (!hostel) { showError(document.getElementById('hostel'), 'Please select your hostel'); valid = false; }
-    } else {
-      if (!document.getElementById('gate').value) { showError(document.getElementById('gate'), 'Please select a gate'); valid = false; }
-      if (!document.getElementById('pickup').value) { showError(document.getElementById('pickup'), 'Please select a pickup point'); valid = false; }
-    }
-    if (!screenshotUploaded) { showToast('📸 Please upload your payment screenshot!'); if (fileWrap) fileWrap.style.borderColor = '#ef4444'; valid = false; }
-    if (cart.length === 0) { showToast('🛒 Add items to your cart first!'); valid = false; }
-    return valid;
-  }
-
-  function showError(input, msg) {
-    if (!input) return;
-    input.classList.add('error');
-    const err = input.nextElementSibling;
-    if (err && err.classList.contains('form-error')) { err.textContent = msg; err.classList.add('show'); }
-  }
-
-  function clearError(input) {
-    if (!input) return;
-    input.classList.remove('error');
-    const err = input.nextElementSibling;
-    if (err && err.classList.contains('form-error')) err.classList.remove('show');
-  }
-}
-
+// ===== MODAL =====
 function showConfirmModal() {
-  const modal = document.getElementById('confirmModal');
-  if (modal) modal.classList.add('open');
+    const modal = document.getElementById('confirmModal');
+    if (modal) modal.classList.add('open');
 }
 
 function handleModalYes() {
-  clearCart();
-  document.getElementById('confirmModal')?.classList.remove('open');
-  window.location.href = 'thankyou.html';
+    clearCart();
+    document.getElementById('confirmModal') ? .classList.remove('open');
+    window.location.href = 'thankyou.html';
 }
 
 function handleModalNo() {
-  document.getElementById('confirmModal')?.classList.remove('open');
+    document.getElementById('confirmModal') ? .classList.remove('open');
 }
 
 // ===== 3D TILT =====
 function initTilt() {
-  document.querySelectorAll('.food-card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const rect = card.getBoundingClientRect();
-      const rotX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -6;
-      const rotY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 6;
-      card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
+    document.querySelectorAll('.food-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const rotX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -6;
+            const rotY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 6;
+            card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
+        });
+        card.addEventListener('mouseleave', () => { card.style.transform = '';
+            card.style.transition = 'all 0.5s ease'; });
+        card.addEventListener('mouseenter', () => { card.style.transition = 'none'; });
     });
-    card.addEventListener('mouseleave', () => { card.style.transform = ''; card.style.transition = 'all 0.5s ease'; });
-    card.addEventListener('mouseenter', () => { card.style.transition = 'none'; });
-  });
 }
+
+// ===== FILTER DROPDOWN =====
 function toggleFilterDropdown() {
-  const dd = document.getElementById('filterDropdown');
-  dd.style.display = dd.style.display === 'none' ? 'block' : 'none';
+    const dd = document.getElementById('filterDropdown');
+    if (dd) dd.style.display = dd.style.display === 'none' ? 'block' : 'none';
 }
 
 function selectCategory(btn, label) {
-  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('activeCatLabel').textContent = label;
-  document.getElementById('filterDropdown').style.display = 'none';
-  btn.dispatchEvent(new Event('click')); // triggers existing filter logic
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    const labelEl = document.getElementById('activeCatLabel');
+    if (labelEl) labelEl.textContent = label;
+    const dd = document.getElementById('filterDropdown');
+    if (dd) dd.style.display = 'none';
+    btn.dispatchEvent(new Event('click'));
 }
-
-// Close dropdown when clicking outside
 document.addEventListener('click', e => {
-  const dd = document.getElementById('filterDropdown');
-  const toggle = document.getElementById('filterToggle');
-  if (dd && toggle && !toggle.contains(e.target) && !dd.contains(e.target)) {
-    dd.style.display = 'none';
-  }
+    const dd = document.getElementById('filterDropdown');
+    const toggle = document.getElementById('filterToggle');
+    if (dd && toggle && !toggle.contains(e.target) && !dd.contains(e.target)) dd.style.display = 'none';
 });
-
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
-  initStatusBanner();
-  initNavbar();
-  updateCartUI();
-  initReveal();
-  initHome();
-  initShop();
-  initCheckout();
-  setTimeout(initTilt, 500);
-  document.querySelectorAll('.cat-tab').forEach(tab => {
-    tab.addEventListener('click', () => setTimeout(initTilt, 400));
-  });
-  });
+    initStatusBanner();
+    initNavbar();
+    updateCartUI();
+    initReveal();
+    initHome();
+    initShop();
+    initCheckout();
+    setTimeout(initTilt, 500);
+    document.querySelectorAll('.cat-tab').forEach(tab => {
+        tab.addEventListener('click', () => setTimeout(initTilt, 400));
+    });
+});

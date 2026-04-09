@@ -12,7 +12,7 @@
             display: flex;
             gap: 0.75rem;
         }
-
+        
         .loc-btn {
             flex: 1;
             padding: 12px;
@@ -26,19 +26,19 @@
             transition: all 0.3s ease;
             font-family: 'Poppins', sans-serif;
         }
-
+        
         .loc-btn.active {
             background: var(--primary);
             border-color: var(--primary);
             color: white;
             box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
         }
-
+        
         .loc-btn:hover:not(.active) {
             border-color: var(--primary);
             color: var(--primary);
         }
-
+        
         .form-select {
             appearance: none;
             -webkit-appearance: none;
@@ -48,17 +48,22 @@
             padding-right: 40px;
             cursor: pointer;
         }
-
+        
         .location-fields {
             animation: slideDown 0.3s ease;
         }
-
+        
         @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-
-        /* Place Order button */
+        
         .place-order-btn {
             width: 100%;
             background: var(--primary);
@@ -75,22 +80,21 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            box-shadow: 0 4px 20px rgba(255,107,53,0.3);
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
         }
-
+        
         .place-order-btn:hover:not(:disabled) {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255,107,53,0.4);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
         }
-
+        
         .place-order-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
-
-        /* Success screen */
+        
         .success-screen {
             display: none;
             text-align: center;
@@ -101,23 +105,25 @@
             max-width: 500px;
             margin: 3rem auto;
         }
-
-        .success-screen.show { display: block; }
-
+        
+        .success-screen.show {
+            display: block;
+        }
+        
         .success-icon {
             font-size: 4rem;
             margin-bottom: 1rem;
         }
-
+        
         .success-screen h2 {
             font-size: 1.6rem;
             color: var(--secondary);
             margin-bottom: 0.5rem;
         }
-
+        
         .success-order-id {
             display: inline-block;
-            background: rgba(255,107,53,0.08);
+            background: rgba(255, 107, 53, 0.08);
             color: var(--primary);
             font-weight: 800;
             font-size: 1.1rem;
@@ -126,28 +132,31 @@
             margin: 1rem 0;
             border: 2px dashed var(--primary);
         }
-
+        
         .success-screen p {
             color: var(--gray-600);
             font-size: 0.88rem;
             line-height: 1.8;
         }
-
-        /* Spinner */
+        
         .spinner {
             width: 18px;
             height: 18px;
-            border: 2px solid rgba(255,255,255,0.4);
+            border: 2px solid rgba(255, 255, 255, 0.4);
             border-top-color: white;
             border-radius: 50%;
             animation: spin 0.7s linear infinite;
             display: none;
         }
-
-        .spinner.show { display: block; }
-
+        
+        .spinner.show {
+            display: block;
+        }
+        
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -157,9 +166,9 @@
     <nav class="navbar">
         <a href="index.html" class="logo">Adox<span>Foods</span></a>
         <ul class="nav-links">
-            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="shop.html">Shop</a></li>
-            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="checkout.html" class="active">Checkout</a></li>
             <li><a href="privacy.html">Privacy Policy</a></li>
             <li><a href="refund.html">Refund Policy</a></li>
         </ul>
@@ -190,9 +199,7 @@
                 <div class="cart-min-bar">
                     <div class="cart-min-fill" id="cart-min-fill"></div>
                 </div>
-                <div class="cart-min-notice not-reached" id="cart-min-notice">
-                    ⚠️ Add ₦500 more to checkout
-                </div>
+                <div class="cart-min-notice not-reached" id="cart-min-notice">⚠️ Add ₦500 more to checkout</div>
             </div>
             <button class="checkout-btn">Go to Checkout</button>
         </div>
@@ -203,28 +210,27 @@
         <p>Fill in your details and send payment to confirm your order</p>
     </div>
 
-    <!-- SUCCESS SCREEN (hidden until order placed) -->
+    <!-- SUCCESS SCREEN -->
     <div class="success-screen" id="successScreen">
         <div class="success-icon">🎉</div>
         <h2>Order Placed!</h2>
         <div class="success-order-id" id="successOrderId">ADX-2026-XXXXXX</div>
         <p>
-            Your order has been received and your payment screenshot has been uploaded.<br><br>
-            We'll confirm your payment and get in touch via <strong>phone or email</strong> shortly.<br><br>
-            Save your Order ID above for reference!
+            Your order has been received and your payment screenshot has been uploaded.<br><br> We'll confirm your payment and get in touch via <strong>phone or email</strong> shortly.<br><br> Save your Order ID above for reference!
         </p>
         <a href="shop.html" style="display:inline-block;margin-top:1.5rem;background:var(--primary);color:white;padding:12px 28px;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none">
             🛍 Continue Shopping
         </a>
     </div>
 
-    <!-- CHECKOUT FORM (hidden after order placed) -->
+    <!-- CHECKOUT FORM -->
     <div class="checkout-wrap" id="checkoutWrap">
 
         <div style="display:flex;flex-direction:column;gap:1.5rem">
 
             <div class="checkout-card">
-                <h2><div class="ch2-icon">📋</div>Order Summary</h2>
+                <h2>
+                    <div class="ch2-icon">📋</div>Order Summary</h2>
                 <div class="order-summary-items"></div>
                 <div class="order-total">
                     <span>Total Amount</span>
@@ -233,7 +239,8 @@
             </div>
 
             <div class="checkout-card">
-                <h2><div class="ch2-icon">🏦</div>Payment Details</h2>
+                <h2>
+                    <div class="ch2-icon">🏦</div>Payment Details</h2>
                 <p style="font-size:.85rem;color:var(--gray-600);margin-bottom:1rem;line-height:1.7">
                     Transfer the exact order amount to the account below, then upload your screenshot.
                 </p>
@@ -250,30 +257,27 @@
         </div>
 
         <div class="checkout-card">
-            <h2><div class="ch2-icon">👤</div>Your Details</h2>
+            <h2>
+                <div class="ch2-icon">👤</div>Your Details</h2>
 
-            <!-- Full Name -->
             <div class="form-group">
                 <label class="form-label" for="fullName">Full Name <span>*</span></label>
                 <input type="text" id="fullName" class="form-input" placeholder="e.g. Chukwuemeka Okafor" autocomplete="name" />
-                <div class="form-error">Please enter your full name (letters only)</div>
+                <div class="form-error">Please enter your full name</div>
             </div>
 
-            <!-- Phone -->
             <div class="form-group">
                 <label class="form-label" for="phone">Phone Number <span>*</span></label>
                 <input type="tel" id="phone" class="form-input" placeholder="e.g. 08012345678" autocomplete="tel" maxlength="14" />
                 <div class="form-error">Enter a valid phone number (10–14 digits)</div>
             </div>
 
-            <!-- Email -->
             <div class="form-group">
                 <label class="form-label" for="email">Email Address <span>*</span></label>
                 <input type="email" id="email" class="form-input" placeholder="e.g. you@gmail.com" autocomplete="email" />
                 <div class="form-error">Please enter a valid email address</div>
             </div>
 
-            <!-- Location Toggle -->
             <div class="form-group">
                 <label class="form-label">Delivery Location <span>*</span></label>
                 <div class="location-toggle">
@@ -336,35 +340,28 @@
             <div class="form-group">
                 <label class="form-label">Payment Screenshot <span>*</span></label>
                 <div class="file-upload-wrap" id="fileUploadWrap">
-                    <input type="file" id="screenshot" accept="image/*" />
+                    <input type="file" id="screenshot" accept="image/*" style="display:none" />
                     <div class="up-icon">📸</div>
                     <p>Click or drag & drop your payment screenshot</p>
                     <p class="up-hint">PNG, JPG, JPEG accepted</p>
                 </div>
-                <div class="file-preview"></div>
+                <div class="file-preview" id="filePreview"></div>
             </div>
 
             <!-- Steps -->
             <div style="background:var(--bg);border-radius:12px;padding:1.2rem;margin-bottom:0.5rem">
                 <p style="font-size:.8rem;font-weight:700;color:var(--secondary);margin-bottom:.75rem">📱 How it works:</p>
                 <div style="display:flex;flex-direction:column;gap:.5rem">
-                    <div style="font-size:.78rem;color:var(--gray-600);display:flex;gap:.5rem;align-items:center">
-                        <span style="background:var(--primary);color:white;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0">1</span>Fill in your details above
-                    </div>
-                    <div style="font-size:.78rem;color:var(--gray-600);display:flex;gap:.5rem;align-items:center">
-                        <span style="background:var(--primary);color:white;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0">2</span>Transfer total to Palmpay 9044572746
-                    </div>
-                    <div style="font-size:.78rem;color:var(--gray-600);display:flex;gap:.5rem;align-items:center">
-                        <span style="background:var(--primary);color:white;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0">3</span>Upload your payment screenshot below
-                    </div>
-                    <div style="font-size:.78rem;color:var(--gray-600);display:flex;gap:.5rem;align-items:center">
-                        <span style="background:var(--primary);color:white;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0">4</span>Click "Place Order" — we'll confirm & deliver!
-                    </div>
+                    <div style="font-size:.78rem;color:var(--gray-600);display:flex;gap:.5rem;align-items:center"><span style="background:var(--primary);color:white;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0">1</span>Fill in your details above</div>
+                    <div style="font-size:.78rem;color:var(--gray-600);display:flex;gap:.5rem;align-items:center"><span style="background:var(--primary);color:white;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0">2</span>Transfer total to Palmpay 9044572746</div>
+                    <div style="font-size:.78rem;color:var(--gray-600);display:flex;gap:.5rem;align-items:center"><span style="background:var(--primary);color:white;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0">3</span>Upload your payment screenshot
+                        below</div>
+                    <div style="font-size:.78rem;color:var(--gray-600);display:flex;gap:.5rem;align-items:center"><span style="background:var(--primary);color:white;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0">4</span>Click "Place Order" — we'll confirm
+                        & deliver!</div>
                 </div>
             </div>
 
-            <!-- PLACE ORDER BUTTON (replaces WhatsApp) -->
-            <button class="place-order-btn" id="placeOrderBtn" onclick="placeOrder()">
+            <button class="place-order-btn" id="placeOrderBtn">
                 <div class="spinner" id="orderSpinner"></div>
                 <span id="placeOrderText">✅ Place Order</span>
             </button>
@@ -387,100 +384,181 @@
         <div class="footer-copy">© 2026 Adox Foods. All rights reserved.</div>
     </footer>
 
+    <!-- script.js loads first (provides cart, getCartTotal, clearCart, showToast, launchConfetti) -->
     <script src="script.js"></script>
+
     <script>
-        async function placeOrder() {
+        // ── File upload UI ──
+        const _fileWrap = document.getElementById('fileUploadWrap');
+        const _fileInput = document.getElementById('screenshot');
+        const _filePreview = document.getElementById('filePreview');
+
+        _fileWrap.addEventListener('click', () => _fileInput.click());
+        _fileWrap.addEventListener('dragover', e => {
+            e.preventDefault();
+            _fileWrap.classList.add('dragover');
+        });
+        _fileWrap.addEventListener('dragleave', () => _fileWrap.classList.remove('dragover'));
+        _fileWrap.addEventListener('drop', e => {
+            e.preventDefault();
+            _fileWrap.classList.remove('dragover');
+            if (e.dataTransfer.files[0]) {
+                _fileInput.files = e.dataTransfer.files;
+                _showFilePreview(e.dataTransfer.files[0]);
+            }
+        });
+        _fileInput.addEventListener('change', () => {
+            if (_fileInput.files[0]) _showFilePreview(_fileInput.files[0]);
+        });
+
+        function _showFilePreview(file) {
+            _filePreview.textContent = '✅ ' + file.name;
+            _filePreview.classList.add('show');
+            _fileWrap.style.borderColor = '#22c55e';
+        }
+
+        // ── Place Order button ──
+        document.getElementById('placeOrderBtn').addEventListener('click', async function() {
             const btn = document.getElementById('placeOrderBtn');
             const spinner = document.getElementById('orderSpinner');
             const btnText = document.getElementById('placeOrderText');
 
-            // --- Gather & validate fields ---
-            const name  = document.getElementById('fullName').value.trim();
+            // Collect fields
+            const name = document.getElementById('fullName').value.trim();
             const phone = document.getElementById('phone').value.trim();
             const email = document.getElementById('email').value.trim();
 
-            // Delivery location
+            // Delivery
             const activeLocBtn = document.querySelector('.loc-btn.active');
             const locType = activeLocBtn ? activeLocBtn.dataset.loc : 'campus';
             let delivery = '';
             if (locType === 'campus') {
                 const hostel = document.getElementById('hostel').value;
-                if (!hostel) { alert('Please select your hostel'); return; }
-                delivery = `On Campus — ${hostel}`;
+                if (!hostel) {
+                    showToast('🏠 Please select your hostel');
+                    return;
+                }
+                delivery = 'On Campus — ' + hostel;
             } else {
-                const gate = document.getElementById('gate').value;
-                if (!gate) { alert('Please select a gate'); return; }
+                const gateEl = document.getElementById('gate');
+                if (!gateEl.value) {
+                    showToast('🚪 Please select a gate');
+                    return;
+                }
                 const pickupEl = document.getElementById('pickup');
-                const pickup = pickupEl && pickupEl.closest('#pickup-group') && pickupEl.closest('#pickup-group').style.display !== 'none'
-                    ? pickupEl.value : '';
-                delivery = `Off Campus — ${gate} Gate${pickup ? ' / ' + pickup : ''}`;
+                const pickup = (pickupEl && document.getElementById('pickup-group').style.display !== 'none') ? pickupEl.value : '';
+                if (!pickup) {
+                    showToast('📍 Please select a pickup point');
+                    return;
+                }
+                delivery = 'Off Campus — ' + gateEl.options[gateEl.selectedIndex].text + ' / ' + pickup;
             }
 
-            if (!name)  { alert('Please enter your full name'); return; }
-            if (!phone) { alert('Please enter your phone number'); return; }
-            if (!email) { alert('Please enter your email address'); return; }
+            // Validate
+            if (!name) {
+                showToast('👤 Please enter your full name');
+                return;
+            }
+            if (phone.length < 10) {
+                showToast('📞 Please enter a valid phone number');
+                return;
+            }
+            if (!email.includes('@')) {
+                showToast('📧 Please enter a valid email address');
+                return;
+            }
 
-            // Cart items
-            const cart = JSON.parse(localStorage.getItem('adox_cart') || '[]');
-            if (!cart.length) { alert('Your cart is empty!'); return; }
-            const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+            // Cart — uses `cart` from script.js
+            if (!cart || cart.length === 0) {
+                showToast('🛒 Your cart is empty!');
+                return;
+            }
+            const total = getCartTotal();
 
             // Screenshot
-            const screenshotFile = document.getElementById('screenshot').files[0];
-            if (!screenshotFile) { alert('Please upload your payment screenshot'); return; }
+            const screenshotFile = _fileInput.files[0];
+            if (!screenshotFile) {
+                showToast('📸 Please upload your payment screenshot!');
+                return;
+            }
 
-            // Convert screenshot to base64
-            const toBase64 = file => new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload  = () => resolve(reader.result);
-                reader.onerror = reject;
-                reader.readAsDataURL(file);
+            // Base64 encode screenshot
+            const toBase64 = f => new Promise((res, rej) => {
+                const r = new FileReader();
+                r.onload = () => res(r.result);
+                r.onerror = rej;
+                r.readAsDataURL(f);
             });
             const screenshot_base64 = await toBase64(screenshotFile);
-            const screenshot_mime   = screenshotFile.type;
+            const screenshot_mime = screenshotFile.type;
 
-            // --- Submit ---
+            // Disable button
             btn.disabled = true;
             spinner.classList.add('show');
             btnText.textContent = 'Placing order...';
 
             try {
+                // Submit to backend
                 const res = await fetch('/api/create-order', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({
-                        name, phone, email, delivery,
+                        name,
+                        phone,
+                        email,
+                        delivery,
                         items: cart,
                         total,
                         screenshot_base64,
                         screenshot_mime
                     })
                 });
-
                 const data = await res.json();
+                if (!res.ok || !data.success) throw new Error(data.error || 'Something went wrong');
 
-                if (!res.ok || !data.success) {
-                    throw new Error(data.error || 'Something went wrong');
-                }
+                const orderId = data.orderId;
 
-                // Clear cart
-                localStorage.removeItem('adox_cart');
-                if (window.updateCartCount) window.updateCartCount();
+                // Formspree (background, no await)
+                fetch('https://formspree.io/f/xvzvdlyk', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email,
+                        name,
+                        phone,
+                        order_id: orderId,
+                        delivery,
+                        items: cart.map(i => i.name + ' x' + i.qty + ' = ₦' + (i.price * i.qty).toLocaleString()).join(', '),
+                        total: '₦' + total.toLocaleString()
+                    })
+                });
 
-                // Show success screen
+                // Clear cart using script.js function
+                clearCart();
+
+                // Show success
                 document.getElementById('checkoutWrap').style.display = 'none';
-                document.getElementById('successOrderId').textContent = data.orderId;
+                document.getElementById('successOrderId').textContent = orderId;
                 document.getElementById('successScreen').classList.add('show');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                if (typeof launchConfetti === 'function') launchConfetti();
 
             } catch (err) {
-                alert('❌ Error: ' + err.message);
+                showToast('❌ Error: ' + err.message);
                 btn.disabled = false;
                 spinner.classList.remove('show');
                 btnText.textContent = '✅ Place Order';
             }
-        }
+        });
     </script>
+
 </body>
 
 </html>
