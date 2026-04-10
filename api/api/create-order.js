@@ -40,28 +40,30 @@ module.exports = async function handler(req, res) {
             if (!data) isUnique = true;
         }
 
-        // Upload screenshot to Supabase Storage
+        // Upload screenshot
         let screenshot_url = null;
         if (screenshot_base64 && screenshot_mime) {
-            try {
-                const base64Data = screenshot_base64.replace(/^data:image\/\w+;base64,/, '');
-                const buffer = Buffer.from(base64Data, 'base64');
-                const ext = screenshot_mime.split('/')[1] || 'png';
-                const fileName = `${orderId}.${ext}`;
+            const base64Data = screenshot_base64.replace(/^data:image\/\w+;base64,/, '');
+            const buffer = Buffer.from(base64Data, 'base64');
+            const ext = screenshot_mime.split('/')[1] || 'png';
+            const fileName = `${orderId}.${ext}`;
 
-                const { error: uploadError } = await supabase.storage
-                    .from('screenshots')
-                    .upload(fileName, buffer, { contentType: screenshot_mime, upsert: true });
+            const { data: uploadData, error: uploadError } = await supabase.storage
+                .from('screenshots')
+                .upload(fileName, buffer, { contentType: screenshot_mime, upsert: true });
 
-                if (!uploadError) {
-                    const { data: urlData } = supabase.storage
-                        .from('screenshots')
-                        .getPublicUrl(fileName);
-                    screenshot_url = urlData.publicUrl;
-                }
-            } catch (e) {
-                console.log('Screenshot error (non-fatal):', e.message);
+            if (uploadError) {
+                // Return the upload error so we can see it
+                return res.status(500).json({
+                    error: 'Screenshot upload failed: ' + uploadError.message,
+                    details: uploadError
+                });
             }
+
+            const { data: urlData } = supabase.storage
+                .from('screenshots')
+                .getPublicUrl(fileName);
+            screenshot_url = urlData.publicUrl;
         }
 
         // Save order
