@@ -1,3 +1,10 @@
+module.exports.config = {
+    api: {
+        bodyParser: {
+            sizeLimit: '10mb'
+        }
+    }
+};
 const { createClient } = require('@supabase/supabase-js');
 
 const supabase = createClient(
