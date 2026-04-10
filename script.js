@@ -5,7 +5,7 @@
 const FOOD_DATA = [
     // GRAINS
     { id: 1, name: "A Congo Of Rice", category: "grains", emoji: "🌾", image: "rice.png", price: 2300, desc: "Fresh, quality rice measured by the congo", badge: "🔥 Popular" },
-    { id: 2, name: "A Congo Of White Beans", category: "grains", emoji: "🫘", image: "whitebeans.png", price: 2100, desc: "Fresh white beans, perfect for any meal", badge: null },
+    { id: 2, name: "A Congo Of White Beans", category: "grains", emoji: "🫘", image: "whitebeans.jpeg", price: 2100, desc: "Fresh white beans, perfect for any meal", badge: null },
     { id: 3, name: "A Congo Of Oloyin Beans", category: "grains", emoji: "🫘", image: "oloyin.png", price: 2800, desc: "Premium Oloyin honey beans", badge: null },
     { id: 4, name: "A Congo Of Garri", category: "grains", emoji: "🥣", image: "gari.png", price: 600, desc: "Fresh garri, measured by the congo", badge: "⭐ Best" },
     //{ id: 5, name: "Kivo Garri", category: "grains", emoji: "🥣", image: "garri.png", price: 400, desc: "Packaged Kivo garri — student favourite", badge: null },
