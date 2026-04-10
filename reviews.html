@@ -1,260 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reviews — Adox Foods</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>" />
-  <style>
-    .reviews-hero {
-      background: linear-gradient(135deg, var(--secondary), #1a2a3a);
-      padding: 120px 2rem 60px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .reviews-hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,107,53,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,107,53,0.04) 1px, transparent 1px);
-      background-size: 50px 50px;
-    }
-    .reviews-hero h1 { font-size: clamp(2rem,4vw,3rem); font-weight: 900; color: white; position: relative; z-index: 1; }
-    .reviews-hero h1 span { color: var(--primary); }
-    .reviews-hero p { color: rgba(255,255,255,0.6); margin-top: 0.8rem; position: relative; z-index: 1; }
-
-    /* Stats bar */
-    .reviews-stats {
-      background: white;
-      padding: 2rem;
-      display: flex;
-      justify-content: center;
-      gap: 4rem;
-      border-bottom: 1px solid var(--gray-100);
-      flex-wrap: wrap;
-    }
-    .rs-item { text-align: center; }
-    .rs-num { font-size: 2rem; font-weight: 900; color: var(--primary); }
-    .rs-label { font-size: 0.8rem; color: var(--gray-400); font-weight: 500; margin-top: 2px; }
-
-    /* Stars */
-    .stars { display: flex; gap: 3px; }
-    .star { font-size: 1.1rem; }
-    .star.filled { color: #f59e0b; }
-    .star.empty { color: var(--gray-200); }
-
-    /* Reviews grid */
-    .reviews-wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
-    .reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-    .review-card {
-      background: white;
-      border-radius: var(--radius);
-      padding: 1.8rem;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--gray-100);
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-    .review-card::before {
-      content: '"';
-      position: absolute;
-      top: -10px; right: 20px;
-      font-size: 8rem;
-      color: rgba(255,107,53,0.06);
-      font-family: Georgia, serif;
-      line-height: 1;
-    }
-    .review-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-md);
-      border-color: rgba(255,107,53,0.2);
-    }
-    .rc-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-    .rc-avatar {
-      width: 46px; height: 46px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: white;
-      flex-shrink: 0;
-    }
-    .rc-name { font-weight: 700; color: var(--secondary); font-size: 0.95rem; }
-    .rc-order { font-size: 0.72rem; color: var(--gray-400); margin-top: 2px; }
-    .rc-stars { margin-bottom: 0.75rem; }
-    .rc-text { font-size: 0.88rem; color: var(--gray-600); line-height: 1.8; }
-    .rc-date { font-size: 0.72rem; color: var(--gray-400); margin-top: 1rem; }
-
-    /* Empty state */
-    .reviews-empty {
-      text-align: center;
-      padding: 5rem 2rem;
-      color: var(--gray-400);
-    }
-    .reviews-empty .empty-icon { font-size: 4rem; margin-bottom: 1rem; }
-    .reviews-empty p { font-size: 1rem; }
-
-    /* Loading */
-    .reviews-loading {
-      text-align: center;
-      padding: 4rem;
-      color: var(--gray-400);
-    }
-    .spinner {
-      width: 40px; height: 40px;
-      border: 3px solid var(--gray-100);
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 1rem;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    @media (max-width: 768px) {
-      .reviews-stats { gap: 2rem; }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reviews — Adox Foods</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>" />
+    <style>
+        .reviews-hero {
+            background: linear-gradient(135deg, var(--secondary), #1a2a3a);
+            padding: 120px 2rem 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .reviews-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 107, 53, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 107, 53, 0.04) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .reviews-hero h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .reviews-hero h1 span {
+            color: var(--primary);
+        }
+        
+        .reviews-hero p {
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 0.8rem;
+            position: relative;
+            z-index: 1;
+        }
+        /* Stats bar */
+        
+        .reviews-stats {
+            background: white;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            border-bottom: 1px solid var(--gray-100);
+            flex-wrap: wrap;
+        }
+        
+        .rs-item {
+            text-align: center;
+        }
+        
+        .rs-num {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        
+        .rs-label {
+            font-size: 0.8rem;
+            color: var(--gray-400);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+        /* Stars */
+        
+        .stars {
+            display: flex;
+            gap: 3px;
+        }
+        
+        .star {
+            font-size: 1.1rem;
+        }
+        
+        .star.filled {
+            color: #f59e0b;
+        }
+        
+        .star.empty {
+            color: var(--gray-200);
+        }
+        /* Reviews grid */
+        
+        .reviews-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .review-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.8rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-100);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .review-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 8rem;
+            color: rgba(255, 107, 53, 0.06);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(255, 107, 53, 0.2);
+        }
+        
+        .rc-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .rc-avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .rc-name {
+            font-weight: 700;
+            color: var(--secondary);
+            font-size: 0.95rem;
+        }
+        
+        .rc-order {
+            font-size: 0.72rem;
+            color: var(--gray-400);
+            margin-top: 2px;
+        }
+        
+        .rc-stars {
+            margin-bottom: 0.75rem;
+        }
+        
+        .rc-text {
+            font-size: 0.88rem;
+            color: var(--gray-600);
+            line-height: 1.8;
+        }
+        
+        .rc-date {
+            font-size: 0.72rem;
+            color: var(--gray-400);
+            margin-top: 1rem;
+        }
+        /* Empty state */
+        
+        .reviews-empty {
+            text-align: center;
+            padding: 5rem 2rem;
+            color: var(--gray-400);
+        }
+        
+        .reviews-empty .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .reviews-empty p {
+            font-size: 1rem;
+        }
+        /* Loading */
+        
+        .reviews-loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--gray-400);
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--gray-100);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .reviews-stats {
+                gap: 2rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="status-banner" id="statusBanner"></div>
+    <div class="status-banner" id="statusBanner"></div>
 
-<nav class="navbar">
-  <a href="index.html" class="logo">Adox<span>Foods</span></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="shop.html">Shop</a></li>
-    <li><a href="checkout.html">Checkout</a></li>
-    <li><a href="reviews.html" class="active">Reviews</a></li>
-  </ul>
-  <div class="nav-right">
-    <button class="cart-btn">🛒 Cart<span class="cart-count hidden">0</span></button>
-    <div class="hamburger"><span></span><span></span><span></span></div>
-  </div>
-</nav>
+    <nav class="navbar">
+        <a href="index.html" class="logo">Adox<span>Foods</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="refund.html">Refund Policy</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="cart-btn">🛒 Cart<span class="cart-count hidden">0</span></button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
 
-<div class="cart-overlay"></div>
-<div class="cart-sidebar">
-  <div class="cart-header"><h3>🛒 Your Cart</h3><button class="cart-close">✕</button></div>
-  <div class="cart-items"><div class="cart-empty"><div class="empty-icon">🛒</div><p>Your cart is empty.</p></div></div>
-  <div class="cart-footer">
-    <div class="cart-total"><span>Total</span><span class="cart-total-amount">₦0</span></div>
-    <button class="checkout-btn">🚀 Go to Checkout</button>
-  </div>
-</div>
+    <div class="cart-overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>🛒 Your Cart</h3><button class="cart-close">✕</button></div>
+        <div class="cart-items">
+            <div class="cart-empty">
+                <div class="empty-icon">🛒</div>
+                <p>Your cart is empty.</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total"><span>Total</span><span class="cart-total-amount">₦0</span></div>
+            <button class="checkout-btn">🚀 Go to Checkout</button>
+        </div>
+    </div>
 
-<!-- Hero -->
-<div class="reviews-hero">
-  <h1>What Students <span>Say</span> ⭐</h1>
-  <p>Real reviews from real FUTA students — no cap!</p>
-</div>
+    <!-- Hero -->
+    <div class="reviews-hero">
+        <h1>What Students <span>Say</span> ⭐</h1>
+        <p>Real reviews from real FUTA students — no cap!</p>
+    </div>
 
-<!-- Stats -->
-<div class="reviews-stats">
-  <div class="rs-item">
-    <div class="rs-num" id="total-reviews">—</div>
-    <div class="rs-label">Total Reviews</div>
-  </div>
-  <div class="rs-item">
-    <div class="rs-num" id="avg-rating">—</div>
-    <div class="rs-label">Average Rating</div>
-  </div>
-  <div class="rs-item">
-    <div class="rs-num" id="five-stars">—</div>
-    <div class="rs-label">5 Star Reviews</div>
-  </div>
-</div>
+    <!-- Stats -->
+    <div class="reviews-stats">
+        <div class="rs-item">
+            <div class="rs-num" id="total-reviews">—</div>
+            <div class="rs-label">Total Reviews</div>
+        </div>
+        <div class="rs-item">
+            <div class="rs-num" id="avg-rating">—</div>
+            <div class="rs-label">Average Rating</div>
+        </div>
+        <div class="rs-item">
+            <div class="rs-num" id="five-stars">—</div>
+            <div class="rs-label">5 Star Reviews</div>
+        </div>
+    </div>
 
-<!-- Reviews -->
-<div class="reviews-wrap">
-  <div id="reviews-container" class="reviews-loading">
-    <div class="spinner"></div>
-    <p>Loading reviews...</p>
-  </div>
-</div>
+    <!-- Reviews -->
+    <div class="reviews-wrap">
+        <div id="reviews-container" class="reviews-loading">
+            <div class="spinner"></div>
+            <p>Loading reviews...</p>
+        </div>
+    </div>
 
-<!-- CTA -->
-<div style="background:linear-gradient(135deg,var(--secondary),#1a2a3a);padding:4rem 2rem;text-align:center">
-  <div style="max-width:500px;margin:0 auto">
-    <div style="font-size:2.5rem;margin-bottom:1rem">🛒</div>
-    <h2 style="color:white;font-size:1.6rem;font-weight:800;margin-bottom:0.75rem">Ready to Order?</h2>
-    <p style="color:rgba(255,255,255,0.6);margin-bottom:2rem">Join hundreds of satisfied students at FUTA!</p>
-    <a href="shop.html" style="background:var(--primary);color:white;padding:14px 36px;border-radius:50px;font-weight:700;font-size:1rem;text-decoration:none;display:inline-block;transition:all .3s ease;box-shadow:0 8px 24px rgba(255,107,53,0.35)" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">🛒 Shop Now</a>
-  </div>
-</div>
+    <!-- CTA -->
+    <div style="background:linear-gradient(135deg,var(--secondary),#1a2a3a);padding:4rem 2rem;text-align:center">
+        <div style="max-width:500px;margin:0 auto">
+            <div style="font-size:2.5rem;margin-bottom:1rem">🛒</div>
+            <h2 style="color:white;font-size:1.6rem;font-weight:800;margin-bottom:0.75rem">Ready to Order?</h2>
+            <p style="color:rgba(255,255,255,0.6);margin-bottom:2rem">Join hundreds of satisfied students at FUTA!</p>
+            <a href="shop.html" style="background:var(--primary);color:white;padding:14px 36px;border-radius:50px;font-weight:700;font-size:1rem;text-decoration:none;display:inline-block;transition:all .3s ease;box-shadow:0 8px 24px rgba(255,107,53,0.35)" onmouseover="this.style.transform='translateY(-3px)'"
+                onmouseout="this.style.transform=''">🛒 Shop Now</a>
+        </div>
+    </div>
 
-<footer>
-  <div class="footer-logo">Adox<span>Foods</span></div>
-  <p class="footer-text">Stocking student life, one delivery at a time 📦</p>
-  <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="reviews.html">Reviews</a>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="refund.html">Refund Policy</a>
-  </div>
-  <div class="footer-copy">© 2026 Adox Foods. All rights reserved.</div>
-</footer>
+    <footer>
+        <div class="footer-logo">Adox<span>Foods</span></div>
+        <p class="footer-text">Stocking student life, one delivery at a time 📦</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="refund.html">Refund Policy</a>
+        </div>
+        <div class="footer-copy">© 2026 Adox Foods. All rights reserved.</div>
+    </footer>
 
-<script src="script.js"></script>
-<script>
-  function renderStars(rating) {
-    return Array.from({ length: 5 }, (_, i) =>
-      `<span class="star ${i < rating ? 'filled' : 'empty'}">${i < rating ? '★' : '☆'}</span>`
-    ).join('');
-  }
+    <script src="script.js"></script>
+    <script>
+        function renderStars(rating) {
+            return Array.from({
+                    length: 5
+                }, (_, i) =>
+                `<span class="star ${i < rating ? 'filled' : 'empty'}">${i < rating ? '★' : '☆'}</span>`
+            ).join('');
+        }
 
-  function formatDate(dateStr) {
-    return new Date(dateStr).toLocaleDateString('en-NG', { year: 'numeric', month: 'long', day: 'numeric' });
-  }
+        function formatDate(dateStr) {
+            return new Date(dateStr).toLocaleDateString('en-NG', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
 
-  async function loadReviews() {
-    try {
-      const res = await fetch('/api/get-reviews');
-      const data = await res.json();
-      const container = document.getElementById('reviews-container');
+        async function loadReviews() {
+            try {
+                const res = await fetch('/api/get-reviews');
+                const data = await res.json();
+                const container = document.getElementById('reviews-container');
 
-      if (!data.success || data.reviews.length === 0) {
-        container.className = '';
-        container.innerHTML = `
+                if (!data.success || data.reviews.length === 0) {
+                    container.className = '';
+                    container.innerHTML = `
           <div class="reviews-empty">
             <div class="empty-icon">⭐</div>
             <p>No reviews yet — be the first to review!</p>
           </div>`;
-        return;
-      }
+                    return;
+                }
 
-      // Update stats
-      const reviews = data.reviews;
-      const avg = (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1);
-      const fiveStars = reviews.filter(r => r.rating === 5).length;
-      document.getElementById('total-reviews').textContent = reviews.length;
-      document.getElementById('avg-rating').textContent = avg + '⭐';
-      document.getElementById('five-stars').textContent = fiveStars;
+                // Update stats
+                const reviews = data.reviews;
+                const avg = (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1);
+                const fiveStars = reviews.filter(r => r.rating === 5).length;
+                document.getElementById('total-reviews').textContent = reviews.length;
+                document.getElementById('avg-rating').textContent = avg + '⭐';
+                document.getElementById('five-stars').textContent = fiveStars;
 
-      container.className = 'reviews-grid';
-      container.innerHTML = reviews.map(r => `
+                container.className = 'reviews-grid';
+                container.innerHTML = reviews.map(r => `
         <div class="review-card reveal">
           <div class="rc-header">
             <div class="rc-avatar">${r.customer_name?.charAt(0).toUpperCase() || '?'}</div>
@@ -269,18 +374,19 @@
         </div>
       `).join('');
 
-      initReveal();
+                initReveal();
 
-    } catch (err) {
-      document.getElementById('reviews-container').innerHTML = `
+            } catch (err) {
+                document.getElementById('reviews-container').innerHTML = `
         <div class="reviews-empty">
           <div class="empty-icon">⚠️</div>
           <p>Could not load reviews. Please try again later.</p>
         </div>`;
-    }
-  }
+            }
+        }
 
-  loadReviews();
-</script>
+        loadReviews();
+    </script>
 </body>
+
 </html>

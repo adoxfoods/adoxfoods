@@ -8,7 +8,7 @@ const FOOD_DATA = [
     { id: 2, name: "A Congo Of White Beans", category: "grains", emoji: "🫘", image: "whitebeans.png", price: 2100, desc: "Fresh white beans, perfect for any meal", badge: null },
     { id: 3, name: "A Congo Of Oloyin Beans", category: "grains", emoji: "🫘", image: "oloyin.png", price: 2800, desc: "Premium Oloyin honey beans", badge: null },
     { id: 4, name: "A Congo Of Garri", category: "grains", emoji: "🥣", image: "gari.png", price: 600, desc: "Fresh garri, measured by the congo", badge: "⭐ Best" },
-    { id: 5, name: "Kivo Garri", category: "grains", emoji: "🥣", image: "garri.png", price: 400, desc: "Packaged Kivo garri — student favourite", badge: null },
+    //{ id: 5, name: "Kivo Garri", category: "grains", emoji: "🥣", image: "garri.png", price: 400, desc: "Packaged Kivo garri — student favourite", badge: null },
     // PASTA & SEMOVITA
     { id: 6, name: "Golden Penny Spag", category: "pasta", emoji: "🍝", image: "GoldenPennySpag.png", price: 1100, desc: "Golden Penny spaghetti — full pack", badge: "🔥 Popular" },
     { id: 7, name: "Mama's Pride Spag", category: "pasta", emoji: "🍝", image: "mamaspag.png", price: 950, desc: "Mama's Pride spaghetti — budget friendly", badge: null },
