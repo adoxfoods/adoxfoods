@@ -4,7 +4,7 @@
 // ===== FOOD DATA =====
 const FOOD_DATA = [
     // GRAINS
-    { id: 1, name: "A Congo Of Rice", category: "grains", emoji: "🌾", image: "rice.png", price: 2300, desc: "Fresh, quality rice measured by the congo", badge: "🔥 Popular" },
+    { id: 1, name: "A Congo Of Rice", category: "grains", emoji: "🌾", image: "rice.png", price: 2400, desc: "Fresh, quality rice measured by the congo", badge: "🔥 Popular" },
     { id: 2, name: "A Congo Of White Beans", category: "grains", emoji: "🫘", image: "whitebeans.jpeg", price: 2100, desc: "Fresh white beans, perfect for any meal", badge: null },
     { id: 3, name: "A Congo Of Oloyin Beans", category: "grains", emoji: "🫘", image: "oloyin.png", price: 2800, desc: "Premium Oloyin honey beans", badge: null },
     { id: 4, name: "A Congo Of Garri", category: "grains", emoji: "🥣", image: "gari.png", price: 600, desc: "Fresh garri, measured by the congo", badge: "⭐ Best" },
@@ -25,11 +25,11 @@ const FOOD_DATA = [
     { id: 30, name: "Power Oil (1/2 Roll, 4 Pieces)", category: "oils", emoji: "🛢️", image: "halfpoil.jpeg", price: 980, desc: "Power Oil — 1/2 roll", badge: null },
     { id: 31, name: "A Sachet Of Power Oil", category: "oils", emoji: "🛢️", image: "sachetoil.jfif", price: 250, desc: "A Sachet Of Power Oil", badge: null },
     // TOMATO PASTE
-    { id: 15, name: "Party Jollof Tomato Paste", category: "tomato", emoji: "🍅", image: "partyjollof.png", price: 240, desc: "Party Jollof tomato paste — per tin", badge: null },
+    { id: 15, name: "Party Jollof Tomato Paste", category: "tomato", emoji: "🍅", image: "partyjollof.png", price: 250, desc: "Party Jollof tomato paste — per tin", badge: null },
     { id: 16, name: "Pepper & Onions Tomato Paste", category: "tomato", emoji: "🍅", image: "potomat.png", price: 200, desc: "Pepper and onions tomato paste — per tin", badge: null },
-    { id: 17, name: "Tomato Paste Mix (Normal)", category: "tomato", emoji: "🍅", image: "tomatpaste.png", price: 190, desc: "Regular tomato paste mix — per tin", badge: null },
+    { id: 17, name: "Tomato Paste Mix (Normal)", category: "tomato", emoji: "🍅", image: "tomatpaste.png", price: 200, desc: "Regular tomato paste mix — per tin", badge: null },
     // SEASONINGS
-    { id: 18, name: "Knorr Seasoning Cube (50 Cubes)", category: "seasonings", emoji: "🧊", image: "knorr.png", price: 650, desc: "Knorr seasoning cubes — pack of 50", badge: "🔥 Popular" },
+    { id: 18, name: "Knorr Seasoning Cube (10 Cubes)", category: "seasonings", emoji: "🧊", image: "knorr.png", price: 650, desc: "Knorr seasoning cubes — pack of 10 ", badge: "🔥 Popular" },
     { id: 19, name: "Chicken Flavor Cube (20 Cubes)", category: "seasonings", emoji: "🧊", image: "c.flvormag.jpg", price: 400, desc: "Chicken flavor seasoning — pack of 20", badge: null },
     { id: 23, name: "Jollof Spicity", category: "seasonings", emoji: "🌶️", image: "jollofspicity.jpeg", price: 150, desc: "Jollof spice mix — perfect blend", badge: null },
     { id: 29, name: "Hot Pepper", category: "seasonings", emoji: "🌶️", image: "hotpeper.png", price: 100, desc: "Ground hot pepper — per pack", badge: null },
