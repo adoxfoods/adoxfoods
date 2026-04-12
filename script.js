@@ -18,7 +18,7 @@ const FOOD_DATA = [
     { id: 11, name: "Semo 500g", category: "pasta", emoji: "🫙", image: "500gsemo.jpeg", price: 950, desc: "Semovita 500g pack — student size", badge: null },
     // OILS
     { id: 12, name: "A Bottle Of Palm Oil", category: "oils", emoji: "🫙", image: "p.oil.png", price: 1480, desc: "Full bottle of fresh palm oil", badge: null },
-    { id: 32, name: "Half A Bottle Of Palm Oil", category: "oils", emoji: "🫙", image: "halfoil.png", price: 750, desc: "Half a bottle of fresh palm oil", badge: null },
+    { id: 32, name: "Half A Bottle Of Palm Oil", category: "oils", emoji: "🫙", image: "p.oil.png", price: 750, desc: "Half a bottle of fresh palm oil", badge: null },
     { id: 13, name: "A Bottle Of Vegetable Oil", category: "oils", emoji: "🫙", image: "voil.png", price: 2100, desc: "Full bottle of vegetable oil", badge: null },
     { id: 33, name: "Half A Bottle Of Vegetable Oil", category: "oils", emoji: "🫙", image: "halfvoil.jpeg", price: 1100, desc: "Half a bottle of vegetable oil", badge: null },
     { id: 14, name: "Power Oil (1 Roll, 8 Pieces)", category: "oils", emoji: "🛢️", image: "poweroil.png", price: 1900, desc: "Power Oil — 1 roll", badge: "⭐ Best" },
