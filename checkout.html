@@ -48,6 +48,92 @@
             padding-right: 40px;
             cursor: pointer;
         }
+        /* floating emojis */
+        
+        .float-emojis {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            border-radius: 28px;
+        }
+        
+        .fe {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: floatUp linear infinite;
+            opacity: 0;
+        }
+        
+        .fe:nth-child(1) {
+            left: 10%;
+            animation-duration: 4s;
+            animation-delay: 0.5s;
+        }
+        
+        .fe:nth-child(2) {
+            left: 25%;
+            animation-duration: 5s;
+            animation-delay: 1.2s;
+        }
+        
+        .fe:nth-child(3) {
+            left: 45%;
+            animation-duration: 3.5s;
+            animation-delay: 0.2s;
+        }
+        
+        .fe:nth-child(4) {
+            left: 65%;
+            animation-duration: 4.5s;
+            animation-delay: 1.8s;
+        }
+        
+        .fe:nth-child(5) {
+            left: 82%;
+            animation-duration: 4s;
+            animation-delay: 0.8s;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                bottom: -10%;
+                opacity: 0;
+                transform: rotate(0deg);
+            }
+            20% {
+                opacity: 0.6;
+            }
+            80% {
+                opacity: 0.4;
+            }
+            100% {
+                bottom: 110%;
+                opacity: 0;
+                transform: rotate(360deg) translateX(20px);
+            }
+        }
+        
+        .ty-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+            animation: fadeInUp 0.6s ease 0.4s both;
+        }
+        
+        .ty-title span {
+            color: var(--primary);
+        }
+        
+        .ty-sub {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease 0.5s both;
+        }
         
         .location-fields {
             animation: slideDown 0.3s ease;
