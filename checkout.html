@@ -48,6 +48,223 @@
             padding-right: 40px;
             cursor: pointer;
         }
+        
+        .location-fields {
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .place-order-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+        }
+        
+        .place-order-btn:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        .place-order-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            display: none;
+        }
+        
+        .spinner.show {
+            display: block;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        /* ===== SUCCESS SCREEN ===== */
+        
+        .success-screen {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--secondary) 0%, #1a2a3a 100%);
+            padding: 100px 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .success-screen.show {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        /* background grid */
+        
+        .success-screen::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 107, 53, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 107, 53, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+        /* floating orbs */
+        
+        .ty-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.12;
+            animation: floatOrb 8s ease-in-out infinite;
+        }
+        
+        .ty-orb:nth-child(1) {
+            width: 350px;
+            height: 350px;
+            background: var(--primary);
+            top: -80px;
+            right: -80px;
+        }
+        
+        .ty-orb:nth-child(2) {
+            width: 250px;
+            height: 250px;
+            background: #ff9f43;
+            bottom: -60px;
+            left: -60px;
+            animation-delay: -4s;
+        }
+        
+        @keyframes floatOrb {
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-20px) scale(1.05);
+            }
+        }
+        
+        .ty-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 3rem 2.5rem;
+            max-width: 560px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+            animation: cardPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+        }
+        
+        @keyframes cardPop {
+            from {
+                opacity: 0;
+                transform: scale(0.7) translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        /* success ring */
+        
+        .success-ring {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+        }
+        
+        .success-ring::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 107, 53, 0.3);
+            animation: ringPulse 2s ease infinite;
+        }
+        
+        .success-ring::after {
+            content: '';
+            position: absolute;
+            inset: -16px;
+            border-radius: 50%;
+            border: 2px dashed rgba(255, 107, 53, 0.15);
+            animation: ringPulse 2s ease 0.5s infinite;
+        }
+        
+        @keyframes ringPulse {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.08);
+                opacity: 0.5;
+            }
+        }
+        
+        .success-icon-wrap {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.4);
+            animation: iconBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s both;
+        }
+        
+        @keyframes iconBounce {
+            from {
+                transform: scale(0) rotate(-180deg);
+            }
+            to {
+                transform: scale(1) rotate(0deg);
+            }
+        }
         /* floating emojis */
         
         .float-emojis {
@@ -134,15 +351,208 @@
             margin-bottom: 2rem;
             animation: fadeInUp 0.6s ease 0.5s both;
         }
+        /* info pills */
         
-        .location-fields {
-            animation: slideDown 0.3s ease;
+        .ty-pills {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease 0.6s both;
         }
         
-        @keyframes slideDown {
+        .ty-pill {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .ty-pill .pill-icon {
+            font-size: 1.1rem;
+        }
+        /* order summary box */
+        
+        .ty-summary {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            text-align: left;
+            animation: fadeInUp 0.6s ease 0.7s both;
+        }
+        
+        .ty-summary-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .ty-order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.85rem;
+        }
+        
+        .ty-order-item:last-child {
+            border-bottom: none;
+        }
+        
+        .ty-item-name {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .ty-item-price {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .ty-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.75rem;
+            margin-top: 0.5rem;
+            border-top: 2px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .ty-total-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .ty-total-amt {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        /* delivery timer */
+        
+        .delivery-timer {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 107, 53, 0.05));
+            border: 1px solid rgba(255, 107, 53, 0.25);
+            border-radius: 14px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: fadeInUp 0.6s ease 0.65s both;
+        }
+        
+        .timer-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .timer-text {
+            text-align: left;
+        }
+        
+        .timer-label {
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .timer-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        
+        .timer-sub {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        /* buttons */
+        
+        .ty-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            animation: fadeInUp 0.6s ease 0.8s both;
+        }
+        
+        .ty-wa-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            padding: 15px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+        }
+        
+        .ty-wa-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(37, 211, 102, 0.4);
+        }
+        
+        .ty-wa-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+            flex-shrink: 0;
+        }
+        
+        .ty-home-btn {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 15px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+        }
+        
+        .ty-home-btn:hover {
+            background: rgba(255, 255, 255, 0.16);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(-10px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -150,98 +560,15 @@
             }
         }
         
-        .place-order-btn {
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            padding: 16px;
-            border-radius: 14px;
-            font-size: 1rem;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
-        }
-        
-        .place-order-btn:hover:not(:disabled) {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
-        }
-        
-        .place-order-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .success-screen {
-            display: none;
-            text-align: center;
-            padding: 3rem 2rem;
-            background: white;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            max-width: 500px;
-            margin: 3rem auto;
-        }
-        
-        .success-screen.show {
-            display: block;
-        }
-        
-        .success-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-        
-        .success-screen h2 {
-            font-size: 1.6rem;
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .success-order-id {
-            display: inline-block;
-            background: rgba(255, 107, 53, 0.08);
-            color: var(--primary);
-            font-weight: 800;
-            font-size: 1.1rem;
-            padding: 8px 20px;
-            border-radius: 50px;
-            margin: 1rem 0;
-            border: 2px dashed var(--primary);
-        }
-        
-        .success-screen p {
-            color: var(--gray-600);
-            font-size: 0.88rem;
-            line-height: 1.8;
-        }
-        
-        .spinner {
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.7s linear infinite;
-            display: none;
-        }
-        
-        .spinner.show {
-            display: block;
-        }
-        
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
+        @media (max-width: 480px) {
+            .ty-card {
+                padding: 2rem 1.5rem;
+            }
+            .ty-title {
+                font-size: 1.6rem;
+            }
+            .ty-pills {
+                gap: 0.5rem;
             }
         }
     </style>
@@ -291,42 +618,86 @@
         </div>
     </div>
 
-    <div class="checkout-hero">
+    <!-- ===== SUCCESS SCREEN (shown after order is placed) ===== -->
+    <div class="success-screen" id="successScreen">
+
+        <!-- background orbs -->
+        <div class="ty-orb"></div>
+        <div class="ty-orb"></div>
+
+        <div class="ty-card">
+
+            <!-- floating emojis -->
+            <div class="float-emojis">
+                <span class="fe">🎉</span>
+                <span class="fe">🧡</span>
+                <span class="fe">⭐</span>
+                <span class="fe">🎊</span>
+                <span class="fe">✨</span>
+            </div>
+
+            <!-- success icon -->
+            <div class="success-ring">
+                <div class="success-icon-wrap">✅</div>
+            </div>
+
+            <!-- order ID badge -->
+            <div style="background:rgba(255,107,53,0.15);border:1px solid rgba(255,107,53,0.3);border-radius:12px;padding:10px 16px;margin-bottom:1.5rem;font-size:.82rem;color:rgba(255,255,255,0.8);font-weight:600;display:flex;justify-content:space-between;align-items:center">
+                <span>🔢 Your Order ID</span>
+                <span style="color:var(--primary);font-weight:800;letter-spacing:1px" id="successOrderId">Loading...</span>
+            </div>
+
+            <h1 class="ty-title">Order <span>Confirmed!</span> 🎉</h1>
+            <p class="ty-sub">
+                Your order has been received! We're preparing your foodstuff right now. Hang tight — it's on its way! 🚀
+            </p>
+
+            <!-- delivery timer -->
+            <div class="delivery-timer">
+                <div class="timer-icon">⏱️</div>
+                <div class="timer-text">
+                    <div class="timer-label">Estimated Delivery</div>
+                    <div class="timer-value">15 – 20 mins</div>
+                    <div class="timer-sub">We'll notify you via WhatsApp</div>
+                </div>
+            </div>
+
+            <!-- info pills -->
+            <div class="ty-pills">
+                <div class="ty-pill"><span class="pill-icon">📍</span> Hostel Delivery</div>
+                <div class="ty-pill"><span class="pill-icon">💳</span> Payment Received</div>
+                <div class="ty-pill"><span class="pill-icon">🔥</span> Being Prepared</div>
+            </div>
+
+            <!-- order summary -->
+            <div class="ty-summary" id="success-order-summary">
+                <div class="ty-summary-title">📋 Your Order</div>
+                <div id="success-ty-items"></div>
+                <div class="ty-total-row">
+                    <span class="ty-total-label">Total Paid</span>
+                    <span class="ty-total-amt" id="success-ty-total">₦0</span>
+                </div>
+            </div>
+
+            <!-- action buttons -->
+            <div class="ty-btns">
+                <a href="https://wa.me/2348012345678" target="_blank" class="ty-wa-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg> Follow Up on WhatsApp
+                </a>
+                <a href="index.html" class="ty-home-btn">🏠 Back to Home</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== CHECKOUT FORM ===== -->
+    <div class="checkout-hero" id="checkoutHero">
         <h1>Complete Your <span>Order</span> 📦</h1>
         <p>Fill in your details and send payment to confirm your order</p>
     </div>
 
-    <!-- SUCCESS SCREEN -->
-    <div class="success-screen" id="successScreen">
-        <div class="success-icon">🎉</div>
-        <h2>Order Placed!</h2>
-        <div class="success-order-id" id="successOrderId">ADX-2026-XXXXXX</div>
-        <p>
-            Your order has been received and your payment screenshot has been uploaded.<br><br> We'll confirm your payment and get in touch via <strong>phone or email</strong> shortly.<br><br> Save your Order ID above for reference!
-        </p>
-        <a href="shop.html" style="display:inline-block;margin-top:1.5rem;background:var(--primary);color:white;padding:12px 28px;border-radius:10px;font-weight:700;font-size:.9rem;text-decoration:none">
-            🛍 Continue Shopping
-        </a>
-        <div class="ty-btns">
-            <a href="https://wa.me/2348012345678" target="_blank" class="ty-wa-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg> Follow Up on WhatsApp
-            </a>
-            <a href="index.html" class="ty-home-btn"> Back to Home</a>
-        </div>
-
-
-        <div class="float-emojis">
-            <span class="fe">🎉</span>
-            <span class="fe">🧡</span>
-            <span class="fe">⭐</span>
-            <span class="fe">🎊</span>
-            <span class="fe">✨</span>
-        </div>
-    </div>
-
-    <!-- CHECKOUT FORM -->
     <div class="checkout-wrap" id="checkoutWrap">
 
         <div style="display:flex;flex-direction:column;gap:1.5rem">
@@ -396,9 +767,8 @@
                     <select id="hostel" class="form-input form-select">
                         <option value="">-- Choose your hostel --</option>
                         <optgroup label="Male Hostels">
-                            <!-- <option>Akindeko Hall of Residence</option> -->
                             <option>Abiola Hostel</option>
-                            <option>Adeniyi Hostsel</option>
+                            <option>Adeniyi Hostel</option>
                             <option>Adeboye Hostel</option>
                             <option>CMS Male Hostel</option>
                         </optgroup>
@@ -451,7 +821,7 @@
                 <div class="file-preview" id="filePreview"></div>
             </div>
 
-            <!-- Steps -->
+            <!-- How it works steps -->
             <div style="background:var(--bg);border-radius:12px;padding:1.2rem;margin-bottom:0.5rem">
                 <p style="font-size:.8rem;font-weight:700;color:var(--secondary);margin-bottom:.75rem">📱 How it works:</p>
                 <div style="display:flex;flex-direction:column;gap:.5rem">
@@ -490,7 +860,6 @@
         <div class="footer-copy">© 2026 Adox Foods. All rights reserved.</div>
     </footer>
 
-    <!-- script.js loads first (provides cart, getCartTotal, clearCart, showToast, launchConfetti) -->
     <script src="script.js"></script>
 
     <script>
@@ -523,7 +892,18 @@
             _fileWrap.style.borderColor = '#22c55e';
         }
 
-        // ── Place Order button ──
+        // ── Location toggle ──
+        document.querySelectorAll('.loc-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.loc-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const loc = btn.dataset.loc;
+                document.getElementById('campus-fields').style.display = loc === 'campus' ? 'block' : 'none';
+                document.getElementById('offcampus-fields').style.display = loc === 'offcampus' ? 'block' : 'none';
+            });
+        });
+
+        // ── Place Order ──
         document.getElementById('placeOrderBtn').addEventListener('click', async function() {
             const btn = document.getElementById('placeOrderBtn');
             const spinner = document.getElementById('orderSpinner');
@@ -538,6 +918,7 @@
             const activeLocBtn = document.querySelector('.loc-btn.active');
             const locType = activeLocBtn ? activeLocBtn.dataset.loc : 'campus';
             let delivery = '';
+
             if (locType === 'campus') {
                 const hostel = document.getElementById('hostel').value;
                 if (!hostel) {
@@ -552,7 +933,8 @@
                     return;
                 }
                 const pickupEl = document.getElementById('pickup');
-                const pickup = (pickupEl && document.getElementById('pickup-group').style.display !== 'none') ? pickupEl.value : '';
+                const pickupGrp = document.getElementById('pickup-group');
+                const pickup = (pickupEl && pickupGrp.style.display !== 'none') ? pickupEl.value : '';
                 if (!pickup) {
                     showToast('📍 Please select a pickup point');
                     return;
@@ -573,20 +955,21 @@
                 showToast('📧 Please enter a valid email address');
                 return;
             }
-
-            // Cart — uses `cart` from script.js
             if (!cart || cart.length === 0) {
                 showToast('🛒 Your cart is empty!');
                 return;
             }
-            const total = getCartTotal();
 
-            // Screenshot
+            const total = getCartTotal();
             const screenshotFile = _fileInput.files[0];
             if (!screenshotFile) {
                 showToast('📸 Please upload your payment screenshot!');
                 return;
             }
+
+            // Snapshot cart BEFORE clearing (so we can show it in the success screen)
+            const cartSnapshot = JSON.parse(JSON.stringify(cart));
+            const totalSnapshot = total;
 
             // Base64 encode screenshot
             const toBase64 = f => new Promise((res, rej) => {
@@ -604,7 +987,6 @@
             btnText.textContent = 'Placing order...';
 
             try {
-                // Submit to backend
                 const res = await fetch('/api/create-order', {
                     method: 'POST',
                     headers: {
@@ -638,18 +1020,36 @@
                         phone,
                         order_id: orderId,
                         delivery,
-                        items: cart.map(i => i.name + ' x' + i.qty + ' = ₦' + (i.price * i.qty).toLocaleString()).join(', '),
-                        total: '₦' + total.toLocaleString()
+                        items: cartSnapshot.map(i => i.name + ' x' + i.qty + ' = ₦' + (i.price * i.qty).toLocaleString()).join(', '),
+                        total: '₦' + totalSnapshot.toLocaleString()
                     })
                 });
 
-                // Clear cart using script.js function
+                // Clear cart
                 clearCart();
 
-                // Show success
+                // Populate order summary on success screen
+                const itemsEl = document.getElementById('success-ty-items');
+                const totalEl = document.getElementById('success-ty-total');
+
+                if (cartSnapshot.length > 0) {
+                    itemsEl.innerHTML = cartSnapshot.map(item => `
+                        <div class="ty-order-item">
+                            <span class="ty-item-name">${item.emoji || ''} ${item.name} × ${item.qty}</span>
+                            <span class="ty-item-price">₦${(item.price * item.qty).toLocaleString()}</span>
+                        </div>
+                    `).join('');
+                    totalEl.textContent = '₦' + totalSnapshot.toLocaleString();
+                } else {
+                    document.getElementById('success-order-summary').style.display = 'none';
+                }
+
+                // Show success screen, hide form
                 document.getElementById('checkoutWrap').style.display = 'none';
+                document.getElementById('checkoutHero').style.display = 'none';
                 document.getElementById('successOrderId').textContent = orderId;
                 document.getElementById('successScreen').classList.add('show');
+
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'

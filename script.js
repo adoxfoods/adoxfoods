@@ -417,7 +417,7 @@ function initShop() {
 
 // ===== PICKUP POINTS =====
 const GATE_PICKUPS = {
-    north: ['North Gate Junction', 'Deeper Life Junction', 'North Gate Bus Stop', 'North Market Square'],
+    north: ['North Gate Junction', 'Deeper Life Junction', 'Gasland Junction', 'North Market Square'],
     south: ['South Gate Junction', 'RCF Junction', 'Peace Avenue Junction', 'Apatapiti Junction', 'Stateline Junction', 'CAC Chapel Of Praise', 'Deeper Life Church'],
     west: ['Westgate Junction', 'Aside Junction', 'CACCF Junction', 'Filaoye Junction', 'Capricorn Junction', 'Yeolab Junction'],
 };
