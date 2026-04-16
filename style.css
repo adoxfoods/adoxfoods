@@ -3,26 +3,28 @@
 /* ===== CSS VARIABLES ===== */
 
 :root {
-    --primary: #ff6b35;
-    --primary-dark: #e85a26;
-    --primary-light: #ff8c5a;
-    --secondary: #2e4057;
-    --secondary-light: #3d5470;
-    --bg: #f9f9f9;
+    --primary: #FB9006;
+    --primary-dark: #d97a05;
+    --primary-light: #fca633;
+    --secondary: #386A03;
+    --secondary-light: #4a8a04;
+    --bg: #F0E5BA;
+    --accent: #F8D859;
     --white: #ffffff;
-    --gray-100: #f0f0f0;
-    --gray-200: #e0e0e0;
-    --gray-400: #aaaaaa;
-    --gray-600: #666666;
-    --gray-800: #333333;
+    --gray-100: #ede0b0;
+    --gray-200: #e0d49e;
+    --gray-400: #a89a6e;
+    --gray-600: #6b5e3a;
+    --gray-800: #2e2a1a;
     --success: #22c55e;
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
-    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
-    --shadow-orange: 0 8px 32px rgba(255, 107, 53, 0.35);
+    --shadow-sm: 0 2px 8px rgba(56, 106, 3, 0.1);
+    --shadow-md: 0 8px 24px rgba(56, 106, 3, 0.15);
+    --shadow-lg: 0 20px 60px rgba(56, 106, 3, 0.18);
+    --shadow-orange: 0 8px 32px rgba(251, 144, 6, 0.35);
     --radius: 16px;
     --radius-sm: 8px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --footer: var(--gray-100);
 }
 
 
@@ -92,7 +94,7 @@ button {
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 107, 53, 0.1);
+    border-bottom: 1px solid rgba(251, 144, 6, 0.1);
     padding: 0 2rem;
     height: 70px;
     display: flex;
@@ -153,6 +155,21 @@ button {
 .nav-links a:hover::after,
 .nav-links a.active::after {
     width: 100%;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+}
+
+.footer-logo img {
+    height: 40px;
+    width: auto;
+}
+
+.adminlogo img {
+    height: 70px;
+    width: auto;
 }
 
 .nav-right {
@@ -255,7 +272,7 @@ button {
 
 .hero {
     min-height: 100vh;
-    background: linear-gradient(135deg, var(--secondary) 0%, #1a2a3a 50%, #0d1b2a 100%);
+    background: linear-gradient(135deg, var(--secondary) 0%, #2d5402 50%, #1e3a02 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -322,7 +339,7 @@ button {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(rgba(255, 107, 53, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 107, 53, 0.05) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(251, 144, 6, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(251, 144, 6, 0.05) 1px, transparent 1px);
     background-size: 60px 60px;
     pointer-events: none;
 }
@@ -342,8 +359,8 @@ button {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(255, 107, 53, 0.15);
-    border: 1px solid rgba(255, 107, 53, 0.3);
+    background: rgba(251, 144, 6, 0.15);
+    border: 1px solid rgba(251, 144, 6, 0.3);
     color: var(--primary-light);
     padding: 8px 16px;
     border-radius: 50px;
@@ -443,7 +460,7 @@ button {
 
 .btn-primary:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 16px 40px rgba(255, 107, 53, 0.5);
+    box-shadow: 0 16px 40px rgba(251, 144, 6, 0.5);
 }
 
 .btn-primary:hover::before {
@@ -643,7 +660,7 @@ button {
     transform: translate(-50%, -50%) rotateX(70deg);
     width: 320px;
     height: 320px;
-    border: 3px solid rgba(255, 107, 53, 0.3);
+    border: 3px solid rgba(251, 144, 6, 0.3);
     border-radius: 50%;
     animation: spin3d 12s linear infinite;
 }
@@ -652,7 +669,7 @@ button {
     content: '';
     position: absolute;
     inset: 20px;
-    border: 2px dashed rgba(255, 107, 53, 0.15);
+    border: 2px dashed rgba(251, 144, 6, 0.15);
     border-radius: 50%;
 }
 
@@ -679,7 +696,7 @@ section {
 
 .section-tag {
     display: inline-block;
-    background: rgba(255, 107, 53, 0.1);
+    background: rgba(251, 144, 6, 0.1);
     color: var(--primary);
     font-size: 0.8rem;
     font-weight: 700;
@@ -765,7 +782,7 @@ section {
 .food-card:hover {
     transform: translateY(-8px) rotateX(2deg);
     box-shadow: var(--shadow-lg);
-    border-color: rgba(255, 107, 53, 0.2);
+    border-color: rgba(251, 144, 6, 0.2);
 }
 
 .food-card:hover .food-img-wrap::after {
@@ -796,7 +813,7 @@ section {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(46, 64, 87, 0.3), transparent);
+    background: linear-gradient(to top, rgba(56, 106, 3, 0.3), transparent);
     opacity: 0;
     transition: var(--transition);
 }
@@ -941,7 +958,7 @@ section {
 /* ===== WHY ADOX ===== */
 
 .why-section {
-    background: linear-gradient(135deg, var(--secondary) 0%, #1a2a3a 100%);
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary) 100%);
     position: relative;
     overflow: hidden;
 }
@@ -950,7 +967,7 @@ section {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(255, 107, 53, 0.05) 0%, transparent 50%);
+    background-image: radial-gradient(circle at 20% 50%, rgba(251, 144, 6, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(251, 144, 6, 0.05) 0%, transparent 50%);
 }
 
 .why-section .section-title {
@@ -962,7 +979,7 @@ section {
 }
 
 .why-section .section-tag {
-    background: rgba(255, 107, 53, 0.2);
+    background: rgba(251, 144, 6, 0.2);
 }
 
 .benefits-grid {
@@ -1017,7 +1034,7 @@ section {
     justify-content: center;
     font-size: 2rem;
     margin: 0 auto 1.5rem;
-    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 10px 30px rgba(251, 144, 6, 0.3);
     transform: rotate(-5deg);
     transition: var(--transition);
 }
@@ -1043,7 +1060,7 @@ section {
 /* ===== MENU PAGE ===== */
 
 .menu-hero {
-    background: linear-gradient(135deg, var(--secondary), #1a2a3a);
+    background: linear-gradient(135deg, var(--secondary), var(--secondary));
     padding: 120px 2rem 60px;
     text-align: center;
     position: relative;
@@ -1054,7 +1071,7 @@ section {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(rgba(255, 107, 53, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 107, 53, 0.04) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(251, 144, 6, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(251, 144, 6, 0.04) 1px, transparent 1px);
     background-size: 50px 50px;
 }
 
@@ -1374,14 +1391,14 @@ section {
 
 .checkout-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(255, 107, 53, 0.45);
+    box-shadow: 0 12px 40px rgba(251, 144, 6, 0.45);
 }
 
 
 /* ===== CHECKOUT PAGE ===== */
 
 .checkout-hero {
-    background: linear-gradient(135deg, var(--secondary), #1a2a3a);
+    background: linear-gradient(135deg, var(--secondary), var(--secondary));
     padding: 120px 2rem 60px;
     text-align: center;
 }
@@ -1496,8 +1513,8 @@ section {
 /* Bank details */
 
 .bank-box {
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(46, 64, 87, 0.05));
-    border: 2px solid rgba(255, 107, 53, 0.2);
+    background: linear-gradient(135deg, rgba(251, 144, 6, 0.05), rgba(56, 106, 3, 0.05));
+    border: 2px solid rgba(251, 144, 6, 0.2);
     border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
@@ -1566,7 +1583,7 @@ section {
 
 .form-input:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+    box-shadow: 0 0 0 4px rgba(251, 144, 6, 0.1);
 }
 
 .form-input.error {
@@ -1601,7 +1618,7 @@ section {
 .file-upload-wrap:hover,
 .file-upload-wrap.dragover {
     border-color: var(--primary);
-    background: rgba(255, 107, 53, 0.03);
+    background: rgba(251, 144, 6, 0.03);
 }
 
 .file-upload-wrap input {
@@ -2091,7 +2108,7 @@ footer {
     border-color: var(--primary);
     color: white;
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.35);
+    box-shadow: 0 8px 20px rgba(251, 144, 6, 0.35);
 }
 
 
@@ -2117,7 +2134,7 @@ footer {
 .hours-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-md);
-    border-color: rgba(255, 107, 53, 0.2);
+    border-color: rgba(251, 144, 6, 0.2);
 }
 
 .hours-icon {

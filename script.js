@@ -1,4 +1,4 @@
-//@ts - nocheck
+// @ts-nocheck
 // ===== ADOX FOODS - MAIN SCRIPT =====
 
 // ===== FOOD DATA =====
@@ -29,13 +29,20 @@ const FOOD_DATA = [
     { id: 16, name: "Pepper & Onions Tomato Paste", category: "tomato", emoji: "🍅", image: "potomat.png", price: 200, desc: "Pepper and onions tomato paste — per tin", badge: null },
     { id: 17, name: "Tomato Paste Mix (Normal)", category: "tomato", emoji: "🍅", image: "tomatpaste.png", price: 200, desc: "Regular tomato paste mix — per tin", badge: null },
     // SEASONINGS
-    { id: 18, name: "Knorr Seasoning Cube (10 Cubes)", category: "seasonings", emoji: "🧊", image: "knorr.png", price: 650, desc: "Knorr seasoning cubes — pack of 10 ", badge: "🔥 Popular" },
+    { id: 18, name: "Knorr Seasoning Cube (10 Cubes)", category: "seasonings", emoji: "🧊", image: "knorr.png", price: 650, desc: "Knorr seasoning cubes — pack of 10", badge: "🔥 Popular" },
     { id: 19, name: "Chicken Flavor Cube (20 Cubes)", category: "seasonings", emoji: "🧊", image: "c.flvormag.jpg", price: 400, desc: "Chicken flavor seasoning — pack of 20", badge: null },
     { id: 23, name: "Jollof Spicity", category: "seasonings", emoji: "🌶️", image: "jollofspicity.jpeg", price: 150, desc: "Jollof spice mix — perfect blend", badge: null },
     { id: 29, name: "Hot Pepper", category: "seasonings", emoji: "🌶️", image: "hotpeper.png", price: 100, desc: "Ground hot pepper — per pack", badge: null },
     // SPICES
     { id: 21, name: "Thyme", category: "spices", emoji: "🌿", image: "thyme.jpg", price: 100, desc: "Dried thyme — per pack", badge: null },
     { id: 22, name: "Curry", category: "spices", emoji: "🌿", image: "curry.jpeg", price: 100, desc: "Curry powder — per pack", badge: null },
+    // SPECIAL OFFERS
+    { id: 23, name: "Big Pack", category: "offers", emoji: "🧊", image: "knorr.png", price: 650, desc: "Best for students buying in bulk", badge: "🔥 Best" },
+    { id: 24, name: "Hostel Pack", category: "offers", emoji: "🧊", image: "c.flvormag.jpg", price: 400, desc: "Perect hostel cooking package", badge: null },
+    { id: 25, name: "Value Pack", category: "offers", emoji: "🌶️", image: "jollofspicity.jpeg", price: 150, desc: "Affordabe food combo that last long", badge: null },
+    { id: 26, name: "Smart Pack", category: "offers", emoji: "🌶️", image: "hotpeper.png", price: 100, desc: "Ground hot pepper — per pack", badge: null },
+    { id: 27, name: "Mini Pack", category: "offers", emoji: "🌶️", image: "jollofspicity.jpeg", price: 150, desc: "Affordabe food combo that last long", badge: null },
+    { id: 28, name: "Survival Pack", category: "offers", emoji: "🌶️", image: "hotpeper.png", price: 100, desc: "Ground hot pepper — per pack", badge: null },
 ];
 
 // ===== CART SYSTEM =====
@@ -211,7 +218,7 @@ function launchConfetti() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const pieces = [];
-    const colors = ['#ff6b35', '#2e4057', '#ff9f43', '#22c55e', '#3b82f6', '#f59e0b'];
+    const colors = ['#FB9006', '#386A03', '#F8D859', '#22c55e', '#F0E5BA', '#d97a05'];
     for (let i = 0; i < 150; i++) {
         pieces.push({
             x: Math.random() * canvas.width,
@@ -267,7 +274,6 @@ function closeCart() {
     if (overlay) overlay.classList.remove('open');
     if (sidebar) sidebar.classList.remove('open');
 }
-
 // ===== TOAST =====
 function showToast(message) {
     let container = document.querySelector('.toast-container');
@@ -417,7 +423,7 @@ function initShop() {
 
 // ===== PICKUP POINTS =====
 const GATE_PICKUPS = {
-    north: ['North Gate Junction', 'Deeper Life Junction', 'Gasland Junction', 'North Market Square'],
+    north: ['North Gate Junction', 'Westco Junction', 'Junction - North Gate', 'North Gate Bus Stop', 'North Market Square'],
     south: ['South Gate Junction', 'RCF Junction', 'Peace Avenue Junction', 'Apatapiti Junction', 'Stateline Junction', 'CAC Chapel Of Praise', 'Deeper Life Church'],
     west: ['Westgate Junction', 'Aside Junction', 'CACCF Junction', 'Filaoye Junction', 'Capricorn Junction', 'Yeolab Junction'],
 };

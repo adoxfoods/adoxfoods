@@ -9,7 +9,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>" />
     <style>
         .reviews-hero {
-            background: linear-gradient(135deg, var(--secondary), #1a2a3a);
+            background: linear-gradient(135deg, var(--secondary), #1e3a02);
             padding: 120px 2rem 60px;
             text-align: center;
             position: relative;
@@ -20,7 +20,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background-image: linear-gradient(rgba(255, 107, 53, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 107, 53, 0.04) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(251, 144, 6, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(251, 144, 6, 0.04) 1px, transparent 1px);
             background-size: 50px 50px;
         }
         
@@ -119,7 +119,7 @@
             top: -10px;
             right: 20px;
             font-size: 8rem;
-            color: rgba(255, 107, 53, 0.06);
+            color: rgba(251, 144, 6, 0.06);
             font-family: Georgia, serif;
             line-height: 1;
         }
@@ -127,7 +127,7 @@
         .review-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-md);
-            border-color: rgba(255, 107, 53, 0.2);
+            border-color: rgba(251, 144, 6, 0.2);
         }
         
         .rc-header {
@@ -231,7 +231,8 @@
     <div class="status-banner" id="statusBanner"></div>
 
     <nav class="navbar">
-        <a href="index.html" class="logo">Adox<span>Foods</span></a>
+        <a href="index.html" class="logo">
+            <img src="images/adox-logo.png" alt="Adox Foods Logo"></a>
         <ul class="nav-links">
             <li><a href="index.html" class="active">Home</a></li>
             <li><a href="shop.html">Shop</a></li>
@@ -249,23 +250,34 @@
     <div class="cart-overlay"></div>
     <div class="cart-sidebar">
         <div class="cart-header">
-            <h3>🛒 Your Cart</h3><button class="cart-close">✕</button></div>
+            <h3>🛒 My Cart</h3>
+            <button class="cart-close">✕</button>
+        </div>
         <div class="cart-items">
             <div class="cart-empty">
                 <div class="empty-icon">🛒</div>
-                <p>Your cart is empty.</p>
+                <p>Your cart is empty.<br>Add some foodstuff!</p>
             </div>
         </div>
         <div class="cart-footer">
-            <div class="cart-total"><span>Total</span><span class="cart-total-amount">₦0</span></div>
-            <button class="checkout-btn">🚀 Go to Checkout</button>
+            <div class="cart-min-bar-wrap">
+                <div class="cart-min-label">
+                    <span>Minimum Order</span>
+                    <span id="cart-min-text">₦0 / ₦500</span>
+                </div>
+                <div class="cart-min-bar">
+                    <div class="cart-min-fill" id="cart-min-fill"></div>
+                </div>
+                <div class="cart-min-notice not-reached" id="cart-min-notice">⚠️ Add ₦500 more to checkout</div>
+            </div>
+            <button class="checkout-btn">Go to Checkout</button>
         </div>
     </div>
 
     <!-- Hero -->
     <div class="reviews-hero">
         <h1>What Students <span>Say</span> ⭐</h1>
-        <p>Real reviews from real FUTA students — no cap!</p>
+        <p>Real reviews from FUTA students — no cap!</p>
     </div>
 
     <!-- Stats -->
@@ -293,18 +305,21 @@
     </div>
 
     <!-- CTA -->
-    <div style="background:linear-gradient(135deg,var(--secondary),#1a2a3a);padding:4rem 2rem;text-align:center">
+    <div style="background:linear-gradient(135deg,var(--secondary),#1e3a02);padding:4rem 2rem;text-align:center">
         <div style="max-width:500px;margin:0 auto">
             <div style="font-size:2.5rem;margin-bottom:1rem">🛒</div>
             <h2 style="color:white;font-size:1.6rem;font-weight:800;margin-bottom:0.75rem">Ready to Order?</h2>
             <p style="color:rgba(255,255,255,0.6);margin-bottom:2rem">Join hundreds of satisfied students at FUTA!</p>
-            <a href="shop.html" style="background:var(--primary);color:white;padding:14px 36px;border-radius:50px;font-weight:700;font-size:1rem;text-decoration:none;display:inline-block;transition:all .3s ease;box-shadow:0 8px 24px rgba(255,107,53,0.35)" onmouseover="this.style.transform='translateY(-3px)'"
+            <a href="shop.html" style="background:var(--primary);color:white;padding:14px 36px;border-radius:50px;font-weight:700;font-size:1rem;text-decoration:none;display:inline-block;transition:all .3s ease;box-shadow:0 8px 24px rgba(251,144,6,0.35)" onmouseover="this.style.transform='translateY(-3px)'"
                 onmouseout="this.style.transform=''">🛒 Shop Now</a>
         </div>
     </div>
 
     <footer>
-        <div class="footer-logo">Adox<span>Foods</span></div>
+        <center>
+            <a href="index.html" class="footer-logo">
+                <img src="images/adox-logo.png" alt="Adox Foods Logo"></a>
+        </center>
         <p class="footer-text">Stocking student life, one delivery at a time 📦</p>
         <div class="footer-links">
             <a href="index.html">Home</a>
