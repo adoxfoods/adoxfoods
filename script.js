@@ -37,12 +37,10 @@ const FOOD_DATA = [
     { id: 21, name: "Thyme", category: "spices", emoji: "🌿", image: "thyme.jpg", price: 100, desc: "Dried thyme — per pack", badge: null },
     { id: 22, name: "Curry", category: "spices", emoji: "🌿", image: "curry.jpeg", price: 100, desc: "Curry powder — per pack", badge: null },
     // SPECIAL OFFERS
-    { id: 23, name: "Big Pack", category: "offers", emoji: "🧊", image: "knorr.png", price: 650, desc: "Best for students buying in bulk", badge: "🔥 Best" },
-    { id: 24, name: "Hostel Pack", category: "offers", emoji: "🧊", image: "c.flvormag.jpg", price: 400, desc: "Perect hostel cooking package", badge: null },
-    { id: 25, name: "Value Pack", category: "offers", emoji: "🌶️", image: "jollofspicity.jpeg", price: 150, desc: "Affordabe food combo that last long", badge: null },
-    { id: 26, name: "Smart Pack", category: "offers", emoji: "🌶️", image: "hotpeper.png", price: 100, desc: "Ground hot pepper — per pack", badge: null },
-    { id: 27, name: "Mini Pack", category: "offers", emoji: "🌶️", image: "jollofspicity.jpeg", price: 150, desc: "Affordabe food combo that last long", badge: null },
-    { id: 28, name: "Survival Pack", category: "offers", emoji: "🌶️", image: "hotpeper.png", price: 100, desc: "Ground hot pepper — per pack", badge: null },
+    { id: 23, name: "Monthly Stock Pack", category: "offers", emoji: "🧊", image: "knorr.png", originalPrice: 25780, price: 24999, desc: "Full month's supply - the best value for serious savers", badge: "👑 Save ₦781" },
+    { id: 24, name: "Fortnight Pack", category: "offers", emoji: "🧊", image: "c.flvormag.jpg", originalPrice: 15830, price: 15299, desc: "Two weeks of provisions - stock up and save big!", badge: "💰 Save ₦531" },
+    { id: 25, name: "Weekly Stock Pack", category: "offers", emoji: "🌶️", image: "jollofspicity.jpeg", originalPrice: 10380, price: 9999, desc: "A full week's worth of quality provisions for you", badge: "💰 Save ₦381" },
+    { id: 26, name: "Survival Pack", category: "offers", emoji: "🌶️", image: "hotpeper.png", originalPrice: 5650, price: 5399, desc: "Essential foodstuff bundle to keep you going all week", badge: "💰 Save ₦251" },
 ];
 
 // ===== CART SYSTEM =====
@@ -51,6 +49,7 @@ let cart = JSON.parse(localStorage.getItem('adoxCart')) || [];
 function saveCart() { localStorage.setItem('adoxCart', JSON.stringify(cart)); }
 
 function getCartCount() { return cart.reduce((sum, item) => sum + item.qty, 0); }
+"💰 Save ₦831"
 
 function getCartTotal() { return cart.reduce((sum, item) => sum + (item.price * item.qty), 0); }
 
@@ -84,6 +83,9 @@ function updateCartQty(id, delta) {
     refreshCheckoutSummary();
 }
 
+
+
+
 function refreshCheckoutSummary() {
     const summaryWrap = document.querySelector('.order-summary-items');
     if (!summaryWrap) return;
@@ -93,6 +95,7 @@ function refreshCheckoutSummary() {
     const totalEl = document.querySelector('.order-total-price');
     if (totalEl) totalEl.textContent = '₦' + getCartTotal().toLocaleString();
 }
+
 
 function clearCart() {
     cart = [];
@@ -363,7 +366,14 @@ function foodCardHTML(food, showQty = true) {
         <button class="qty-btn" onclick="this.previousElementSibling.textContent = parseInt(this.previousElementSibling.textContent) + 1">+</button>
        </div>` :
         '';
-    const priceHTML = food.price === 0 ? '<span>Price on request</span>' : `₦<span>${food.price.toLocaleString()}</span>`;
+    const priceHTML = food.price === 0 ?
+        '<span>Price on request</span>' :
+        food.originalPrice ?
+        `<div class="price-wrap">
+        <span class="original-price">₦${food.originalPrice.toLocaleString()}</span>
+        <span class="new-price">₦${food.price.toLocaleString()}</span>
+       </div>` :
+        `₦<span>${food.price.toLocaleString()}</span>`;
     return `
     <div class="food-card reveal">
       <div class="food-img-wrap">${imageHTML}${badgeHTML}</div>
