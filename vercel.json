@@ -1,7 +1,10 @@
 {
-    "functions": {
-        "api/create-order.js": {
-            "maxDuration": 30
-        }
+  "functions": {
+    "api/create-order.js": {
+      "maxDuration": 30
     }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" }
+  ]
 }
