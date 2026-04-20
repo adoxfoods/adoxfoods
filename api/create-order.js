@@ -104,7 +104,7 @@ module.exports = async function handler(req, res) {
                         LAST_ORDER_ID: orderId,
                         DELIVERY_LOCATION: delivery
                     },
-                    listIds: [5],
+                    listIds: [7],
 
                     updateEnabled: true
 
