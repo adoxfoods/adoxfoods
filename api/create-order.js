@@ -15,20 +15,18 @@ try {
                 FIRSTNAME: firstName,
                 LASTNAME: lastName,
                 SMS: phone,
-                WHATSAPP: phone,
-                LAST_ORDER_ID: orderId,
-                DELIVERY_LOCATION: delivery
+                LAST_ORDER_ID: orderId
             },
             listIds: [7],
             updateEnabled: true
         })
     });
 
-    const brevoData = await brevoRes.json();
+    const brevoText = await brevoRes.text();
     console.log('Brevo status:', brevoRes.status);
-    console.log('Brevo response:', JSON.stringify(brevoData));
+    console.log('Brevo response text:', brevoText);
 
 } catch (brevoErr) {
-    console.log('Brevo error:', brevoErr.message);
+    console.log('Brevo error (non-fatal):', brevoErr.message);
 }
 // ===== END BREVO =====
