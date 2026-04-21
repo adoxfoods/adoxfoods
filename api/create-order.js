@@ -117,6 +117,14 @@ try {
     console.log('Brevo response text:', brevoText);
 
 } catch (brevoErr) {
-    console.log('Brevo error (non-fatal):', brevoErr.message);
-}
-// ===== END BREVO =====
+        console.error('Brevo error (non-fatal):', brevoErr.message);
+    }
+    // ===== END BREVO =====
+
+        return res.status(200).json({ success: true, orderId, screenshot_url });
+
+    } catch (err) {
+        console.error('Error:', err.message);
+        return res.status(500).json({ error: err.message });
+    }
+};  // ← closes the exported handler function    // ===== END BREVO =====
