@@ -1,43 +1,41 @@
 {
-  "name": "Adox Foods",
-  "short_name": "Adox Foods",
-  "description": "Fresh. Affordable. Student Foodstuff. Delivered to your hostel at FUTA.",
-  "start_url": "/index.html",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#e65c00",
-  "orientation": "portrait-primary",
-  "scope": "/",
-  "lang": "en",
-  "categories": ["food", "shopping"],
-  "icons": [
-    {
-      "src": "/images/adox-logo.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/images/adox-logo.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Shop Now",
-      "short_name": "Shop",
-      "description": "Browse all foodstuff",
-      "url": "/shop.html",
-      "icons": [{ "src": "/images/adox-logo.png", "sizes": "96x96" }]
-    },
-    {
-      "name": "Checkout",
-      "short_name": "Checkout",
-      "description": "Complete your order",
-      "url": "/checkout.html",
-      "icons": [{ "src": "/images/adox-logo.png", "sizes": "96x96" }]
-    }
-  ]
+    "name": "Adox Foods",
+    "short_name": "Adox Foods",
+    "description": "Fresh. Affordable. Student Foodstuff. Delivered to your hostel at FUTA.",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#e65c00",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en",
+    "categories": ["food", "shopping"],
+    "icons": [{
+            "src": "/images/adoxfoods.jpg",
+            "sizes": "192x192",
+            "type": "image/jpg",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/images/adoxfoods.jpg",
+            "sizes": "512x512",
+            "type": "image/jpg",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [{
+            "name": "Shop Now",
+            "short_name": "Shop",
+            "description": "Browse all foodstuff",
+            "url": "/shop.html",
+            "icons": [{ "src": "/images/adoxfoods.jpg", "sizes": "96x96" }]
+        },
+        {
+            "name": "Checkout",
+            "short_name": "Checkout",
+            "description": "Complete your order",
+            "url": "/checkout.html",
+            "icons": [{ "src": "/images/adoxfoods.jpg", "sizes": "96x96" }]
+        }
+    ]
 }
