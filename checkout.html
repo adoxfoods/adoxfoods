@@ -1117,12 +1117,8 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/sw.js')
-                    .then(function(reg) {
-                        console.log('[Adox] SW registered:', reg.scope);
-                    })
-                    .catch(function(err) {
-                        console.warn('[Adox] SW failed:', err);
-                    });
+                    .then(function(reg) { console.log('[Adox] SW registered:', reg.scope); })
+                    .catch(function(err) { console.warn('[Adox] SW failed:', err); });
             });
         }
 
@@ -1148,9 +1144,7 @@
                 banner.remove();
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then(function() {
-                        deferredPrompt = null;
-                    });
+                    deferredPrompt.userChoice.then(function() { deferredPrompt = null; });
                 }
             });
             document.getElementById('adox-dismiss-btn').addEventListener('click', function() {

@@ -79,7 +79,7 @@
         <div class="hero-bg-orb"></div>
         <div class="hero-content">
             <div class="hero-text">
-                <div class="hero-badge"><span class="dot"></span>We Deliver Daily 🎉</div>
+                <div class="hero-badge"><span class="dot"></span>Now Taking Orders 🎉</div>
                 <h1 class="hero-title">Fresh.<br>Affordable.<br><span class="highlight">Student Foodstuff.</span></h1>
                 <p class="hero-sub">Quality foodstuffs delivered straight to your hostel at FUTA. Stock up without the stress of going to the market!</p>
                 <div class="hero-btns">
@@ -272,12 +272,8 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/sw.js')
-                    .then(function(reg) {
-                        console.log('[Adox] SW registered:', reg.scope);
-                    })
-                    .catch(function(err) {
-                        console.warn('[Adox] SW failed:', err);
-                    });
+                    .then(function(reg) { console.log('[Adox] SW registered:', reg.scope); })
+                    .catch(function(err) { console.warn('[Adox] SW failed:', err); });
             });
         }
 
@@ -303,9 +299,7 @@
                 banner.remove();
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then(function() {
-                        deferredPrompt = null;
-                    });
+                    deferredPrompt.userChoice.then(function() { deferredPrompt = null; });
                 }
             });
             document.getElementById('adox-dismiss-btn').addEventListener('click', function() {
