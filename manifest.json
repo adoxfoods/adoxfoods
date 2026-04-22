@@ -11,16 +11,29 @@
     "lang": "en",
     "categories": ["food", "shopping"],
     "icons": [{
-            "src": "/images/adoxfoods.jpg",
+            "src": "/images/adx192.png",
             "sizes": "192x192",
-            "type": "image/jpg",
-            "purpose": "any maskable"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
-            "src": "/images/adoxfoods.jpg",
+            "src": "/images/adoxfoods.png",
             "sizes": "512x512",
-            "type": "image/jpg",
-            "purpose": "any maskable"
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "images/adoxfoods-maskable.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+
+        {
+            "src": "images/adx144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
         }
     ],
     "shortcuts": [{
@@ -28,14 +41,44 @@
             "short_name": "Shop",
             "description": "Browse all foodstuff",
             "url": "/shop.html",
-            "icons": [{ "src": "/images/adoxfoods.jpg", "sizes": "96x96" }]
+            "icons": [{ "src": "/images/adx96.png", "sizes": "96x96" }]
         },
         {
             "name": "Checkout",
             "short_name": "Checkout",
             "description": "Complete your order",
             "url": "/checkout.html",
-            "icons": [{ "src": "/images/adoxfoods.jpg", "sizes": "96x96" }]
+            "icons": [{ "src": "/images/adx96.png", "sizes": "96x96" }]
+        }
+    ],
+
+
+    "screenshots": [{
+            "src": "images/desktop-home.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "Adox Foods - Home page on desktop"
+        },
+
+        {
+            "src": "images/desktop-shop.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "Adox Foods - Products page"
+        },
+        {
+            "src": "images/mobile-home.png",
+            "sizes": "750x1334",
+            "type": "image/png",
+            "label": "Adox Foods mobile home screen"
+        },
+        {
+            "src": "images/mobile-shop.png",
+            "sizes": "750x1334",
+            "type": "image/png",
+            "label": "Shopping cart on mobile"
         }
     ]
 }
