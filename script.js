@@ -84,6 +84,40 @@ function updateCartQty(id, delta) {
     refreshCheckoutSummary();
 }
 
+let deferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault(); // Stop auto-banner
+    deferredPrompt = e; // Save it for later
+
+    // Show your custom install button
+    const installBtn = document.getElementById('install-btn');
+    if (installBtn) {
+        installBtn.style.display = 'block';
+    }
+});
+
+// When user clicks your install button
+const installBtn = document.getElementById('install-btn');
+if (installBtn) {
+    installBtn.addEventListener('click', async() => {
+        if (!deferredPrompt) return;
+
+        deferredPrompt.prompt(); // 🔑 This triggers the banner
+        const { outcome } = await deferredPrompt.userChoice;
+
+        console.log('User choice:', outcome); // 'accepted' or 'dismissed'
+        deferredPrompt = null;
+        installBtn.style.display = 'none'; // Hide button after
+    });
+}
+
+// Hide button if app is already installed
+window.addEventListener('appinstalled', () => {
+    const installBtn = document.getElementById('install-btn');
+    if (installBtn) installBtn.style.display = 'none';
+    deferredPrompt = null;
+});
 
 
 
