@@ -1,4 +1,4 @@
-const CACHE_NAME = 'adox-foods-v1';
+const CACHE_NAME = 'adox-foods-v2';
 
 // Only cache files that actually exist on your server
 const urlsToCache = [
