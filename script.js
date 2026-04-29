@@ -11,8 +11,8 @@ const FOOD_DATA = [
     //{ id: 5, name: "Kivo Garri", category: "grains", emoji: "🥣", image: "garri.png", price: 400, desc: "Packaged Kivo garri — student favourite", badge: null },
     // PASTA & SEMOVITA
     { id: 6, name: "Golden Penny Spag", category: "pasta", emoji: "🍝", image: "GoldenPennySpag.png", price: 1100, desc: "Golden Penny spaghetti — full pack", badge: "🔥 Popular" },
-    { id: 7, name: "Mama's Pride Spag", category: "pasta", emoji: "🍝", image: "mamaspag.png", price: 950, desc: "Mama's Pride spaghetti — budget friendly", badge: null },
-    { id: 8, name: "Auntie B Spag", category: "pasta", emoji: "🍝", image: "AuntieB spag.png", price: 950, desc: "Auntie B spaghetti — great quality", badge: null },
+    { id: 7, name: "Mama's Pride Spag", category: "pasta", emoji: "🍝", image: "mamaspag.png", price: 970, desc: "Mama's Pride spaghetti — budget friendly", badge: null },
+    { id: 8, name: "Auntie B Spag", category: "pasta", emoji: "🍝", image: "AuntieB spag.png", price: 970, desc: "Auntie B spaghetti — great quality", badge: null },
     { id: 9, name: "Crown Spag", category: "pasta", emoji: "🍝", image: "CrownSpag.png", price: 1050, desc: "Crown spaghetti — premium quality", badge: null },
     { id: 10, name: "Semo 1kg", category: "pasta", emoji: "🫙", image: "1kkgsemo.png", price: 1800, desc: "Semovita 1kg pack — full size", badge: null },
     { id: 11, name: "Semo 500g", category: "pasta", emoji: "🫙", image: "500gsemo.jpeg", price: 950, desc: "Semovita 500g pack — student size", badge: null },
@@ -37,11 +37,11 @@ const FOOD_DATA = [
     { id: 21, name: "Thyme", category: "spices", emoji: "🌿", image: "thyme.jpg", price: 100, desc: "Dried thyme — per pack", badge: null },
     { id: 22, name: "Curry", category: "spices", emoji: "🌿", image: "curry.jpeg", price: 100, desc: "Curry powder — per pack", badge: null },
     // SPECIAL OFFERS
-    { id: 40, name: "Monthly Stock Pack", category: "offers", emoji: "🧊", image: "knorr.png", originalPrice: 25780, price: 24999, desc: "Full month's supply - the best value for serious savers", badge: "👑 Save ₦781" },
-    { id: 24, name: "Fortnight Pack", category: "offers", emoji: "🧊", image: "c.flvormag.jpg", originalPrice: 15830, price: 15299, desc: "Two weeks of provisions - stock up and save big!", badge: "💰 Save ₦531" },
-    { id: 25, name: "Weekly Stock Pack", category: "offers", emoji: "🌶️", image: "jollofspicity.jpeg", originalPrice: 10380, price: 9999, desc: "A full week's worth of quality provisions for you", badge: "💰 Save ₦381" },
-    { id: 26, name: "Mini Pack", category: "offers", emoji: "🌶️", image: "hotpeper.png", originalPrice: 5650, price: 5399, desc: "Essential foodstuff bundle to keep you going all week", badge: "💰 Save ₦251" },
-    { id: 39, name: "Survival Pack", category: "offers", emoji: "🌶️", image: "hotpeper.png", originalPrice: 3600, price: 3500, desc: "Essential foodstuff bundle to keep you doing for the main time", badge: "💰 Save ₦100" },
+    { id: 40, name: "Monthly Stock Pack", category: "offers", emoji: "🧊", image: "adxmonth.jpg", originalPrice: 25780, price: 24999, desc: "Full month's supply - the best value for serious savers", badge: "👑 Save ₦781" },
+    { id: 24, name: "Fortnight Pack", category: "offers", emoji: "🧊", image: "adxfor.jpg", originalPrice: 15830, price: 15299, desc: "Two weeks of provisions - stock up and save big!", badge: "💰 Save ₦531" },
+    { id: 25, name: "Weekly Stock Pack", category: "offers", emoji: "🌶️", image: "adxweek.jpg", originalPrice: 10380, price: 9999, desc: "A full week's worth of quality provisions for you", badge: "💰 Save ₦381" },
+    { id: 26, name: "Mini Pack", category: "offers", emoji: "🌶️", image: "adxmin.jpg", originalPrice: 5650, price: 5399, desc: "Essential foodstuff bundle to keep you going all week", badge: "💰 Save ₦251" },
+    { id: 39, name: "Survival Pack", category: "offers", emoji: "🌶️", image: "ADXSUR.jpg", originalPrice: 3600, price: 3500, desc: "Essential foodstuff bundle to keep you doing for the main time", badge: "💰 Save ₦100" },
 ];
 
 // ===== CART SYSTEM =====
@@ -434,7 +434,7 @@ function initShop() {
 
 // ===== PICKUP POINTS =====
 const GATE_PICKUPS = {
-    north: ['North Gate Junction', 'Westco Junction', 'Junction - North Gate', 'North Gate Bus Stop', 'North Market Square'],
+    north: ['North Gate Junction', 'Wesco Junction', 'AP filling station Junction', 'Gasland Junction', 'Deeper Life Junction'],
     south: ['South Gate Junction', 'RCF Junction', 'Peace Avenue Junction', 'Apatapiti Junction', 'Stateline Junction', 'CAC Chapel Of Praise', 'Deeper Life Church'],
     west: ['Westgate Junction', 'Aside Junction', 'CACCF Junction', 'Filaoye Junction', 'Capricorn Junction', 'Yeolab Junction'],
 };

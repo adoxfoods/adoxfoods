@@ -83,48 +83,57 @@ module.exports = async function handler(req, res) {
 
         if (insertError) throw insertError;
 
- // ===== ADD CUSTOMER TO BREVO =====
-try {
-    const firstName = name.split(' ')[0];
-    const lastName = name.split(' ').slice(1).join(' ') || '';
+        // Replace your Brevo block with this:
+        try {
+            const firstName = name.split(' ')[0];
+            const lastName = name.split(' ').slice(1).join(' ') || '';
 
-    const normalizePhone = (phone) => {
-        const cleaned = phone.replace(/\s+/g, '').replace(/^0/, '');
-        return `+234${cleaned}`;
-    };
+            const normalizePhone = (phone) => {
+                const cleaned = phone.replace(/\s+/g, '').replace(/\D/g, ''); // strip all non-digits
+                const withoutLeadingZero = cleaned.replace(/^0/, '');
+                const withoutCountryCode = withoutLeadingZero.replace(/^234/, '');
+                return `+234${withoutCountryCode}`;
+            };
 
-    const brevoRes = await fetch('https://api.brevo.com/v3/contacts', {
-        method: 'POST',
-        headers: {
-            'api-key': process.env.BREVO_API_KEY,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            email: email,
-            attributes: {
-                FIRSTNAME: firstName,
-                LASTNAME: lastName,
-                SMS: normalizePhone(phone),
-                LAST_ORDER_ID: orderId
-            },
-            listIds: [7],
-            updateEnabled: true
-        })
-    });
+            console.log('Brevo key exists:', !!process.env.BREVO_API_KEY);
+            console.log('Normalized phone:', normalizePhone(phone));
 
-    const brevoText = await brevoRes.text();
-    console.log('Brevo status:', brevoRes.status);
-    console.log('Brevo response text:', brevoText);
+            const brevoPayload = {
+                email,
+                attributes: {
+                    FIRSTNAME: firstName,
+                    LASTNAME: lastName,
+                    SMS: normalizePhone(phone),
+                    LAST_ORDER_ID: orderId
+                },
+                listIds: [7],
+                updateEnabled: true
+            };
 
-} catch (brevoErr) {
-        console.error('Brevo error (non-fatal):', brevoErr.message);
-    }
-    // ===== END BREVO =====
+            console.log('Brevo payload:', JSON.stringify(brevoPayload));
 
-        return res.status(200).json({ success: true, orderId, screenshot_url });
+            const brevoRes = await fetch('https://api.brevo.com/v3/contacts', {
+                method: 'POST',
+                headers: {
+                    'api-key': process.env.BREVO_API_KEY,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(brevoPayload)
+            });
+
+            const brevoText = await brevoRes.text();
+            console.log('Brevo status:', brevoRes.status);
+            console.log('Brevo response:', brevoText);
+
+        } catch (brevoErr) {
+            console.error('Brevo error:', brevoErr.message);
+        }
+
+        // ✅ Add everything below this line
+        return res.status(200).json({ success: true, orderId });
 
     } catch (err) {
-        console.error('Error:', err.message);
-        return res.status(500).json({ error: err.message });
+        console.error('Order error:', err.message);
+        return res.status(500).json({ error: 'Failed to create order' });
     }
-};  // ← closes the exported handler function    // ===== END BREVO =====
+};
